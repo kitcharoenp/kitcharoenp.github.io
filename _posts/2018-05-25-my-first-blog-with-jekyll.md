@@ -5,7 +5,7 @@ date:   2018-05-25 16:16:01 +0700
 categories: jekyll howto
 ---
 ### Creating GitHub Pages
-Create a repository on GitHub by following the steps in
+First, Create a repository on GitHub by following the steps in
 [Getting Started with GitHub Pages](https://guides.github.com/features/pages/).
 This guide is to help you create a repository step by step.
 
@@ -110,17 +110,3 @@ _posts/
 This is my first blog post screenshot:
 
 ![My helpful screenshot]({{ "/assets/img/blog/Screenshot from 2018-05-26 17-34-13.png" | absolute_url }})
-
-### Installing the `jekyll-menus` plugin Using RubyGems
-Following **Using RubyGems** section in  [Jekyll Menus](https://github.com/forestryio/jekyll-menus) to install the `jekyll-menus` plugin.
-
-```
-sudo gem install jekyll-menus
-```
-
-Add the Gem to your `_config.yml`:
-
-```
-plugins:
-- jekyll-menus
-```
