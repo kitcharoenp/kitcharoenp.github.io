@@ -1,2 +1,12 @@
 theme: jekyll-theme-cayman
 title: Kitcharoen Poolperm
+# Conversion
+markdown: kramdown
+
+kramdown:
+  input: GFM
+  hard_wrap: false
+  syntax_highlighter: rouge
+
+plugins:
+  - jekyll-menus  

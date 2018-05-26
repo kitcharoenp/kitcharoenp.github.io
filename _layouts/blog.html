@@ -7,7 +7,7 @@ layout: default
     {% for post in site.posts %}
         <li>
             <time class="time">
-                {% assign date_format = site.date_format | default: "%b %-d, %Y" %}
+                {% assign date_format = site.date_format | default: "%-d %b %Y" %}
                 {{ post.date | date: date_format }}
             </time>
             <h2>
