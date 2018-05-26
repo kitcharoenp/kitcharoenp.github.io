@@ -1,3 +1,4 @@
+repository: kitcharoenp/kitcharoenp.github.io
 theme: jekyll-theme-cayman
 title: Kitcharoen Poolperm
 description: Knowledge Discovery in Data
@@ -10,4 +11,4 @@ kramdown:
   syntax_highlighter: rouge
 
 plugins:
-  - "jekyll-github-metadata"  
+  - "jekyll-github-metadata"
