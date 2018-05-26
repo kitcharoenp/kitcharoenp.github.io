@@ -1,7 +1,15 @@
-repository: kitcharoenp/kitcharoenp.github.io
 theme: jekyll-theme-cayman
-title: Kitcharoen Poolperm
+title: Life Is Simple When You Live Simply
+email: kitcharoenp@gmail.com
+github:
+  is_project_page: true
+  repository_url: https://github.com/kitcharoenp/kitcharoenp.github.io
+  repository_name: kitcharoenp.github.io
+  owner_url: https://github.com/kitcharoenp
+  owner_name: Kitcharoen Poolperm
+
 description: Knowledge Discovery in Data
+
 # Conversion
 markdown: kramdown
 
