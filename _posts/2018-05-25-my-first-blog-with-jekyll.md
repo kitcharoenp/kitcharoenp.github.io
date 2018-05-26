@@ -109,4 +109,20 @@ _posts/
 
 This is my first blog post screenshot:
 
-![My helpful screenshot]({{ "/assets/img/blog/Screenshot from 2018-05-26 17-34-13.png" | absolute_url }})
+![My Posts screenshot]({{ "/assets/img/blog/Screenshot from 2018-05-26 17-34-13.png" | absolute_url }})
+
+### Show GitHub Repository Metadata
+Append the `_config.yml` with this content.
+
+```
+email: your email
+github:
+  is_project_page: true
+  repository_url: your_github_repository_url
+  repository_name: your_github_repository_name
+  owner_url: your_github_url
+  owner_name: your_name
+```
+Screenshot show GitHub Repository Metadata after edit the `_config.yml`.
+
+![Show GitHub Repository Metadata]({{ "/assets/img/blog/Screenshot from 2018-05-26 21-06-34.png" | absolute_url }})
