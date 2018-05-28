@@ -20,3 +20,6 @@ kramdown:
 
 plugins:
   - "jekyll-github-metadata"
+
+# Google Analytics
+google_analytics: UA-119899033-1
