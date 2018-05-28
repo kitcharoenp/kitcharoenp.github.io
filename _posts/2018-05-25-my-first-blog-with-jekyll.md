@@ -126,3 +126,29 @@ github:
 Screenshot show GitHub Repository Metadata after edit the `_config.yml`.
 
 ![Show GitHub Repository Metadata]({{ "/assets/img/blog/Screenshot from 2018-05-26 21-06-34.png" | absolute_url }})
+
+### Enabling Google Analytics
+If you are using [The Cayman theme](https://github.com/pages-themes/cayman) with Jekyll. To enable Google Analytics, append the following lines to `_config.yml`:
+
+```
+# Google Analytics
+google_analytics: UA-123456789-0
+```
+
+The `UA-123456789-0` is your **Google Analytics Tracking ID**. The Cayman theme will auto enable Google Analytics with script in the `default.html`
+
+{% raw %}
+~~~html
+{% if site.google_analytics %}
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', '{{ site.google_analytics }}', 'auto');
+    ga('send', 'pageview');
+  </script>
+{% endif %}
+~~~
+{% endraw %}
