@@ -135,7 +135,7 @@ If you are using [The Cayman theme](https://github.com/pages-themes/cayman) with
 google_analytics: UA-123456789-0
 ```
 
-The `UA-123456789-0` is your **Google Analytics Tracking ID**. The Cayman theme will auto enable Google Analytics with script in the `default.html`
+The `UA-123456789-0` is your [**Google Analytics Tracking ID**](https://support.google.com/analytics/answer/1008080?hl=en). The Cayman theme will auto enable Google Analytics with script in the `default.html`
 
 {% raw %}
 ~~~html
