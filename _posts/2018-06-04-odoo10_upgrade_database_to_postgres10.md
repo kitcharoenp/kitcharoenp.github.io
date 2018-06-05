@@ -3,12 +3,32 @@ layout: post
 title:  "Odoo10 Upgrade the PostgreSQL from 9.5 to 10"
 date:   2018-06-04 09:18:01 +0700
 categories: [odoo, postgresql]
-published: false
+published: true
 ---
 
-### Backup database and Odoo local file
-* Take a snapshot of container, if you use the lxc (Linux container).
-* Use `pg_dump()`, if you aren't user lxc.
+### Backup Database
+* If you are use the LXD. You can snapshot a container with:
+```
+lxc snapshot <container>
+```
+Replace the `<container>` with your container name. For more about **LXD container** read
+[LXD 2.0: Your first LXD container [3/12]](https://blog.ubuntu.com/2016/03/22/lxd-2-0-your-first-lxd-container)
+
+* Backup a PostgreSQL database by `pg_dump()` .
+The [`pg_dump`](https://www.postgresql.org/docs/current/static/app-pgdump.html) is a utility for backing up a PostgreSQL database.
+The `/opt/odoo10_backup/` is backup folder.
+```
+pg_dump -Ft odoo_database > /opt/odoo10_backup/odoo_database.tar
+```
+
+### Backup Odoo local files
+Odoo local files default is on `odoo/.local/share/Odoo`.
+If your Odoo install folder is `/opt`. Then use **rsync** backup to `/opt/odoo10_backup/` folder
+```
+rsync -azP --delete /opt/odoo /opt/odoo10_backup/
+```
+If you are use the LXD. You aren't take this step due to snapshot a container backup
+all system data.
 
 ### Install PostgreSQL 10
 * Import the GPG key for PostgreSQL packages. Then add the repository to your system.
@@ -61,13 +81,30 @@ apt-get autoremove --purge postgresql-9.5
 service postgresql start
 ```
 
-### Fixed Programming Error due to Database Upgrade
-There is no primary key for referenced table `res_users`.
-Solution : create a new database with demo data then install some module.
+### Check your upgrade
+* Check PostreSQL 10 with `pg_lsclusters`:
+```
+# pg_lsclusters
+Ver Cluster Port Status Owner    Data directory              Log file
+10  main    5432 online postgres /var/lib/postgresql/10/main /var/log/postgresql/postgresql-10-main.log
+```
 
+* Check Odoo service is online:
+```
+# service odoo status
+● odoo.service - LSB: Start odoo daemon at boot time
+   Loaded: loaded (/etc/init.d/odoo; bad; vendor preset: enabled)
+   Active: active (running) since Tue 2018-06-05 07:03:01 UTC; 1min 8s ago
+```
+
+* Try to Login
+
+
+### Fixed Odoo Programming Error
+Sometime after upgrade you found some Error. This some solution to fixe it.
+* **There is no primary key for referenced table `res_users`.**
+```
+ALTER TABLE res_users ADD PRIMARY KEY (id);
+```
 I found the solution in
-[In odoo where advanced-view-editor in saving files](https://stackoverflow.com/questions/36850440/in-odoo-where-advanced-view-editor-in-saving-files)
-* get the list of primary keys
-```
-update ir_module_module set state = 'installed' where state = 'to upgrade';
-```
+[In odoo where advanced-view-editor in saving files](https://stackoverflow.com/questions/36850440/in-odoo-where-advanced-view-editor-in-saving-files).
