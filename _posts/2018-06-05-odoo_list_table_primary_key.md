@@ -20,3 +20,12 @@ from information_schema.table_constraints tc
     and kc.constraint_name = tc.constraint_name
 where tc.constraint_type = 'PRIMARY KEY';
 ```
+
+### Analyze a Postgres database
+*  `-Z`  Only calculate statistics for use by the optimizer (no vacuum).
+*  `-v`  Print detailed information during processing.
+*  `-a`  Vacuum all databases.
+*  `-j 6`Execute the vacuum or analyze commands in parallel by running njobs (6) commands simultaneously.
+```
+vacuumdb -Zv -a -j 6
+```

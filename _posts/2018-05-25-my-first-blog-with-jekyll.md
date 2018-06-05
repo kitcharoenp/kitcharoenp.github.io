@@ -152,3 +152,5 @@ The `UA-123456789-0` is your [**Google Analytics Tracking ID**](https://support.
 {% endif %}
 ~~~
 {% endraw %}
+
+### [Controlling URLs and Links in Jekyll](https://www.digitalocean.com/community/tutorials/controlling-urls-and-links-in-jekyll) 
