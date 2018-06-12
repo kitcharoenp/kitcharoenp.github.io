@@ -115,5 +115,11 @@ Type "help" for help.
 postgres=# CREATE USER ubuntu WITH PASSWORD secure_password;
 postgres=# ALTER DATABASE gisdb OWNER TO ubuntu;
 postgres=# ALTER USER ubuntu WITH SUPERUSER;
+postgres=# \du
+List of roles
+Role name |                         Attributes                         | Member of
+-----------+------------------------------------------------------------+-----------
+postgres  | Superuser, Create role, Create DB, Replication, Bypass RLS | {}
+ubuntu    | Superuser
 postgres=# \q
 ```
