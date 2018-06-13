@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "GeoDjango Installation with Virtualenv"
+title:  "GeoDjango Installation with Virtualenv on Ubuntu"
 date:   2018-06-12 14:08:01 +0700
 categories: gis
 published: true

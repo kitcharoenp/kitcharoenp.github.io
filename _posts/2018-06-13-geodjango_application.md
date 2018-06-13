@@ -1,7 +1,7 @@
 ---
 layout: post
-title:  "GeoDjango Application"
+title:  "GeoDjango Importing Spatial Data and Putting on the Map"
 categories: gis
 published: true
 ---
-#### Create a Application within the Project
+#### Importing Spatial Data and Putting on the Map
