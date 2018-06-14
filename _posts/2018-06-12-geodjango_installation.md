@@ -40,6 +40,7 @@ $ source bin/activate
 The `activate` script will also modify your shell prompt to indicate which environment is currently active.
 
 * Install GeoDjango
+**Geodjango** is included in the Django installation
 ```
 (django)$ pip install Django
 Collecting Django
@@ -103,6 +104,7 @@ Use the `django-admin` script to create a project called `kapany`:
 This will create a directory called `kapany` within your current directory.
 
 #### Install pyscopg2
+Install python bindings for postgres
 ```
 (django)$ pip install psycopg2
 ```
