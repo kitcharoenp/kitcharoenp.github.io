@@ -5,8 +5,7 @@ categories: gis
 published: true
 ---
 This post do following [GeoDjango Tutorial](https://docs.djangoproject.com/en/2.0/ref/contrib/gis/tutorial/). In this
-post we will loading a shapefile then convert it for import to PostGIS. We will use
-boundaries to filter point and line which display on map.
+post we will loading a shapefile then convert it for import to PostGIS.
 
 ## Geographic Data
 ### Thailand - Administrative Boundaries
@@ -169,8 +168,161 @@ Running migrations:
   Applying network_topology.0001_initial... OK
 ```
 
-## Importing Spatial Data
+### Show Tables in the Database.
+```
+postgres=# \c gisdb
+gisdb=# \dt
+                       List of relations
+ Schema  |               Name               | Type  |  Owner   
+---------+----------------------------------+-------+----------
+ postgis | spatial_ref_sys                  | table | postgres
+ public  | auth_group                       | table | ubuntu
+ public  | auth_group_permissions           | table | ubuntu
+...
+ public  | django_session                   | table | ubuntu
+ public  | network_topology_networktopology | table | ubuntu
+(15 rows)
 
+gisdb=# \d network_topology_networktopology
+                                        Table "public.network_topology_networktopology"
+   Column   |            Type             | Collation | Nullable |                           Default                            
+------------+-----------------------------+-----------+----------+--------------------------------------------------------------
+ id         | integer                     |           | not null | nextval('network_topology_networktopology_id_seq'::regclass)
+ prov_namt  | character varying(80)       |           | not null |
+ adm1name   | character varying(254)      |           | not null |
+...
+ admin0name | character varying(50)       |           | not null |
+ admin0code | character varying(2)        |           | not null |
+ geom       | geometry(MultiPolygon,4326) |           | not null |
+Indexes:
+    "network_topology_networktopology_pkey" PRIMARY KEY, btree (id)
+    "network_topology_networktopology_geom_id" gist (geom)
+
+gisdb=#
+
+```
+
+## Importing Spatial Data
 ### LayerMapping
+The [LayerMapping](https://docs.djangoproject.com/en/2.0/ref/contrib/gis/layermapping/)
+class provides a way to map the contents of vector spatial data files
+(e.g. shapefiles) into GeoDjango models.
+```
+class LayerMapping(model, data_source, mapping,
+  layer=0, source_srs=None, encoding=None,
+  transaction_mode='commit_on_success', transform=True,
+  unique=True, using='default')
+```
+
+To import the data, use a LayerMapping in a Python script.
+Create a file called **load.py** inside the **network_topology** application,
+with the following code:
+```
+import os
+from django.contrib.gis.utils import LayerMapping
+from .models import NetworkTopology
+
+# Each key in the networktopology_mapping dictionary corresponds to
+# a field in the NetworkTopology model.
+networktopology_mapping = {
+    'prov_namt': 'PROV_NAMT',
+    'adm1name': 'Adm1Name',
+    'adm1code': 'Adm1Code',
+    'amp_namt': 'AMP_NAMT',
+    'adm2name': 'Adm2Name',
+    'adm2code': 'Adm2Code',
+    'admin0name': 'Admin0Name',
+    'admin0code': 'Admin0Code',
+    'geom': 'MULTIPOLYGON',
+}
+
+tha_adm2_shp = os.path.abspath(
+    os.path.join(os.path.dirname(__file__), 'data', 'THA_Adm2_GISTA_plyg_v5.shp'),
+)
+
+def run(verbose=True):
+    lm = LayerMapping(
+        NetworkTopology, tha_adm2_shp, networktopology_mapping,
+        transform=False, encoding='utf-8',
+    )
+    lm.save(strict=True, verbose=verbose)
+```
+* **networktopology_mapping** : copy from output of `ogrinspect` command above
+* **tha_adm2_shp** : path to our shapefile (`THA_Adm2_GISTA_plyg_v5.shp`) in data directory
+
+### Import the Spatial Data  into GeoDjango models
+Invoke the Django shell from the **kapany** project directory:
+```
+$ python manage.py shell
+```
+
+Next, import the **load.py** , call the run routine,
+and watch **LayerMapping** do the work:
+```
+>>> from network_topology import load
+>>> load.run()
+```
+
+Queries the imported data in PostGIS database
+```
+gisdb=# select id, prov_namt, amp_namt from network_topology_networktopology limit 5;
+ id | prov_namt |  amp_namt   
+----+-----------+-------------
+  1 | เชียงใหม่   | เชียงดาว
+  2 | เชียงใหม่   | เมืองเชียงใหม่
+  3 | เชียงใหม่   | เวียงแหง
+  4 | เชียงใหม่   | แม่แจ่ม
+  5 | เชียงใหม่   | แม่แตง
+(5 rows)
+
+gisdb=# select count(*) from network_topology_networktopology;
+ count
+-------
+   928
+(1 row)
+```
 
 ## Putting Data on the Map
+### Geographic Admin
+Create a file called **admin.py** inside the **network_topology** application with the following code:
+```
+from django.contrib.gis import admin
+
+# Register your models here.
+
+from .models import NetworkTopology
+
+admin.site.register(NetworkTopology, admin.GeoModelAdmin)
+```
+
+Next, edit your urls.py in the **kapany** application folder as follows:
+```
+from django.contrib.gis import admin
+from django.urls import include, path
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+]
+```
+
+Next, start up the Django **development** server:
+```
+$ python manage.py runserver 0:8000
+Performing system checks...
+
+System check identified no issues (0 silenced).
+June 27, 2018 - 02:28:14
+Django version 2.0.6, using settings 'kapany.settings'
+Starting development server at http://0:8000/
+Quit the server with CONTROL-C.
+```
+
+Finally, browse to **http://127.0.0.1:8000/admin/**, and log in with the user you just created.
+
+![Site administration]({{ "/assets/img/blog/Screenshot from 2018-06-27 09-30-03.png" | absolute_url }})
+
+![Show Network_Topology]({{ "/assets/img/blog/Screenshot from 2018-06-27 09-30-13.png" | absolute_url }})
+
+Browse to any of the **Network_Topology** entries.
+
+![Show Network_Topology]({{ "/assets/img/blog/Screenshot from 2018-06-27 09-38-42.png" | absolute_url }})
