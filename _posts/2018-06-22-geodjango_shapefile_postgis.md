@@ -63,11 +63,11 @@ Admin0Code: String (2.0)
 ## Geographic Models
 ### Try ogrinspect
 Automate geographic models and import data process with use of the `ogrinspect` management command.
-The [`ogrinspect`](https://docs.djangoproject.com/en/2.0/ref/contrib/gis/tutorial/#try-ogrinspect) command introspects a GDAL-supported vector data source (e.g., a shapefile) and generates a model definition and LayerMapping dictionary automatically
+The [`ogrinspect`](https://docs.djangoproject.com/en/2.0/ref/contrib/gis/tutorial/#try-ogrinspect) command introspects a GDAL-supported vector data source (e.g., a shapefile) and generates a model definition and LayerMapping dictionary automatically. We will define the model class name as `AdministrativeLevel2Boundaries`  in **model.py**.
 ```
 $ python manage.py ogrinspect [options] <data_source> <model_name> [options]
 
-$ python3 manage.py ogrinspect network_topology/data/THA_Adm2_GISTA_plyg_v5.shp NetworkTopology --srid=4326 --mapping --multi
+$ python3 manage.py ogrinspect network_topology/data/THA_Adm2_GISTA_plyg_v5.shp AdministrativeLevel2Boundaries --srid=4326 --mapping --multi
 ```
 
 The command produces the following output , which may be copied directly into the **models.py**
@@ -76,7 +76,7 @@ The command produces the following output , which may be copied directly into th
 # This is an auto-generated Django model module created by ogrinspect.
 from django.contrib.gis.db import models
 
-class NetworkTopology(models.Model):
+class AdministrativeLevel2Boundaries(models.Model):
     prov_namt = models.CharField(max_length=80)
     adm1name = models.CharField(max_length=254)
     adm1code = models.CharField(max_length=254)
@@ -88,8 +88,8 @@ class NetworkTopology(models.Model):
     geom = models.MultiPolygonField(srid=4326)
 
 
-# Auto-generated `LayerMapping` dictionary for NetworkTopology model
-networktopology_mapping = {
+    # Auto-generated `LayerMapping` dictionary for AdministrativeLevel2Boundaries model
+    administrativelevel2boundaries_mapping = {
     'prov_namt': 'PROV_NAMT',
     'adm1name': 'Adm1Name',
     'adm1code': 'Adm1Code',
@@ -111,7 +111,7 @@ We use a `amp_namt` field to returns the string representation of the model. The
 from django.contrib.gis.db import models
 
 # Create your models here.
-class NetworkTopology(models.Model):
+class AdministrativeLevel2Boundaries(models.Model):
     prov_namt = models.CharField(max_length=80)     # provinc_name_th
     adm1name = models.CharField(max_length=254)     # provinc_name_en
     adm1code = models.CharField(max_length=254)     # province_code
@@ -142,9 +142,9 @@ Migrations for 'network_topology':
 $ python manage.py sqlmigrate network_topology 0001
 BEGIN;
 --
--- Create model NetworkTopology
+-- Create model AdministrativeLevel2Boundaries
 --
-CREATE TABLE "network_topology_networktopology" (
+CREATE TABLE "network_topology_administrativelevel2boundaries" (
   "id" serial NOT NULL PRIMARY KEY,
   "prov_namt" varchar(80) NOT NULL,
   "adm1name" varchar(254) NOT NULL,
@@ -155,15 +155,14 @@ CREATE TABLE "network_topology_networktopology" (
   "admin0name" varchar(50) NOT NULL,
   "admin0code" varchar(2) NOT NULL,
   "geom" geometry(MULTIPOLYGON,4326) NOT NULL);
-CREATE INDEX "network_topology_networktopology_geom_id"
-  ON "network_topology_networktopology" USING GIST ("geom");
+CREATE INDEX "network_topology_administrativelevel2boundaries_geom_id" ON "network_topology_administrativelevel2boundaries"USING GIST ("geom");
 COMMIT;
 ```
 * [migrate : ](https://docs.djangoproject.com/en/2.0/ref/django-admin/#django-admin-migrate) Synchronizes the database state with the current set of models and migrations.
 ```
 $ python manage.py migrate
 Operations to perform:
-  Apply all migrations: accidents, admin, auth, contenttypes, network_topology, sessions, world
+  Apply all migrations: admin, auth, contenttypes, network_topology, sessions
 Running migrations:
   Applying network_topology.0001_initial... OK
 ```
@@ -172,33 +171,35 @@ Running migrations:
 ```
 postgres=# \c gisdb
 gisdb=# \dt
-                       List of relations
- Schema  |               Name               | Type  |  Owner   
----------+----------------------------------+-------+----------
- postgis | spatial_ref_sys                  | table | postgres
- public  | auth_group                       | table | ubuntu
- public  | auth_group_permissions           | table | ubuntu
+                              List of relations
+ Schema  |                      Name                       | Type  |  Owner   
+---------+-------------------------------------------------+-------+----------
+ postgis | spatial_ref_sys                                 | table | postgres
 ...
- public  | django_session                   | table | ubuntu
- public  | network_topology_networktopology | table | ubuntu
-(15 rows)
+ public  | auth_user                                       | table | ubuntu
+ public  | auth_user_groups                                | table | ubuntu
+ public  | auth_user_user_permissions                      | table | ubuntu
+ public  | django_admin_log                                | table | ubuntu
+ public  | django_content_type                             | table | ubuntu
+ public  | django_migrations                               | table | ubuntu
+ public  | django_session                                  | table | ubuntu
+ public  | network_topology_administrativelevel2boundaries | table | ubuntu
+...
 
-gisdb=# \d network_topology_networktopology
-                                        Table "public.network_topology_networktopology"
-   Column   |            Type             | Collation | Nullable |                           Default                            
-------------+-----------------------------+-----------+----------+--------------------------------------------------------------
- id         | integer                     |           | not null | nextval('network_topology_networktopology_id_seq'::regclass)
- prov_namt  | character varying(80)       |           | not null |
- adm1name   | character varying(254)      |           | not null |
+gisdb=# \d network_topology_administrativelevel2boundaries
+Table "public.network_topology_administrativelevel2boundaries"
+Column   |            Type             | Collation | Nullable |                                   Default                                   
 ...
- admin0name | character varying(50)       |           | not null |
- admin0code | character varying(2)        |           | not null |
- geom       | geometry(MultiPolygon,4326) |           | not null |
+id         | integer                     |           | not null | nextval('network_topology_administrativelevel2boundaries_id_seq'::regclass)
+prov_namt  | character varying(80)       |           | not null |
+adm1name   | character varying(254)      |           | not null |
+...
+admin0name | character varying(50)       |           | not null |
+admin0code | character varying(2)        |           | not null |
+geom       | geometry(MultiPolygon,4326) |           | not null |
 Indexes:
-    "network_topology_networktopology_pkey" PRIMARY KEY, btree (id)
-    "network_topology_networktopology_geom_id" gist (geom)
-
-gisdb=#
+"network_topology_administrativelevel2boundaries_pkey" PRIMARY KEY, btree (id)
+"network_topology_administrativelevel2boundaries_geom_id" gist (geom)
 
 ```
 
@@ -220,11 +221,11 @@ with the following code:
 ```
 import os
 from django.contrib.gis.utils import LayerMapping
-from .models import NetworkTopology
+from .models import AdministrativeLevel2Boundaries
 
-# Each key in the networktopology_mapping dictionary corresponds to
-# a field in the NetworkTopology model.
-networktopology_mapping = {
+# Each key in the administrativelevel2boundaries_mapping dictionary corresponds to
+# a field in the AdministrativeLevel2Boundaries model.
+administrativelevel2boundaries_mapping = {
     'prov_namt': 'PROV_NAMT',
     'adm1name': 'Adm1Name',
     'adm1code': 'Adm1Code',
@@ -242,12 +243,12 @@ tha_adm2_shp = os.path.abspath(
 
 def run(verbose=True):
     lm = LayerMapping(
-        NetworkTopology, tha_adm2_shp, networktopology_mapping,
+        AdministrativeLevel2Boundaries, tha_adm2_shp, administrativelevel2boundaries_mapping,
         transform=False, encoding='utf-8',
     )
     lm.save(strict=True, verbose=verbose)
 ```
-* **networktopology_mapping** : copy from output of `ogrinspect` command above
+* **administrativelevel2boundaries_mapping** : copy from output of `ogrinspect` command above
 * **tha_adm2_shp** : path to our shapefile (`THA_Adm2_GISTA_plyg_v5.shp`) in data directory
 
 ### Import the Spatial Data  into GeoDjango models
@@ -265,7 +266,7 @@ and watch **LayerMapping** do the work:
 
 Queries the imported data in PostGIS database
 ```
-gisdb=# select id, prov_namt, amp_namt from network_topology_networktopology limit 5;
+gisdb=# select id, prov_namt, amp_namt from network_topology_administrativelevel2boundaries limit 5;
  id | prov_namt |  amp_namt   
 ----+-----------+-------------
   1 | เชียงใหม่   | เชียงดาว
@@ -275,7 +276,7 @@ gisdb=# select id, prov_namt, amp_namt from network_topology_networktopology lim
   5 | เชียงใหม่   | แม่แตง
 (5 rows)
 
-gisdb=# select count(*) from network_topology_networktopology;
+gisdb=# select count(*) from network_topology_administrativelevel2boundaries;
  count
 -------
    928
@@ -290,9 +291,9 @@ from django.contrib.gis import admin
 
 # Register your models here.
 
-from .models import NetworkTopology
+from .models import AdministrativeLevel2Boundaries
 
-admin.site.register(NetworkTopology, admin.GeoModelAdmin)
+admin.site.register(AdministrativeLevel2Boundaries, admin.GeoModelAdmin)
 ```
 
 Next, edit your urls.py in the **kapany** application folder as follows:
@@ -319,10 +320,10 @@ Quit the server with CONTROL-C.
 
 Finally, browse to **http://127.0.0.1:8000/admin/**, and log in with the user you just created.
 
-![Site administration]({{ "/assets/img/blog/Screenshot from 2018-06-27 09-30-03.png" | absolute_url }})
+![Site administration]({{ "/assets/img/blog/Site administration Django site admin.png" | absolute_url }})
 
-![Show Network_Topology]({{ "/assets/img/blog/Screenshot from 2018-06-27 09-30-13.png" | absolute_url }})
+![Show Network_Topology]({{ "/assets/img/blog/Select administrative level2 boundaries to change Django site admin.png" | absolute_url }})
 
-Browse to any of the **Network_Topology** entries.
+Browse to any of the **Administrative level2 boundariess** entries.
 
-![Show Network_Topology]({{ "/assets/img/blog/Screenshot from 2018-06-27 09-38-42.png" | absolute_url }})
+![Show Network_Topology]({{ "/assets/img/blog/Change administrative level2 boundaries Django site admin.png" | absolute_url }})
