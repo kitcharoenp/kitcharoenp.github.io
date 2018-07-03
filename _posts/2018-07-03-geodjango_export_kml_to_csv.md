@@ -71,13 +71,14 @@ def write_layer_features_to_csv(layer):
 pointsFile = "points.csv"
 lineStringsFile = "lineStrings.csv"
 
-# define the column header of  csv 
+# define the column header of csv
 header =  ['layer_name', 'geom_type', 'coords', 'name', 'description']
 for csvfile in [pointsFile, lineStringsFile]:
     with open(csvfile, "w") as output:
         writer = csv.writer(output, lineterminator='\n')
         writer.writerow(header)
-source = DataSource('MEA.kml')
+
+source = DataSource('My_KML_File.kml')
 
 # iteration via layer in source if found Point or lineStrings writer it to csv file
 for layer in source:
