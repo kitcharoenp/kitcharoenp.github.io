@@ -106,6 +106,11 @@ _posts/
 
 0 directories, 1 file
 ```
+### Run your Jekyll site locally
+
+```
+$ bundle exec jekyll serve
+```
 
 This is my first blog post screenshot:
 
@@ -153,4 +158,4 @@ The `UA-123456789-0` is your [**Google Analytics Tracking ID**](https://support.
 ~~~
 {% endraw %}
 
-### [Controlling URLs and Links in Jekyll](https://www.digitalocean.com/community/tutorials/controlling-urls-and-links-in-jekyll) 
+### [Controlling URLs and Links in Jekyll](https://www.digitalocean.com/community/tutorials/controlling-urls-and-links-in-jekyll)
