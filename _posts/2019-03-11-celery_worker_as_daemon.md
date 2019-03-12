@@ -4,10 +4,8 @@ title: "[Celery] worker as daemon"
 published: true
 categories: [celery]
 ---
-
+You probably want to use a daemonization tool to start the worker in the background.
 Running the worker in the background as a daemon see [Daemonization](http://docs.celeryproject.org/en/latest/userguide/daemonizing.html#daemonization) for more information.
-
-[Install Celery task manager](https://www.miarec.com/book/export/html/585)
 
 ### Create a configuration file
 1. Create the empty `/etc/default/celeryd` configuration file for the init script
