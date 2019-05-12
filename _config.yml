@@ -10,6 +10,27 @@ github:
 
 description: Knowledge Discovery in Data
 
+
+# Personal info
+my_name: Kitcharoen Poolperm
+my_job_title: DevOps Engineer
+my_email: kitcharoenp@gmail.com
+my_phone: Your phone number (optional)
+my_website: Your website (eg. https://google.com)(optional)
+
+# Social links
+twitter_username: jekyllrb
+github_username:  jekyll
+dribbble_username: jekyll
+facebook_username: jekyll
+flickr_username: jekyll
+instagram_username: jekyll
+linkedin_username: jekyll
+xing_username: jekyll
+pinterest_username: jekyll
+youtube_username: jekyll
+googleplus_username: +jekyll
+
 # Conversion
 markdown: kramdown
 
@@ -23,3 +44,7 @@ plugins:
 
 # Google Analytics
 google_analytics: UA-119899033-1
+
+sass:
+  sass_dir: _sass
+  style: compressed
