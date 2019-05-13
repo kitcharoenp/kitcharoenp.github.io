@@ -19,17 +19,10 @@ my_phone: Your phone number (optional)
 my_website: Your website (eg. https://google.com)(optional)
 
 # Social links
-twitter_username: jekyllrb
-github_username:  jekyll
-dribbble_username: jekyll
-facebook_username: jekyll
-flickr_username: jekyll
-instagram_username: jekyll
-linkedin_username: jekyll
-xing_username: jekyll
-pinterest_username: jekyll
-youtube_username: jekyll
-googleplus_username: +jekyll
+github_username:  kitcharoenp
+dribbble_username: kitcharoen@gmail.com
+facebook_username: kitcharoen.poolperm
+linkedin_username: kitcharoen@gmail.com
 
 # Conversion
 markdown: kramdown
