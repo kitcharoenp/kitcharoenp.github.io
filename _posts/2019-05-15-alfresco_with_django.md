@@ -1,19 +1,9 @@
 ---
 layout: post
-title: "Using Alfresco with Django on Celery Task"
+title: "Using Alfresco with Django in Celery Task"
 published: false
 categories: [django, alfresco, file]
 ---
-
-### Settings Alfresco Connection parameters
-Add the following to `proj/proj/local_settings.py`
-```python
-# Alfresco Connection parameters
-ALFRESCO_BASE_URL = 'http://your_alfreco_host/alfresco/service/api/upload'
-ALFRESCO_AUTH_USERNAME = 'your_alf_username'
-ALFRESCO_AUTH_PASSWORD = 'your_alf_password'
-ALFRESCO_SITE_ID = 'your_alf_site_id'
-```
 
 ### Media Files Configurations
 Add the following to `proj/proj/settings.py` . See more in [Managing files](https://docs.djangoproject.com/en/2.2/topics/files/#managing-files)
@@ -25,11 +15,18 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 ```
 
-### Set Permission Write for Celery task
+### Settings Alfresco Connection parameters
+Add the following to `proj/proj/local_settings.py`
+```python
+# Alfresco Connection Parameters
+ALFRESCO_BASE_URL = 'http://your_alfreco_host/alfresco/service/api/upload'
+ALFRESCO_AUTH_USERNAME = 'your_alf_username'
+ALFRESCO_AUTH_PASSWORD = 'your_alf_password'
+ALFRESCO_SITE_ID = 'your_alf_site_id'
+```
 
-
-### Example Uploading Function
-*  Create a new `alfresco_files_upload.py` in `proj/app/views/` folder.
+### Example Uploading Module
+*  Create a new `alfresco_files_upload.py` in `proj/app/views/`
 ```shell
 $ touch proj/app/views/alfresco_files_upload.py
 $ tree proj/app/views/ -L 1
@@ -53,10 +50,6 @@ import requests
 import os
 
 def alfresco_set_conn_param():
-    """
-    See more in
-    https://docs.djangoproject.com/en/2.2/ref/files/storage/#module-django.core.files.storage
-    """
     auth_username = settings.ALFRESCO_AUTH_USERNAME
     auth_password = settings.ALFRESCO_AUTH_PASSWORD
     url = settings.ALFRESCO_BASE_URL
@@ -73,8 +66,30 @@ def alfresco_upload_a_file(file_system, file_name):
     files = {"filedata": file_system.open(file_name, mode='r')}
 
     r = requests.post(url, auth=auth, data=data, files=files)
-    return r    
+    return r
+
+def alfresco_upload_dir(directory='kml/', json_result = ''):
+    path = os.path.join(settings.MEDIA_ROOT, directory)
+    file_system = FileSystemStorage(location=path)
+
+    for f in file_system.listdir(path)[1]:
+        r = alfresco_upload_a_file(file_system, f)
+        data_ = r.json()
+        json_result += json.dumps(data_)
+    return json_result        
 ```
 
+### Define A Task
+My uploading files in `proj/media/upload_to_alf/`
+```python
+from __future__ import absolute_import, unicode_literals
+from proj.celery import app
+from . import views
 
-### Add a new task to Celery
+@app.task
+def alfresco_upload_dir(directory='upload_to_alf/'):
+    return views.alfresco_upload_dir(directory=directory)
+```
+### Testing on Periodic Tasks Administration
+
+### View Celery Results › Task results
