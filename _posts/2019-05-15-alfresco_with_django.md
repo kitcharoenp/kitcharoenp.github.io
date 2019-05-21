@@ -40,7 +40,7 @@ proj/app/views/
 from .alfresco_files_upload import *
 ```
 
-* Add the following lines to `alfresco_files_upload.py`
+* **file:** `alfresco_files_upload.py`
 ```python
 from django.conf import settings
 from django.core.files.storage import FileSystemStorage
@@ -79,8 +79,10 @@ def alfresco_upload_dir(directory='kml/', json_result = ''):
     return json_result        
 ```
 
-### Define A Task
+### Define Task
 My uploading files in `proj/media/upload_to_alf/`
+
+**file:** proj/app/tasks.py
 ```python
 from __future__ import absolute_import, unicode_literals
 from proj.celery import app
@@ -90,6 +92,7 @@ from . import views
 def alfresco_upload_dir(directory='upload_to_alf/'):
     return views.alfresco_upload_dir(directory=directory)
 ```
+
 ### Testing on Periodic Tasks Administration
 
 ### View Celery Results › Task results
