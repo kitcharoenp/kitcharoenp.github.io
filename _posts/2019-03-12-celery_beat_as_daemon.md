@@ -77,22 +77,8 @@ see [using custom scheduler classes](http://docs.celeryproject.org/en/latest/use
     * project env : `/opt/django_projects/kapany_proj/kapany_env/`
 
     ```shell
-    # Absolute or relative path to the 'celery' command:
-    #CELERY_BIN="/usr/local/bin/celery"
-    #CELERY_BIN="/virtualenvs/def/bin/celery"
-    CELERY_BIN="/opt/django_projects/kapany_proj/kapany_env/bin/celery"
-
-    # App instance to use
-    # comment out this line if you don't use an app
-    CELERY_APP="kapany_proj"
-    # or fully qualified:
-    #CELERY_APP="proj.tasks:app"
-
-    # Where to chdir at start.
-    CELERYD_CHDIR="/opt/django_projects/kapany_proj/"
-
     # Extra arguments to celerybeat
-    CELERYBEAT_OPTS="--schedule=/var/run/celery/celerybeat-schedule"
+    CELERYBEAT_OPTS="--schedule=django_celery_beat.schedulers:DatabaseScheduler"
     ```
 
 ## Create the init script
@@ -131,4 +117,11 @@ celerybeat (pid 23093) is up...
 ```shell
 $ sudo update-rc.d celerybeat defaults
 $ sudo service celerybeat start
+```
+
+## Remove the daemon
+```shell
+$ sudo update-rc.d -f celerybeat remove
+$ sudo rm -f /etc/init.d/celerybeat
+$ sudo rm -f /etc/default/celerybeat
 ```
