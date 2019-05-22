@@ -98,6 +98,12 @@ $ sudo vim /etc/init.d/celerybeat
 $ sudo chmod +x /etc/init.d/celerybeat
 ```
 
+## Enable Permission
+add the `celery` user to your user group or group which running django server.
+```shell
+$ sudo usermod -a -G celery your_user_group
+```
+
 ## Verbose the init-scripts
 
 ```shell
