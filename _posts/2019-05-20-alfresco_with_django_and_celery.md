@@ -1,9 +1,10 @@
 ---
 layout: post
 title: "Using Alfresco with Django in Celery Task"
-published: false
+published: true
 categories: [django, alfresco, file]
 ---
+> [Alfresco](https://en.wikipedia.org/wiki/Alfresco_(software)) is a collection of information management software products for Microsoft Windows and Unix-like operating systems developed using Java technology. Their primary software offering, branded as a Digital Business Platform[3] is proprietary & a commercially licensed open source platform, supports open standards, and provides enterprise scale
 
 ### Media Files Configurations
 Add the following to `proj/proj/settings.py` . See more in [Managing files](https://docs.djangoproject.com/en/2.2/topics/files/#managing-files)
@@ -41,6 +42,7 @@ from .alfresco_files_upload import *
 ```
 
 * **file:** `alfresco_files_upload.py`
+
 ```python
 from django.conf import settings
 from django.core.files.storage import FileSystemStorage
@@ -80,7 +82,7 @@ def alfresco_upload_dir(directory='kml/', json_result = ''):
 ```
 
 ### Define Task
-My uploading files in `proj/media/upload_to_alf/`
+Suppose the uploading files are in `proj/media/upload_to_alf/` directory
 
 **file:** proj/app/tasks.py
 ```python
@@ -95,4 +97,7 @@ def alfresco_upload_dir(directory='upload_to_alf/'):
 
 ### Testing on Periodic Tasks Administration
 
+![periodic task]({{ "/assets/img/blog/2019-05-20/2019-05-20_01.png" | absolute_url }})
+
 ### View Celery Results › Task results
+![task result]({{ "/assets/img/blog/2019-05-20/2019-05-20_02.png" | absolute_url }})
