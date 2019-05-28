@@ -134,3 +134,10 @@ celery multi v4.2.1 (windowlicker)
 $ sudo update-rc.d celeryd defaults
 $ sudo service celeryd start
 ```
+
+## Remove the daemon
+```shell
+$ sudo update-rc.d -f celeryd remove
+$ sudo rm -f /etc/init.d/celeryd
+$ sudo rm -f /etc/default/celeryd
+```
