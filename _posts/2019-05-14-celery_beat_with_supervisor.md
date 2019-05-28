@@ -13,19 +13,34 @@ First of all, you’ll need to have [Celery and Celery Beat running with Django]
 Following [**Supervisor** Installation Instructions](http://supervisord.org/installing.html) depend on your system.
 
 **directory structure:**
+
 ```shell
+# Installing With Pip
+# Cackup
+$ cd /etc/
+$ sudo mkdir supervisor
+$ cd /etc/supervisor
+$ sudo mkdir conf.d
+
+$ tree /etc/supervisor -L 1
+/etc/supervisor
+├── conf.d
+```
+
+```shell
+# Installing a Distribution Package
 $ tree /etc/supervisor -L 1
 /etc/supervisor
 ├── conf.d
 ├── supervisord.conf
+
+# Cackup
+$ cd /etc/supervisor
+$ sudo cp supervisord.conf supervisord.conf.default.factory
 ```
 
 ### Edit ***Supervisor*** configuration file
 ```shell
-# backup
-$ cd /etc/supervisor
-$ sudo cp supervisord.conf supervisord.conf.default.factory
-
 # update with new config
 $ echo_supervisord_conf | sudo tee supervisord.conf
 ```
