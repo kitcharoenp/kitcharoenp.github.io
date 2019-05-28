@@ -16,13 +16,17 @@ my_name: Kitcharoen Poolperm
 my_job_title: DevOps Engineer
 my_email: kitcharoenp@gmail.com
 my_phone: Your phone number (optional)
-my_website: Your website (eg. https://google.com)(optional)
+my_website: https://kitcharoenp.github.io/
 
 # Social links
 github_username:  kitcharoenp
 dribbble_username: kitcharoen@gmail.com
 facebook_username: kitcharoen.poolperm
-linkedin_username: kitcharoen@gmail.com
+linkedin_username: kitcharoen-poolperm-659117118
+
+
+# Footer
+footer_show_references: true
 
 # Conversion
 markdown: kramdown

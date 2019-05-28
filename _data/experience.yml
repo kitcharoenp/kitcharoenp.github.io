@@ -1,9 +1,135 @@
 # Experience template
-- company: Company name
-  link: Link to company (optional)
-  job_title: Job title
-  dates: Date Range (eg. November 2016 - present)
+- company: InterlinkTelecom
+  link: http://www.interlinktelecom.co.th
+  job_title: Devops Engineer
+  dates: October 2013 - Present
   quote: >
-   Short description of the company (optional)
+    Responsible for developing and building application and integration with the Open Source Enterprise Resource Planning.
+    Translate technical requirements, assist with all stages of test data, develop interface stubs and simulators and perform script maintenance and updates.
+    Deploy new modules and upgrades and complete fixes within the production environment
   description: | # this will include new lines to allow paragraphs
-    Description of role
+    ### Responsibility
+    * Developed an ERP system from the open source (Zurmo) and customize the system to improves the effectiveness of the company activity
+    * Customize the interface between ERP and Microsoft Dynamics NAV
+    * Automate the company business processes by work flow
+    * Integration customize module (Quotation, Purchase Request, Purchase Order, Service Order, Work Order, Inventory and Warehouse Management)
+    * Develop website interfaces / Update content on website (http://www.interlinktelecom.co.th)
+
+- company: GroupTech
+  link: https://www.alt.co.th/ourcompanydetails2
+  job_title: Outside Plant Engineer
+  dates: July 2013 - October 2013
+  quote: >
+  description: | # this will include new lines to allow paragraphs
+    ### Responsibility
+    * Coordinate between SBN and subcontractor for  installation , commissioning and PAT until work finish completely
+    * Monitor subcontractor to follow up installation standard.
+    * Report progress and pending issue to project manager.
+    * Control and monitor subcontractor for OFC route survey , installation drawing , as-builting.
+    * PAT with subcontractor to ensure for BOQ and pending issue
+
+
+- company: Triple T Broadband
+  link: https://www.3bb.co.th/
+  job_title: Senior  Engineer Telecom
+  dates: February 2009 - July 2012
+  quote: >
+   Developed the broadband network monitoring using Web Applications, Provided tecnical support to implementation teams
+  description: | # this will include new lines to allow paragraphs
+    ### Responsibility
+    * Supported teams to installation, commissioning  DSLAM, MSAN node (1431 nodes)
+    * Developed the network monitoring web application  (BRAS Temperature,
+    MME Temperature, CRC DSLAM Link, Access users on BRAS, DSLAM Port Utilization,
+    Monitoring the amount of  online offline user on slot port in DSLAM)
+    * Update , import, export, catalogue the  points & paths of OFC route on
+    Google Earth for OSP Network such as Node position, DP of OSP, OFC route cable
+    * Created the self script to up speed ADSL users
+
+- company: TT&T Plc
+  link: Link to company (optional)
+  job_title: Operation Maintenance Engineer Telecom
+  dates: January 2003 - February 2009
+  quote: >
+   Responsible for managing a team of personnel who perform planned and unplanned operations and maintenance
+   (O&M) services to ensure that the client’s network and IT security infrastructure is properly configured
+   and that all approved changes to the approved baseline have been implemented, tested,
+   and documented in accordance with approved procedures. As O&M manager, is responsible for formal tasking,
+   scheduling assignment, training, and overall management of the O&M team.
+  description: | # this will include new lines to allow paragraphs
+    ### Responsibility
+
+    ## **Implement and supervise the network equipment**
+    * Take the Training for Hardware installation , Service & NMS configuration for take this knowledge to coordinate , inspect supplier installation
+    * Initiate or revise the implement plan and operation. Coordinate with both internal & external partners according to site and equipment preparation.
+    * Site Preparation for support the new network equipment implementation
+    * Network Transmissions Preparation Optical fiber core – Explore the optical route to support the equipment such as IP DSLAM , MetroNet . If the optic have the available cores then measured optical loss value for verify its could satisfier with their device, if not correct value into standard the support for device by splice to reduce loss. If not enough core optic must design new optic route for best cost and efficiency
+    * Control and inspect the supplier installation site by site . By send the inspected teams coupled with supplier. If supplier met the problem during work or install the network equipment not follow specification acceptance. This teams will give the recommend information to supplier before patch and on-service the equipment. This will work finished punctual and make the win-win with the company & supply.
+    * To Come together patched and pending with supplier
+
+    ## **Installation the Broadband, DDN & PSTN Service**
+    Provided the lease line circuit interconnect between the head office and the branch office,
+    ATM EDC support to KBANK, KTB, BBL, SCB Provide and install the DTU and CISCO WIC card for
+    backup circuit of KBANK Provide and install the transmission link to True Base station CP branch
+
+    * Configured and Installed the IP-VPN router for support the Counter service and the inventory online system to 7-11 approximate 274 branch
+    * Configured and Installed the CISCO router, Switch and dial modem backup to support PAY@POST for Thai POST 29 branch
+    * Provided and installation the NTU or the IP-VPN router support Tsutaya, Se-Ed, counter service, Telewiz, BigC,
+    * VoIP
+    * IP­TV
+    * Channelized E1 support Voice
+    * ADSL service
+    * Optical Fiber – Provide and splice the Optical fiber to the customer site
+
+
+
+    ##  **Fault Corrective & Troubleshooting**
+    Everyday in division will be inform from customer and NOC about Fault .
+    Fault can simple separating into inside (the network equipment ) and outside
+    ( optical fiber, copper wire) exchange .
+    After inform NOC & customer must analyze fault to find solution with team
+    and prepare essential device to correct fault
+
+    Responsibility Network equipment including Alcatel switching network, NEC, AT&T transmission network,
+    Huawei SDH network, Alcatel DWDM network, Huawei ATM, IP DSLAM network , Huawei MetroNet network ,
+    Alcatel Mainstreet Network , FOM , Enkein , PowerOne , Telcon Rectifier, Air-conditions , Battery, Generator
+
+
+    ### Training
+    * Huawei OptiX OSN 6800 WDM   Operation, Maintenance, Troubleshooting
+    at Huawei University
+    * Huawei Quidway S8300, S5600, S5300  NetEngine80E,
+    Operation & Maintenance , Troubleshooting
+    * Huawei MSAN, DSLAM - Operation and Maintenance – IP & ATM DSLAM provide
+    multi­service access modules that provide broadband access services such as ADSL2+,
+    SHDSL, and LAN. This training provide the knowledge with respect to the
+    hardware components of DSLAM, correct installation , acknowledge in technology that
+    support with its. And could configuration DSLAM to provide service such as XDSL service ,
+    VLAN service , Multicast service.
+    * Huawei TMG 8010 Engineer Training
+    * ICND - Interconnecting Cisco Network Device
+    * Traineeship Skill - Objective for have knowledge , ability and practice to trainer for ถายทอด knowledge to target group.
+    * ADSL Service Operation & Troubleshooting – analyze cause of ADSL fault then correct it with best solution and time
+    * Troubleshooting TCP/IP Internetworking
+    * Alcatel 1000E10 Operation & Maintenance – 100E10 is Alcatel Switching network
+    * NGN ( Next Generation Network ) Principle Training
+    * NGN Test Tool – Agilent
+    * Alcatel Mainstreet 3600 Configuration and Troubleshooting
+    * SmartEdge Router Configuration and Troubleshooting
+    * Adtran TA3010 Operation & Maintenance
+    * MIMS - Web Base system for manage ADSL service to customer. It can operate or terminate service via web browser.
+    MIMS have able to manage and store database of customer such as address, billing, detail of customer service.
+    * UPS, Battery, Inverter and Converter Operation & Maintenance
+
+
+
+
+
+    ## Skills
+    * Have knowledge in the Cisco Router & Switch can installation,
+    configuration ,troubleshooting
+    * Have knowledge in the TCP/IP Interconnection network
+    * Knowledge in Linux/Windows, MySQL, SQL server, Web development
+    * Familiarity with PHP Framework such as Yii or basic understand the concept of  MVC
+    * Have knowledge in the Python, PHP, HTML5, CSS, AJAX, JavaScript, jQuery, Twitter Bootstrap
+    * Experienced in connecting to API service or Web Service
+    * Web-based Application Development and Web Services

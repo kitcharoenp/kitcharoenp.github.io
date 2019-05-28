@@ -95,9 +95,9 @@
           Phone: {{ site.phone | escape }}
         </p>
       {%- endif -%}
-      {%- if site.website -%}
+      {%- if site.my_website -%}
         <p>
-          Web: {% include a.html href=site.website %}{{ site.website | escape }}</a>
+          Web: {% include a.html href=site.my_website %}{{ site.my_website | escape }}</a>
         </p>
       {%- endif -%}
     </div>
