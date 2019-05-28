@@ -87,8 +87,15 @@ $ sudo service supervisord status
 ```
 
 ### Remove the default supervisor init-scripts
+If install supervisor from distribute package
 ```shell
 $ sudo update-rc.d -f supervisor remove
 $ sudo rm -f /etc/init.d/supervisor
 $ sudo rm -f /etc/default/supervisor
+```
+
+### Restart server
+```shell
+$ sudo shutdown -r now
+
 ```
