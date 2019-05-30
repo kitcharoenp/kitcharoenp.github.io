@@ -1,49 +1,63 @@
 # Experience template
-- company: InterlinkTelecom
-  link: http://www.interlinktelecom.co.th
-  job_title: Devops Engineer
-  dates: October 2013 - Present
-  quote: >
-    Responsible for developing and building application and integration with the Open Source Enterprise Resource Planning.
-    Translate technical requirements, assist with all stages of test data, develop interface stubs and simulators and perform script maintenance and updates.
-    Deploy new modules and upgrades and complete fixes within the production environment
-  description: | # this will include new lines to allow paragraphs
-    ### Responsibility
-    * Developed an ERP system from the open source (Zurmo) and customize the system to improves the effectiveness of the company activity
-    * Customize the interface between ERP and Microsoft Dynamics NAV
-    * Automate the company business processes by work flow
-    * Integration customize module (Quotation, Purchase Request, Purchase Order, Service Order, Work Order, Inventory and Warehouse Management)
-    * Develop website interfaces / Update content on website (http://www.interlinktelecom.co.th)
+# - company: InterlinkTelecom
+#   link: http://www.interlinktelecom.co.th
+#   job_title: Devops Engineer
+#   dates: October 2013 - Present
+#   quote: >
+#     Responsible for developing and building application and integration with the Open Source Enterprise Resource Planning.
+#     Translate technical requirements, assist with all stages of test data, develop interface stubs and simulators and perform script maintenance and updates.
+#     Deploy new modules and upgrades and complete fixes within the production environment
+#   description: | # this will include new lines to allow paragraphs
+#     ### Responsibility
+#     * Developed an ERP system from the open source (Zurmo) and customize the system to improves the effectiveness of the company activity
+#     * Customize the interface between ERP and Microsoft Dynamics NAV
+#     * Automate the company business processes by work flow
+#     * Integration customize module (Quotation, Purchase Request, Purchase Order, Service Order, Work Order, Inventory and Warehouse Management)
+#     * Develop website interfaces / Update content on website (http://www.interlinktelecom.co.th)
+    # ## Skills
+    # * Have knowledge in the Cisco Router & Switch can installation,
+    # configuration ,troubleshooting
+    # * Have knowledge in the TCP/IP Interconnection network
+    # * Knowledge in Linux/Windows, MySQL, SQL server, Web development
+    # * Familiarity with PHP Framework such as Yii or basic understand the concept of  MVC
+    # * Have knowledge in the Python, PHP, HTML5, CSS, AJAX, JavaScript, jQuery, Twitter Bootstrap
+    # * Experienced in connecting to API service or Web Service
+    # * Web-based Application Development and Web Services
 
-- company: GroupTech
-  link: https://www.alt.co.th/ourcompanydetails2
-  job_title: Outside Plant Engineer
-  dates: July 2013 - October 2013
-  quote: >
-  description: | # this will include new lines to allow paragraphs
-    ### Responsibility
-    * Coordinate between SBN and subcontractor for  installation , commissioning and PAT until work finish completely
-    * Monitor subcontractor to follow up installation standard.
-    * Report progress and pending issue to project manager.
-    * Control and monitor subcontractor for OFC route survey , installation drawing , as-builting.
-    * PAT with subcontractor to ensure for BOQ and pending issue
+# - company: GroupTech
+#   link: https://www.alt.co.th/ourcompanydetails2
+#   job_title: Outside Plant Engineer
+#   dates: July 2013 - October 2013
+#   quote: > Responsible for fiber optic route engineering,
+#     pole line and underground route field documentation,
+#     construction permits, project tracking,
+#     as-built documentation and electronic records preparation in accordance with company policies,
+#     procedures and quality standards, while meeting customer delivery requirements.
+#   description: | # this will include new lines to allow paragraphs
+#     ### Responsibility
+#     * Coordinate between SBN and subcontractor for  installation , commissioning and PAT until work finish completely
+#     * Monitor subcontractor to follow up installation standard.
+#     * Report progress and pending issue to project manager.
+#     * Control and monitor subcontractor for OFC route survey , installation drawing , as-builting.
+#     * PAT with subcontractor to ensure for BOQ and pending issue
+#     * Works with network planning, central office, transmission and operations personnel to support growth
 
 
-- company: Triple T Broadband
-  link: https://www.3bb.co.th/
-  job_title: Senior  Engineer Telecom
-  dates: February 2009 - July 2012
-  quote: >
-   Developed the broadband network monitoring using Web Applications, Provided tecnical support to implementation teams
-  description: | # this will include new lines to allow paragraphs
-    ### Responsibility
-    * Supported teams to installation, commissioning  DSLAM, MSAN node (1431 nodes)
-    * Developed the network monitoring web application  (BRAS Temperature,
-    MME Temperature, CRC DSLAM Link, Access users on BRAS, DSLAM Port Utilization,
-    Monitoring the amount of  online offline user on slot port in DSLAM)
-    * Update , import, export, catalogue the  points & paths of OFC route on
-    Google Earth for OSP Network such as Node position, DP of OSP, OFC route cable
-    * Created the self script to up speed ADSL users
+# - company: Triple T Broadband
+#   link: https://www.3bb.co.th/
+#   job_title: Senior  Engineer Telecom
+#   dates: February 2009 - July 2012
+#   quote: >
+#    Developed the broadband network monitoring using Web Applications, Provided tecnical support to implementation teams
+#   description: | # this will include new lines to allow paragraphs
+#     ### Responsibility
+#     * Supported teams to installation, commissioning  DSLAM, MSAN node (1431 nodes)
+#     * Developed the network monitoring web application  (BRAS Temperature,
+#     MME Temperature, CRC DSLAM Link, Access users on BRAS, DSLAM Port Utilization,
+#     Monitoring the amount of  online offline user on slot port in DSLAM)
+#     * Update , import, export, catalogue the  points & paths of OFC route on
+#     Google Earth for OSP Network such as Node position, DP of OSP, OFC route cable
+#     * Created the self script to up speed ADSL users
 
 - company: TT&T Plc
   link: Link to company (optional)
@@ -51,15 +65,13 @@
   dates: January 2003 - February 2009
   quote: >
    Responsible for managing a team of personnel who perform planned and unplanned operations and maintenance
-   (O&M) services to ensure that the client’s network and IT security infrastructure is properly configured
+   (O&M) services to ensure that the client’s network is properly configured
    and that all approved changes to the approved baseline have been implemented, tested,
-   and documented in accordance with approved procedures. As O&M manager, is responsible for formal tasking,
-   scheduling assignment, training, and overall management of the O&M team.
+   and documented in accordance with approved procedures.
   description: | # this will include new lines to allow paragraphs
     ### Responsibility
 
     ## **Implement and supervise the network equipment**
-    * Take the Training for Hardware installation , Service & NMS configuration for take this knowledge to coordinate , inspect supplier installation
     * Initiate or revise the implement plan and operation. Coordinate with both internal & external partners according to site and equipment preparation.
     * Site Preparation for support the new network equipment implementation
     * Network Transmissions Preparation Optical fiber core – Explore the optical route to support the equipment such as IP DSLAM , MetroNet . If the optic have the available cores then measured optical loss value for verify its could satisfier with their device, if not correct value into standard the support for device by splice to reduce loss. If not enough core optic must design new optic route for best cost and efficiency
@@ -116,20 +128,4 @@
     * Alcatel Mainstreet 3600 Configuration and Troubleshooting
     * SmartEdge Router Configuration and Troubleshooting
     * Adtran TA3010 Operation & Maintenance
-    * MIMS - Web Base system for manage ADSL service to customer. It can operate or terminate service via web browser.
-    MIMS have able to manage and store database of customer such as address, billing, detail of customer service.
     * UPS, Battery, Inverter and Converter Operation & Maintenance
-
-
-
-
-
-    ## Skills
-    * Have knowledge in the Cisco Router & Switch can installation,
-    configuration ,troubleshooting
-    * Have knowledge in the TCP/IP Interconnection network
-    * Knowledge in Linux/Windows, MySQL, SQL server, Web development
-    * Familiarity with PHP Framework such as Yii or basic understand the concept of  MVC
-    * Have knowledge in the Python, PHP, HTML5, CSS, AJAX, JavaScript, jQuery, Twitter Bootstrap
-    * Experienced in connecting to API service or Web Service
-    * Web-based Application Development and Web Services
