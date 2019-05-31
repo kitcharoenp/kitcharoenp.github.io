@@ -1,5 +1,5 @@
 # Experience template
-# - company: InterlinkTelecom
+# - company: InterlinkTelecom (Thailand)
 #   link: http://www.interlinktelecom.co.th
 #   job_title: Devops Engineer
 #   dates: October 2013 - Present
@@ -24,7 +24,7 @@
     # * Experienced in connecting to API service or Web Service
     # * Web-based Application Development and Web Services
 
-# - company: GroupTech
+# - company: GroupTech (Thailand)
 #   link: https://www.alt.co.th/ourcompanydetails2
 #   job_title: Outside Plant Engineer
 #   dates: July 2013 - October 2013
@@ -43,7 +43,7 @@
 #     * Works with network planning, central office, transmission and operations personnel to support growth
 
 
-# - company: Triple T Broadband
+# - company: Triple T Broadband (Thailand)
 #   link: https://www.3bb.co.th/
 #   job_title: Senior  Engineer Telecom
 #   dates: February 2009 - July 2012
@@ -59,9 +59,9 @@
 #     Google Earth for OSP Network such as Node position, DP of OSP, OFC route cable
 #     * Created the self script to up speed ADSL users
 
-- company: TT&T Plc
+- company: TT&T (Thailand)
   link: Link to company (optional)
-  job_title: Operation Maintenance Engineer Telecom
+  job_title: Telecom O&M Engineer
   dates: January 2003 - February 2009
   quote: >
    Responsible for managing a team of personnel who perform planned and unplanned operations and maintenance
@@ -119,7 +119,6 @@
     VLAN service , Multicast service.
     * Huawei TMG 8010 Engineer Training
     * ICND - Interconnecting Cisco Network Device
-    * Traineeship Skill - Objective for have knowledge , ability and practice to trainer for ถายทอด knowledge to target group.
     * ADSL Service Operation & Troubleshooting – analyze cause of ADSL fault then correct it with best solution and time
     * Troubleshooting TCP/IP Internetworking
     * Alcatel 1000E10 Operation & Maintenance – 100E10 is Alcatel Switching network
