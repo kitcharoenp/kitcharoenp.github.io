@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Using Alfresco with Django in Celery Task"
+title: "Alfresco api with django + celery task"
 published: true
 categories: [django, alfresco, file]
 ---
@@ -70,7 +70,7 @@ def alfresco_upload_a_file(file_system, file_name):
     r = requests.post(url, auth=auth, data=data, files=files)
     return r
 
-def alfresco_upload_dir(directory='kml/', json_result = ''):
+def alfresco_upload_dir(directory='upload_to_alf/', json_result = ''):
     path = os.path.join(settings.MEDIA_ROOT, directory)
     file_system = FileSystemStorage(location=path)
 

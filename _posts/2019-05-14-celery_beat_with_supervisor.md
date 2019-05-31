@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Celery and Celery Beat Daemonization with Supervisor"
+title: "Supervisor + Celery Beat Daemonization"
 published: true
 categories: [celery, supervisor]
 ---
@@ -38,10 +38,10 @@ $ cd /etc/supervisor
 $ sudo cp supervisord.conf supervisord.conf.default.factory
 ```
 
-### Edit ***Supervisor*** configuration file
+### Create / Update ***Supervisor*** configuration file
 ```shell
-# update with new config
-$ echo_supervisord_conf | sudo tee supervisord.conf
+#   create / update configuration file
+$ echo_supervisord_conf | sudo tee /etc/supervisor/supervisord.conf
 ```
 Keep all configuration as default. Edit the `[include]` section from
 ```shell
@@ -68,7 +68,7 @@ celeryd.conf
     * project name : `_proj`
     * project directory : `/home/ubuntu/_proj`
     * project virtualenv : `/home/ubuntu/_proj/virt_env/`
-    * celery user : `ubuntu`
+    * project user : `ubuntu`
 
     ```
     ...
@@ -92,7 +92,7 @@ celeryd.conf  celerybeat.conf
     * project name : `_proj`
     * project directory : `/home/ubuntu/_proj`
     * project virtualenv : `/home/ubuntu/_proj/virt_env/`
-    * celery user : `ubuntu`
+    * project user : `ubuntu`
     * beat scheduler : `django_celery_beat.schedulers:DatabaseScheduler`
     * pidfile : `/tmp/celerybeat.pid`
 
