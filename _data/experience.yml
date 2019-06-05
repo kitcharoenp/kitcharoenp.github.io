@@ -93,14 +93,11 @@
     * Optical Fiber – Provide and splice the Optical fiber to the customer site
 
 
-    ##  **Fault Corrective & Troubleshooting**
-    Everyday in division will be inform from customer and NOC about Fault .
-    Fault can simple separating into inside (the network equipment ) and outside
-    ( optical fiber, copper wire) exchange .
-    After inform NOC & customer must analyze fault to find solution with team
-    and prepare essential device to correct fault
+    ##  **Corrective Maintenance**
+    Identification or diagnosis of "trouble" in the telecom system caused by a failure of some kind.
+    Talk to team members who work with the process directly, and get their opinions on where identification or diagnosis could be made.
 
-    Responsibility Network equipment including Alcatel switching network, NEC, AT&T transmission network,
+    Responsibilities of the job including:  Alcatel switching network, NEC, AT&T transmission network,
     Huawei SDH network, Alcatel DWDM network, Huawei ATM, IP DSLAM network , Huawei MetroNet network ,
     Alcatel Mainstreet Network , FOM , Enkein , PowerOne , Telcon Rectifier, Air-conditions , Battery, Generator
 
