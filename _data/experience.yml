@@ -93,7 +93,6 @@
     * Optical Fiber – Provide and splice the Optical fiber to the customer site
 
 
-
     ##  **Fault Corrective & Troubleshooting**
     Everyday in division will be inform from customer and NOC about Fault .
     Fault can simple separating into inside (the network equipment ) and outside
@@ -106,25 +105,23 @@
     Alcatel Mainstreet Network , FOM , Enkein , PowerOne , Telcon Rectifier, Air-conditions , Battery, Generator
 
 
-    ### Training
-    * Huawei OptiX OSN 6800 WDM   Operation, Maintenance, Troubleshooting
-    at Huawei University
-    * Huawei Quidway S8300, S5600, S5300  NetEngine80E,
-    Operation & Maintenance , Troubleshooting
-    * Huawei MSAN, DSLAM - Operation and Maintenance – IP & ATM DSLAM provide
+    ## Training
+    * `Huawei OptiX OSN 6800 WDM` operation, maintenance and troubleshooting at Huawei university
+    * `Huawei Quidway S8300, S5600, S5300  NetEngine80E` operation, maintenance and troubleshooting
+    * `Huawei MSAN, DSLAM` - operation and maintenance – IP & ATM DSLAM provide
     multi­service access modules that provide broadband access services such as ADSL2+,
     SHDSL, and LAN. This training provide the knowledge with respect to the
     hardware components of DSLAM, correct installation , acknowledge in technology that
     support with its. And could configuration DSLAM to provide service such as XDSL service ,
     VLAN service , Multicast service.
-    * Huawei TMG 8010 Engineer Training
-    * ICND - Interconnecting Cisco Network Device
-    * ADSL Service Operation & Troubleshooting – analyze cause of ADSL fault then correct it with best solution and time
-    * Troubleshooting TCP/IP Internetworking
-    * Alcatel 1000E10 Operation & Maintenance – 100E10 is Alcatel Switching network
-    * NGN ( Next Generation Network ) Principle Training
+    * `Huawei TMG 8010` engineer training
+    * `ICND` - Interconnecting Cisco Network Device
+    * `ADSL Service` operation and troubleshooting – analyze cause of ADSL fault then correct it with best solution and time
+    * Troubleshooting TCP/IP internetworking
+    * `Alcatel 1000E10` operation and maintenance – 100E10 is Alcatel Switching network
+    * `NGN`  (Next Generation Network) principle training
     * NGN Test Tool – Agilent
-    * Alcatel Mainstreet 3600 Configuration and Troubleshooting
-    * SmartEdge Router Configuration and Troubleshooting
-    * Adtran TA3010 Operation & Maintenance
-    * UPS, Battery, Inverter and Converter Operation & Maintenance
+    * `Alcatel Mainstreet 3600` configuration and troubleshooting
+    * `SmartEdge Router` configuration and troubleshooting
+    * `Adtran TA3010` operation and troubleshooting
+    * UPS, Battery, Inverter and Converter operation and troubleshooting
