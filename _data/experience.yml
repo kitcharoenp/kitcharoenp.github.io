@@ -24,23 +24,24 @@
     # * Experienced in connecting to API service or Web Service
     # * Web-based Application Development and Web Services
 
-# - company: GroupTech (Thailand)
-#   link: https://www.alt.co.th/ourcompanydetails2
-#   job_title: Outside Plant Engineer
-#   dates: July 2012 - October 2012
-#   quote: > Responsible for fiber optic route engineering,
-#     pole line and underground route field documentation,
-#     construction permits, project tracking,
-#     as-built documentation and electronic records preparation in accordance with company policies,
-#     procedures and quality standards, while meeting customer delivery requirements.
-#   description: | # this will include new lines to allow paragraphs
-#     ### Responsibility
-#     * Coordinate between SBN and subcontractor for  installation , commissioning and PAT until work finish completely
-#     * Monitor subcontractor to follow up installation standard.
-#     * Report progress and pending issue to project manager.
-#     * Control and monitor subcontractor for OFC route survey , installation drawing , as-builting.
-#     * PAT with subcontractor to ensure for BOQ and pending issue
-#     * Works with network planning, central office, transmission and operations personnel to support growth
+- company: GroupTech (Thailand)
+  link: https://www.alt.co.th/ourcompanydetails2
+  job_title: Outside Plant Engineer
+  dates: July 2012 - October 2012
+  quote: >
+    Responsible for fiber optic route engineering,
+    pole line and underground route field documentation,
+    construction permits, project tracking,
+    as-built documentation and electronic records preparation in accordance with company policies,
+    procedures and quality standards, while meeting customer delivery requirements.
+  description: | # this will include new lines to allow paragraphs
+    ### Responsibility
+    * Coordinate between customer and subcontractor for installation, commissioning and PAT until work finish completely
+    * Monitor subcontractor to follow up installation standard.
+    * Report progress and pending issue to project manager.
+    * Control and monitor subcontractor for OFC route survey, installation drawing, as-builting.
+    * PAT with subcontractor to ensure for BOQ and pending issue
+    * Works with network planning, central office, transmission and operations personnel
 
 
 - company: Triple T Broadband (Thailand)
