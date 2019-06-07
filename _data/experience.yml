@@ -2,7 +2,7 @@
 # - company: InterlinkTelecom (Thailand)
 #   link: http://www.interlinktelecom.co.th
 #   job_title: Devops Engineer
-#   dates: October 2013 - Present
+#   dates: October 2012 - Present
 #   quote: >
 #     Responsible for developing and building application and integration with the Open Source Enterprise Resource Planning.
 #     Translate technical requirements, assist with all stages of test data, develop interface stubs and simulators and perform script maintenance and updates.
@@ -27,7 +27,7 @@
 # - company: GroupTech (Thailand)
 #   link: https://www.alt.co.th/ourcompanydetails2
 #   job_title: Outside Plant Engineer
-#   dates: July 2013 - October 2013
+#   dates: July 2012 - October 2012
 #   quote: > Responsible for fiber optic route engineering,
 #     pole line and underground route field documentation,
 #     construction permits, project tracking,
@@ -43,21 +43,16 @@
 #     * Works with network planning, central office, transmission and operations personnel to support growth
 
 
-# - company: Triple T Broadband (Thailand)
-#   link: https://www.3bb.co.th/
-#   job_title: Senior  Engineer Telecom
-#   dates: February 2009 - July 2012
-#   quote: >
-#    Developed the broadband network monitoring using Web Applications, Provided tecnical support to implementation teams
-#   description: | # this will include new lines to allow paragraphs
-#     ### Responsibility
-#     * Supported teams to installation, commissioning  DSLAM, MSAN node (1431 nodes)
-#     * Developed the network monitoring web application  (BRAS Temperature,
-#     MME Temperature, CRC DSLAM Link, Access users on BRAS, DSLAM Port Utilization,
-#     Monitoring the amount of  online offline user on slot port in DSLAM)
-#     * Update , import, export, catalogue the  points & paths of OFC route on
-#     Google Earth for OSP Network such as Node position, DP of OSP, OFC route cable
-#     * Created the self script to up speed ADSL users
+- company: Triple T Broadband (Thailand)
+  link: https://www.3bb.co.th/
+  job_title: Senior Telecom O&M Engineer
+  dates: February 2009 - July 2012
+  quote: >
+   Developed the broadband network monitoring using Web Applications, Provide technical support to implementation teams
+  description: | # this will include new lines to allow paragraphs
+    ### Responsibility
+    * Commissioning support (DSLAM, MSAN 1431 nodes)
+    * Developed the network monitoring web application (MySQL + PHP + Python + JavaScript) (Network equipment Temperature, Link Error and Network Utilization Monitoring)
 
 - company: TT&T (Thailand)
   link: Link to company (optional)
