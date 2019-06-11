@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "[Celery] worker as daemon"
+title: "Celery worker as daemon"
 published: true
 categories: [celery]
 ---
@@ -19,9 +19,9 @@ Running the worker in the background as a daemon see [Daemonization](http://docs
 
 3. Edit the [configuration option](http://docs.celeryproject.org/en/latest/userguide/daemonizing.html#available-options) according to your project.
 
-    * project name : `kapany_proj`
-    * project directory : `/opt/django_projects/kapany_proj/`
-    * project env : `/opt/django_projects/kapany_proj/kapany_env/`
+    * project name : `your_proj`
+    * project directory : `/opt/django_projects/your_proj/`
+    * project env : `/opt/django_projects/your_proj/your_env/`
 
     ```shell
     # Names of nodes to start
@@ -36,16 +36,16 @@ Running the worker in the background as a daemon see [Daemonization](http://docs
     # Absolute or relative path to the 'celery' command:
     #CELERY_BIN="/usr/local/bin/celery"
     #CELERY_BIN="/virtualenvs/def/bin/celery"
-    CELERY_BIN="/opt/django_projects/kapany_proj/kapany_env/bin/celery"
+    CELERY_BIN="/opt/django_projects/your_proj/your_env/bin/celery"
 
     # App instance to use
     # comment out this line if you don't use an app
-    CELERY_APP="kapany_proj"
+    CELERY_APP="your_proj"
     # or fully qualified:
     #CELERY_APP="proj.tasks:app"
 
     # Where to chdir at start.
-    CELERYD_CHDIR="/opt/django_projects/kapany_proj/"
+    CELERYD_CHDIR="/opt/django_projects/your_proj/"
 
     # Extra command-line arguments to the worker
     CELERYD_OPTS="--time-limit=300 --concurrency=8"
@@ -121,8 +121,8 @@ celery init v10.1.
 + [ 0 -ne 0 ]
 + start_workers
 + [ ! -z  ]
-+ _chuid start worker1 --workdir=/opt/django_projects/kapany_proj/ --pidfile=/var/run/celery/%n.pid --logfile=/var/log/celery/%n%I.log --loglevel=INFO --app=kapany_proj --time-limit=300 --concurrency=8
-+ su celery -c /opt/django_projects/kapany_proj/kapany_env/bin/celery multi start worker1 --workdir=/opt/django_projects/kapany_proj/ --pidfile=/var/run/celery/%n.pid --logfile=/var/log/celery/%n%I.log --loglevel=INFO --app=kapany_proj --time-limit=300 --concurrency=8
++ _chuid start worker1 --workdir=/opt/django_projects/your_proj/ --pidfile=/var/run/celery/%n.pid --logfile=/var/log/celery/%n%I.log --loglevel=INFO --app=your_proj --time-limit=300 --concurrency=8
++ su celery -c /opt/django_projects/your_proj/your_env/bin/celery multi start worker1 --workdir=/opt/django_projects/your_proj/ --pidfile=/var/run/celery/%n.pid --logfile=/var/log/celery/%n%I.log --loglevel=INFO --app=your_proj --time-limit=300 --concurrency=8
 celery multi v4.2.1 (windowlicker)
 > Starting nodes...
 	> worker1@vhcalnplci: OK
