@@ -1,8 +1,8 @@
 # Experience template
 - company: InterlinkTelecom (Thailand)
   link: http://www.interlinktelecom.co.th
-  job_title: Devops Engineer
-  dates: October 2012 - Present
+  job_title: DevOps Engineer
+  dates: October 2014 - Present
   quote: >
     Responsible for developing and building application (ERP) and integration with SAP.
     Translate technical requirements, assist with all stages of test data,
@@ -20,7 +20,7 @@
 - company: GroupTech (Thailand)
   link: https://www.alt.co.th/ourcompanydetails2
   job_title: Outside Plant Engineer
-  dates: July 2012 - October 2012
+  dates: July 2014 - October 2014
   quote: >
     Responsible for fiber optic route engineering,
     pole line and underground route field documentation,
@@ -40,18 +40,20 @@
 - company: Triple T Broadband (Thailand)
   link: https://www.3bb.co.th/
   job_title: Senior Telecom O&M Engineer
-  dates: February 2009 - July 2012
+  dates: February 2011 - July 2014
   quote: >
-   Developed the broadband network monitoring using Web Applications, Provide technical support to implementation teams
+   Developed the broadband network monitoring using Web Applications,
+   Provide technical support to implementation teams
   description: | # this will include new lines to allow paragraphs
     ### Responsibility
     * Commissioning support (DSLAM, MSAN 1431 nodes)
-    * Developed the network monitoring web application (MySQL + PHP + Python + JavaScript) (Network equipment Temperature, Link Error and Network Utilization Monitoring)
+    * Developed the network monitoring web application (MySQL + PHP + Python + JavaScript)
+     (Network equipment Temperature, Link Error and Network Utilization Monitoring)
 
 - company: TT&T (Thailand)
   link: Link to company (optional)
   job_title: Telecom O&M Engineer
-  dates: January 2003 - February 2009
+  dates: January 2003 - February 2011
   quote: >
    Responsible for managing a team of personnel who perform planned and unplanned operations and maintenance
    (O&M) services to ensure that the client’s network is properly configured
