@@ -1,8 +1,9 @@
 # Project template
-- name: Project name
-  link: Link to project (eg. sproogen.github.io/modern-resume-theme)(optional)
-  github: Github page for project (eg. sproogen/modern-resume-theme)(optional)
+- name: x_odoo_10_addons
+  link: https://github.com/kitcharoenp/x_odoo_10_addons
+  github: https://github.com/kitcharoenp/x_odoo_10_addons
   quote: >
-    Short overview of the project (optional)
+    Module and extension for odoo 10
   description: | # this will include new lines to allow paragraphs
-    Description about the work on/with the project
+     This project aim to deal with modules related to manage invoicing,
+     purchase, timesheet

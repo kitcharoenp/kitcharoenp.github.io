@@ -1,28 +1,21 @@
 # Experience template
-# - company: InterlinkTelecom (Thailand)
-#   link: http://www.interlinktelecom.co.th
-#   job_title: Devops Engineer
-#   dates: October 2012 - Present
-#   quote: >
-#     Responsible for developing and building application and integration with the Open Source Enterprise Resource Planning.
-#     Translate technical requirements, assist with all stages of test data, develop interface stubs and simulators and perform script maintenance and updates.
-#     Deploy new modules and upgrades and complete fixes within the production environment
-#   description: | # this will include new lines to allow paragraphs
-#     ### Responsibility
-#     * Developed an ERP system from the open source (Zurmo) and customize the system to improves the effectiveness of the company activity
-#     * Customize the interface between ERP and Microsoft Dynamics NAV
-#     * Automate the company business processes by work flow
-#     * Integration customize module (Quotation, Purchase Request, Purchase Order, Service Order, Work Order, Inventory and Warehouse Management)
-#     * Develop website interfaces / Update content on website (http://www.interlinktelecom.co.th)
-    # ## Skills
-    # * Have knowledge in the Cisco Router & Switch can installation,
-    # configuration ,troubleshooting
-    # * Have knowledge in the TCP/IP Interconnection network
-    # * Knowledge in Linux/Windows, MySQL, SQL server, Web development
-    # * Familiarity with PHP Framework such as Yii or basic understand the concept of  MVC
-    # * Have knowledge in the Python, PHP, HTML5, CSS, AJAX, JavaScript, jQuery, Twitter Bootstrap
-    # * Experienced in connecting to API service or Web Service
-    # * Web-based Application Development and Web Services
+- company: InterlinkTelecom (Thailand)
+  link: http://www.interlinktelecom.co.th
+  job_title: Devops Engineer
+  dates: October 2012 - Present
+  quote: >
+    Responsible for developing and building application (ERP) and integration with SAP.
+    Translate technical requirements, assist with all stages of test data,
+    develop interface stubs and simulators and perform script maintenance and updates.
+    Deploy new modules and upgrades and complete fixes within the production environment
+  description: | # this will include new lines to allow paragraphs
+    ### Responsibility
+    * Server maintenance and new server installation
+    * Keeping a server software updated and running (ubuntu)
+    * Customizing ERP system development from opensource (Zurmo, Odoo)
+    * ERP integration: System Connection between opensource ERP and SAP
+    * Creating custom modules (Quotation, SaleOrder, Procurement, WorkOrder, Inventory Management etc.)
+    * Web & Mobile App Design and Development (ionic)
 
 - company: GroupTech (Thailand)
   link: https://www.alt.co.th/ourcompanydetails2
