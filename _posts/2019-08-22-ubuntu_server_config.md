@@ -4,3 +4,46 @@ title: "Ubuntu Server Configuration"
 published: false
 categories: [ubuntu, server]
 ---
+### Configure Static IP Address
+The default configuration files of Netplan are found under `/etc/netplan/` directory.
+```shell
+$ ls /etc/netplan/
+50-cloud-init.yaml
+```
+The default network configuration file is `50-cloud-init.yaml`.
+
+```shell
+$ cat /etc/netplan/50-cloud-init.yaml
+# This file is generated from information provided by
+# the datasource.  Changes to it will not persist across an instance.
+# To disable cloud-init's network configuration capabilities, write a file
+# /etc/cloud/cloud.cfg.d/99-disable-network-config.cfg with the following:
+# network: {config: disabled}
+network:
+    version: 2
+    ethernets:
+        eth0:
+            dhcp4: no
+            addresses: [10.10.10.212/24]
+            gateway4: 10.10.10.20
+            nameservers:
+                addresses: [8.8.4.4,8.8.8.8]
+$
+```
+
+#### Apply configuration
+```shell
+$ sudo netplan --debug apply
+```
+**netplan apply** applies the current netplan configuration to a running system.
+
+**–debug** Print debugging output during the process.
+
+### SSH `Permission denied (publickey).`
+
+Change `PasswordAuthentication no` to `PasswordAuthentication yes` in `/etc/ssh/sshd_config`
+```
+# To disable tunneled clear text passwords, change to no here!
+PasswordAuthentication yes
+#PermitEmptyPasswords no
+```
