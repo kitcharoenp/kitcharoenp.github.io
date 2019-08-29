@@ -4,6 +4,7 @@ title: "Ubuntu Server Configuration"
 published: true
 categories: [ubuntu, server]
 ---
+
 ### Configure Static IP Address
 The default configuration files of Netplan are found under `/etc/netplan/` directory.
 ```shell
@@ -29,6 +30,44 @@ network:
             nameservers:
                 addresses: [8.8.4.4,8.8.8.8]
 $
+```
+
+### Configure Bridge interface
+Install the bridge-utils
+```shell
+$ sudo apt install bridge-utils
+```
+
+Configuration files of Netplan in `/etc/netplan/01-netcfg.yaml`.
+* set bridge interface on `eno1`
+* ip address `10.10.20.12/24`
+* gateway ipv4 `10.10.10.20`
+
+ ```shell
+$ ls /etc/netplan
+01-netcfg.yaml  01-netcfg.yaml.default  01-netcfg.yaml.default.bridges
+
+# show config in `01-netcfg.yaml`
+$ cat /etc/netplan/01-netcfg.yaml
+network:
+  version: 2
+  renderer: networkd
+  ethernets:
+    eno1:
+      dhcp4: no
+    eno2:
+      dhcp4: no
+      addresses: [10.10.20.12/24]
+  bridges:
+    br0:
+      dhcp4: no        
+      addresses: [10.10.10.12/24]
+      gateway4: 10.10.10.20
+      nameservers:
+        addresses: [8.8.4.4,8.8.8.8]
+      interfaces:
+      - eno1
+
 ```
 
 #### Apply configuration
