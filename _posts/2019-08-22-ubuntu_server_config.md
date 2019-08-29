@@ -29,8 +29,15 @@ network:
             gateway4: 10.10.10.20
             nameservers:
                 addresses: [8.8.4.4,8.8.8.8]
-$
 ```
+
+#### Apply configuration
+```shell
+$ sudo netplan --debug apply
+```
+**netplan apply** applies the current netplan configuration to a running system.
+
+**–debug** Print debugging output during the process.
 
 ### Configure Bridge interface
 Install the bridge-utils
@@ -70,14 +77,6 @@ network:
 
 ```
 
-#### Apply configuration
-```shell
-$ sudo netplan --debug apply
-```
-**netplan apply** applies the current netplan configuration to a running system.
-
-**–debug** Print debugging output during the process.
-
 ### SSH `Permission denied (publickey).`
 
 Change `PasswordAuthentication no` to `PasswordAuthentication yes` in `/etc/ssh/sshd_config`
@@ -85,4 +84,13 @@ Change `PasswordAuthentication no` to `PasswordAuthentication yes` in `/etc/ssh/
 # To disable tunneled clear text passwords, change to no here!
 PasswordAuthentication yes
 #PermitEmptyPasswords no
+```
+
+### Rsync : Exclude Multiple Files and Directories
+* **source** : username@ip_source `ubuntu@10.10.10.12` , directory `/home/ubuntu/zurmo`
+* **destination** : directory `/var/www/html`
+* **exclude dir** : `app/protected/runtime/uploads/localfiles/*`
+
+```shell
+$ rsync -avP --exclude 'app/protected/runtime/uploads/localfiles/*'  ubuntu@10.10.10.12:/home/ubuntu/zurmo /var/www/html
 ```
