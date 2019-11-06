@@ -2,7 +2,7 @@
 layout: post
 title: "Jenkins Master and Slave"
 published: false
-categories: []
+categories: [jenkins]
 ---
 
 ```shell

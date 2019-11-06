@@ -2,7 +2,7 @@
 layout: post
 title: "GeoDjango Import Data from KML File"
 published: true
-categories: [geodjago]
+categories: [gis]
 ---
 There are some cases, you need to import the KML data to a Django project.
 Share and collaborate on KML has a complex folder structure (many sub-folders

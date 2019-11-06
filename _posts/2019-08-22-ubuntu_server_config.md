@@ -2,7 +2,7 @@
 layout: post
 title: "Ubuntu Server Configuration"
 published: true
-categories: [ubuntu, server]
+categories: [server]
 ---
 
 ### Configure Static IP Address

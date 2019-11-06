@@ -2,7 +2,7 @@
 layout: post
 title:  "Set up PostgreSQL and PostGIS extension on Ubuntu"
 date:   2018-05-28 16:38:01 +0700
-categories: [postgresql, postgis]
+categories: [postgresql, gis]
 published: true
 ---
 Get more on [UsersWikiPostGIS2](https://trac.osgeo.org/postgis/wiki/UsersWikiPostGIS24UbuntuPGSQL10Apt)

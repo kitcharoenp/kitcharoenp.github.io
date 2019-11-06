@@ -2,7 +2,7 @@
 layout: post
 title: "Alfresco api with django + celery task"
 published: true
-categories: [django, alfresco, file]
+categories: [celery, alfresco]
 ---
 > [Alfresco](https://en.wikipedia.org/wiki/Alfresco_(software)) is a collection of information management software products for Microsoft Windows and Unix-like operating systems developed using Java technology. Their primary software offering, branded as a Digital Business Platform[3] is proprietary & a commercially licensed open source platform, supports open standards, and provides enterprise scale
 

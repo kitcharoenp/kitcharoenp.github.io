@@ -2,7 +2,7 @@
 layout: post
 title: "Running supervisord automatically on startup"
 published: true
-categories: [supervisor]
+categories: [celery]
 ---
 ### [Starting the supervisor server](https://www.vultr.com/docs/installing-and-configuring-supervisor-on-ubuntu-16-04)
 > supervisor is composed of a server and clients that connect to it. To be able to manage and control programs, we need to start the server. To do so, we will be registering the supervisor server in systemd, so that the server may be started at system startup.

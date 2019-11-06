@@ -2,7 +2,7 @@
 layout: post
 title: "Supervisor + Celery Beat Daemonization"
 published: true
-categories: [celery, supervisor]
+categories: [celery]
 ---
 
 > **[Supervisor](http://supervisord.org/index.html)** is a client/server system that allows its users to monitor and control a number of processes on UNIX-like operating systems.

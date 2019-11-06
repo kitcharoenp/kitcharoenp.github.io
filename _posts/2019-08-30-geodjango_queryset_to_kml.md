@@ -2,7 +2,7 @@
 layout: post
 title: "GeoDjango QuerySet to KML"
 published: true
-categories: [gis, kml]
+categories: [gis]
 ---
 ### **models/point_models.py**
 

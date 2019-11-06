@@ -2,7 +2,7 @@
 layout: post
 title: "Geodjango export geometries to kml file"
 published: false
-categories: [geodjango, kml]
+categories: [geodjango]
 ---
 
 ### Media Files Configurations

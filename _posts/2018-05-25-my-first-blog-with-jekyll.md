@@ -2,7 +2,7 @@
 layout: post
 title:  "My First Blog with Jekyll on GitHub, How to ?"
 date:   2018-05-25 16:16:01 +0700
-categories: jekyll howto
+categories: [jekyll]
 ---
 ### Creating GitHub Pages
 First, Create a repository on GitHub by following the steps in
