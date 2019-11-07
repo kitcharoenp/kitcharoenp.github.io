@@ -4,7 +4,7 @@ layout: default
 <section class="blog">
     {{ content }}
     <ul class="list">
-    {% for post in site.posts %}
+    {% for post in site.posts limit:8 %}
         <li>
             <time class="time">
                 {% assign date_format = site.date_format | default: "%-d %b %Y" %}
