@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "MySQL update column with csv file"
+title: "MySQL : Update column with csv file"
 published: true
 categories: [mysql]
 ---

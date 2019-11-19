@@ -1,7 +1,7 @@
 ---
 layout: post
-title: "MySQL InnoDB Cluster"
-published: false
+title: "MySQL : InnoDB Cluster"
+published: true
 categories: [mysql]
 ---
 Notes while reading :
@@ -34,34 +34,6 @@ mysqlv8-1a 10.254.162.31
 mysqlv8-1b 10.254.162.32
 mysqlv8-1c 10.254.162.33
 ```
-
-#### Install `mysqlsh`
-> [MySQL Shell](https://dev.mysql.com/doc/mysql-shell/8.0/en/) is an advanced client and code editor for MySQL Server.
-```
-sudo apt install mysql-shell
-```
-Test login with `mysqlsh`
-```
-$ mysqlsh root@localhost
-mysqlsh root@localhost
-Please provide the password for 'root@localhost': ********
-Save password for 'root@localhost'? [Y]es/[N]o/Ne[v]er (default No):
-MySQL Shell 8.0.18
-
-Copyright (c) 2016, 2019, Oracle and/or its affiliates. All rights reserved.
-Oracle is a registered trademark of Oracle Corporation and/or its affiliates.
-Other names may be trademarks of their respective owners.
-
-Type '\help' or '\?' for help; '\quit' to exit.
-Creating a session to 'root@localhost'
-Fetching schema names for autocompletion... Press ^C to stop.
-Your MySQL connection id is 9 (X protocol)
-Server version: 8.0.18 MySQL Community Server - GPL
-No default schema selected; type \use <schema> to set one.
-MySQL  localhost:33060+ ssl  JS >
-
-```
-
 
 #### Enable GTID / Clone Plugin
 > The [clone plugin](https://dev.mysql.com/doc/refman/8.0/en/clone-plugin.html) permits cloning data locally or from a remote MySQL server instance. Cloned data is a physical snapshot of data stored in InnoDB that includes schemas, tables, tablespaces, and data dictionary metadata.
