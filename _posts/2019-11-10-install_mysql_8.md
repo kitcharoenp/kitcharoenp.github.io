@@ -55,7 +55,7 @@ Threads: 2  Questions: 3  Slow queries: 0  Opens: 115  Flush tables: 3  Open tab
 ```
 sudo apt install mysql-shell
 ```
-Test login with `mysqlsh`
+Test local login :   `mysqlsh root@localhost`
 ```
 $ mysqlsh root@localhost
 mysqlsh root@localhost
@@ -75,6 +75,23 @@ Server version: 8.0.18 MySQL Community Server - GPL
 No default schema selected; type \use <schema> to set one.
 MySQL  localhost:33060+ ssl  JS >
 ```
+Switching to SQL mode:  `\sql`
+```
+ MySQL  localhost:33060+ ssl  JS > \sql
+Switching to SQL mode... Commands end with ;
+ MySQL  localhost:33060+ ssl  SQL > show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| sys                |
++--------------------+
+4 rows in set (0.0433 sec)
+ MySQL  localhost:33060+ ssl  SQL >
+```
+
 ### Securing installation
 * Remove anonymous users?
 * Disallow root login remotely?

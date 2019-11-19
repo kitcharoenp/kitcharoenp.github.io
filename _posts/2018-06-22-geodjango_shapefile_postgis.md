@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Geodjango Loading a Shapefile into PostGIS"
+title:  "GeoDjango Loading a Shapefile into PostGIS"
 categories: gis
 published: true
 ---

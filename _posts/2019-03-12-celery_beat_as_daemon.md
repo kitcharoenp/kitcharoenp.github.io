@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "[Celery] beat as daemon"
+title: "Celery beat as daemon"
 published: true
 categories: [celery]
 ---
