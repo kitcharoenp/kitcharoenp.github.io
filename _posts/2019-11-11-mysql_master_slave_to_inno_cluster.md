@@ -77,7 +77,7 @@ Then restart MySQL to make the change. For more information please read [Replica
 #### Check `GTID`
 single:
 ```
-mysql-repl> select @@server_id,@@gtid_mode,@@enforce_gtid_consistency;
+mysql-repl > select @@server_id,@@gtid_mode,@@enforce_gtid_consistency;
 +-------------+-------------+----------------------------+
 | @@server_id | @@gtid_mode | @@enforce_gtid_consistency |
 +-------------+-------------+----------------------------+
@@ -86,7 +86,7 @@ mysql-repl> select @@server_id,@@gtid_mode,@@enforce_gtid_consistency;
 ```
 mysqlv8-1a:
 ```
-mysqlv8-1a> select @@server_id,@@gtid_mode,@@enforce_gtid_consistency;
+mysqlv8-1a > select @@server_id,@@gtid_mode,@@enforce_gtid_consistency;
 +-------------+-------------+----------------------------+
 | @@server_id | @@gtid_mode | @@enforce_gtid_consistency |
 +-------------+-------------+----------------------------+
@@ -96,7 +96,7 @@ mysqlv8-1a> select @@server_id,@@gtid_mode,@@enforce_gtid_consistency;
 
 mysqlv8-1b:
 ```
-mysqlv8-1b> select @@server_id,@@gtid_mode,@@enforce_gtid_consistency;
+mysqlv8-1b > select @@server_id,@@gtid_mode,@@enforce_gtid_consistency;
 +-------------+-------------+----------------------------+
 | @@server_id | @@gtid_mode | @@enforce_gtid_consistency |
 +-------------+-------------+----------------------------+
@@ -120,7 +120,7 @@ mysql> SELECT PLUGIN_NAME, PLUGIN_STATUS
 Clone instance :  `mysql-repl` to `mysqlv8-1a`
 * Clone `mysql-repl` instance:
 ```
-mysqlv8-1a> show databases;
+mysqlv8-1a > show databases;
 +--------------------+
 | Database           |
 +--------------------+
@@ -130,27 +130,27 @@ mysqlv8-1a> show databases;
 | sys                |
 +--------------------+
 4 rows in set (0.0385 sec
-mysqlv8-1a> clone instance from repl@'mysql-repl':3306 IDENTIFIED by 'repl_password';
+mysqlv8-1a > clone instance from repl@'mysql-repl':3306 IDENTIFIED by 'repl_password';
 ERROR: 3869 (HY000): Clone system configuration: mysql-repl:3306 is not found in clone_valid_donor_list:
 mysqlv8-1a>
 ```
 
 * Set `clone_valid_donor_list`:
 ```
-mysqlv8-1a> set GLOBAL clone_valid_donor_list='mysql-repl:3306';
-Smysqlv8-1a> clone instance from repl@'mysql-repl':3306 IDENTIFIED by 'repl_password';
+mysqlv8-1a > set GLOBAL clone_valid_donor_list='mysql-repl:3306';
+mysqlv8-1a > clone instance from repl@'mysql-repl':3306 IDENTIFIED by 'repl_password';
 ERROR: 3862: Clone Donor Error: Connect failed: 1045 : Access denied for user 'repl'@'mysqlv8-1a' (using password: YES).
 ```
 
 * Create replication user and assigns privileges:
 ```
-mysql-repl> CREATE USER 'repl'@'mysqlv8%' IDENTIFIED BY 'repl_password' REQUIRE SSL;
-mysql-repl> GRANT REPLICATION SLAVE, BACKUP_ADMIN, CLONE_ADMIN ON *.* TO 'repl'@'mysqlv8%';
+mysql-repl > CREATE USER 'repl'@'mysqlv8%' IDENTIFIED BY 'repl_password' REQUIRE SSL;
+mysql-repl > GRANT REPLICATION SLAVE, BACKUP_ADMIN, CLONE_ADMIN ON *.* TO 'repl'@'mysqlv8%';
 ```
 
 * Try again:
 ```
-mysqlv8-1a> clone instance from repl@'mysql-repl':3306 IDENTIFIED by 'repl_password';
+mysqlv8-1a > clone instance from repl@'mysql-repl':3306 IDENTIFIED by 'repl_password';
 Query OK, 0 rows affected (8 min 41.1291 sec)
 ...
 mysqlv8-1a> show databases;
@@ -174,8 +174,8 @@ SQL > show databases;
 ```
 * Show clone status and progress:
 ```
-mysqlv8-1a> use performance_schema;
-mysqlv8-1a> select * from clone_progress;
+mysqlv8-1a > use performance_schema;
+mysqlv8-1a > select * from clone_progress;
 +----+-----------+-----------+----------------------------+----------------------------+---------+-------------+-------------+-------------+------------+---------------+
 | ID | STAGE     | STATE     | BEGIN_TIME                 | END_TIME                   | THREADS | ESTIMATE    | DATA        | NETWORK     | DATA_SPEED | NETWORK_SPEED |
 +----+-----------+-----------+----------------------------+----------------------------+---------+-------------+-------------+-------------+------------+---------------+
@@ -189,7 +189,7 @@ mysqlv8-1a> select * from clone_progress;
 +----+-----------+-----------+----------------------------+----------------------------+---------+-------------+-------------+-------------+------------+---------------+
 7 rows in set (0.0025 sec)
 ...
-mysqlv8-1a>  select ID, STATE, ERROR_MESSAGE, BINLOG_POSITION from clone_status;
+mysqlv8-1a >  select ID, STATE, ERROR_MESSAGE, BINLOG_POSITION from clone_status;
 +----+-----------+---------------+-----------------+
 | ID | STATE     | ERROR_MESSAGE | BINLOG_POSITION |
 +----+-----------+---------------+-----------------+
@@ -198,9 +198,245 @@ mysqlv8-1a>  select ID, STATE, ERROR_MESSAGE, BINLOG_POSITION from clone_status;
 1 row in set (0.0004 sec)
 ```
 
-### MySQL InnoDB Cluster – howto install it from scratch
+## MySQL InnoDB Cluster
 
-Get a temporay password from mysqld.log after fresh installation mysql
+> [User Privileges](https://dev.mysql.com/doc/refman/8.0/en/mysql-innodb-cluster-production-deployment.html#mysql-innodb-cluster-user-privileges) : The user account used to administer an instance does not have to be the **root** account.
+> The `dba.configureInstance()` method verifies that a suitable user is available for cluster usage, which is used for connections between members of the cluster. The **recommended way** to add a suitable user is to use the `clusterAdmin` and `clusterAdminPassword` options, which enable you to configure the cluster user and password when calling the function.
+
+
+* Switching to JavaScript mode : `\js`
+* Config local MySQL instance via TCP port 3306: `dba.configureInstance('root@localhost:3306', {clusterAdmin: "'cluster_admin'@'mysqlv8-1%'", clusterAdminPassword: 'cluster_admin_password'})`
+
+
+### Configuration instance
+**mysqlv8-1a:**
+```
+JS > dba.configureInstance('root@localhost:3306', {clusterAdmin: "'cluster_admin'@'mysqlv8-1%'", clusterAdminPassword: 'cluster_admin_password'});
+Please provide the password for 'root@localhost:3306': ********
+Save password for 'root@localhost:3306'? [Y]es/[N]o/Ne[v]er (default No): v
+Configuring local MySQL instance listening at port 3306 for use in an InnoDB cluster...
+
+This instance reports its own address as mysqlv8-1a:3306
+Clients and other cluster members will communicate with it through this address by default. If this is not correct, the report_host MySQL system variable should be changed.
+
+NOTE: Some configuration options need to be fixed:
++-----------------+---------------+----------------+----------------------------+
+| Variable        | Current Value | Required Value | Note                       |
++-----------------+---------------+----------------+----------------------------+
+| binlog_checksum | CRC32         | NONE           | Update the server variable |
++-----------------+---------------+----------------+----------------------------+
+
+Do you want to perform the required configuration changes? [y/n]: y
+
+Cluster admin user 'cluster_admin'@'mysqlv8-1%' created.
+Configuring instance...
+The instance 'localhost:3306' was configured for InnoDB cluster usage.
+JS >
+```
+Perform `dba.configureInstance()` on **mysqlv8-1b** and **mysqlv8-1c**
+
+### Create Cluster
+**mysqlv8-1a:**
+```
+JS > \c cluster_admin@mysqlv8-1a
+Creating a session to 'cluster_admin@mysqlv8-1a'
+Please provide the password for 'cluster_admin@mysqlv8-1a': **********************
+Save password for 'cluster_admin@mysqlv8-1a'? [Y]es/[N]o/Ne[v]er (default No): v
+Fetching schema names for autocompletion... Press ^C to stop.
+Closing old connection...
+Your MySQL connection id is 15 (X protocol)
+Server version: 8.0.18 MySQL Community Server - GPL
+No default schema selected; type \use <schema> to set one.
+JS >
+```
+
+Create the cluster: `dba.createCluster('cluster01')`:
+
+```
+JS > cluster=dba.createCluster('cluster01')
+A new InnoDB cluster will be created on instance 'mysqlv8-1a:3306'.
+
+Validating instance at mysqlv8-1a:3306...
+
+This instance reports its own address as mysqlv8-1a:3306
+
+Instance configuration is suitable.
+Creating InnoDB cluster 'cluster01' on 'mysqlv8-1a:3306'...
+
+Adding Seed Instance...
+Cluster successfully created. Use Cluster.addInstance() to add MySQL instances.
+At least 3 instances are needed for the cluster to be able to withstand up to
+one server failure.
+
+<Cluster:cluster01>
+JS >
+```
+Show cluster status:
+```
+JS > cluster.status()
+{
+    "clusterName": "cluster01",
+    "defaultReplicaSet": {
+        "name": "default",
+        "primary": "mysqlv8-1a:3306",
+        "ssl": "REQUIRED",
+        "status": "OK_NO_TOLERANCE",
+        "statusText": "Cluster is NOT tolerant to any failures.",
+        "topology": {
+            "mysqlv8-1a:3306": {
+                "address": "mysqlv8-1a:3306",
+                "mode": "R/W",
+                "readReplicas": {},
+                "replicationLag": null,
+                "role": "HA",
+                "status": "ONLINE",
+                "version": "8.0.18"
+            }
+        },
+        "topologyMode": "Single-Primary"
+    },
+    "groupInformationSourceMember": "mysqlv8-1a:3306"
+}
+JS >
+```
+
+### Add instance to the cluster:
+**mysqlv8-1a:**
+```
+JS > cluster.addInstance('cluster_admin@mysqlv8-1b')
+Please provide the password for 'cluster_admin@mysqlv8-1b': **********************
+NOTE: A GTID set check of the MySQL instance at 'mysqlv8-1b:3306' determined that it
+is missing transactions that were purged from all cluster members.
+...
+```
+
+Select a recovery method
+```
+Please select a recovery method [C]lone/[A]bort (default Abort): C
+Validating instance at mysqlv8-1b:3306...
+
+This instance reports its own address as mysqlv8-1b:3306
+
+Instance configuration is suitable.
+A new instance will be added to the InnoDB cluster. Depending on the amount of
+data on the cluster this might take from a few seconds to several hours.
+
+Adding instance to the cluster...
+...
+```
+
+Waiting for clone to finish:
+```
+Clone based state recovery is now in progress.
+
+NOTE: A server restart is expected to happen as part of the clone process. If the
+server does not support the RESTART command or does not come back after a
+while, you may need to manually start it back.
+
+* Waiting for clone to finish...
+NOTE: mysqlv8-1b:3306 is being cloned from mysqlv8-1a:3306
+** Stage DROP DATA: Completed
+...
+Stage RECOVERY: /####################################  100%  Completed** Stage RECOVERY: \
+NOTE: mysqlv8-1b:3306 is shutting down...
+
+* Waiting for server restart... ready
+* mysqlv8-1b:3306 has restarted, waiting for clone to finish...
+* Clone process has finished: 11.02 GB transferred in 15 min 30 sec (11.85 MB/s)
+
+Incremental distributed state recovery is now in progress.
+
+* Waiting for distributed recovery to finish...
+NOTE: 'mysqlv8-1b:3306' is being recovered from 'mysqlv8-1a:3306'
+* Distributed recovery has finished
+
+The instance 'mysqlv8-1b' was successfully added to the cluster.
+```
+Show cluster status:
+```
+JS > cluster.status()
+{
+    "clusterName": "cluster01",
+    "defaultReplicaSet": {
+        "name": "default",
+        "primary": "mysqlv8-1a:3306",
+        "ssl": "REQUIRED",
+        "status": "OK_NO_TOLERANCE",
+        "statusText": "Cluster is NOT tolerant to any failures.",
+        "topology": {
+            "mysqlv8-1a:3306": {
+                "address": "mysqlv8-1a:3306",
+                "mode": "R/W",
+                "readReplicas": {},
+                "replicationLag": null,
+                "role": "HA",
+                "status": "ONLINE",
+                "version": "8.0.18"
+            },
+            "mysqlv8-1b:3306": {
+                "address": "mysqlv8-1b:3306",
+                "mode": "R/O",
+                "readReplicas": {},
+                "replicationLag": null,
+                "role": "HA",
+                "status": "ONLINE",
+                "version": "8.0.18"
+            }
+        },
+        "topologyMode": "Single-Primary"
+    },
+    "groupInformationSourceMember": "mysqlv8-1a:3306"
+}
+JS >
+```
+
+Add instance `mysqlv8-1c` to cluster. Waiting for clone to finish:
+```
+JS > cluster.addInstance('cluster_admin@mysqlv8-1c')
+...
+The instance 'mysqlv8-1c' was successfully added to the cluster
+JS >
+```
+
+Show cluster status:
+```
+JS > cluster.status()
+{
+    "clusterName": "cluster01",
+    "defaultReplicaSet": {
+        "name": "default",
+        "primary": "mysqlv8-1a:3306",
+...
+            "mysqlv8-1b:3306": {
+                "address": "mysqlv8-1b:3306",
+                "mode": "R/O",
+                "readReplicas": {},
+                "replicationLag": null,
+                "role": "HA",
+                "status": "ONLINE",
+                "version": "8.0.18"
+            },
+            "mysqlv8-1c:3306": {
+                "address": "mysqlv8-1c:3306",
+                "mode": "R/O",
+                "readReplicas": {},
+                "replicationLag": null,
+                "role": "HA",
+                "status": "ONLINE",
+                "version": "8.0.18"
+            }
+        },
+        "topologyMode": "Single-Primary"
+    },
+    "groupInformationSourceMember": "mysqlv8-1a:3306"
+}
+JS >
+```
+
+### Fixed
+* `Cluster.addInstance`: Cannot add an instance with the **same server UUID**. Fixed by removing that auto generated `/var/lib/mysql/auto.conf` file and restart MySQL server. After that you will get a new `/var/lib/mysql/auto.conf` file with a new server UUID.
+
+* Get a temporay password from `mysqld.log` after fresh installation mysql
 ```
 grep passwd /var/log/mysqld.log
 ```

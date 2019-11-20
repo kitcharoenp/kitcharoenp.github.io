@@ -1,5 +1,5 @@
 theme: jekyll-theme-cayman
-title: Life Is Simple When You Live Simply
+title: LifeIsSimpleWhenYouLiveSimply
 email: kitcharoenp@gmail.com
 github:
   is_project_page: true
@@ -10,7 +10,7 @@ github:
   about_me: https://kitcharoenp.github.io/about_me
   categories: https://kitcharoenp.github.io/categories
 
-description: Knowledge Discovery in Data
+description: KnowledgeDiscoveryInData
 
 # Personal info
 my_name: Kitcharoen Poolperm
