@@ -440,20 +440,13 @@ We will use Asynchronous Replication from `mysql-repl` to the Primary Member in 
 
 **mysql-repl:**
 ```
-SQL > CREATE USER 'repl'@'mysqlv8-1%' IDENTIFIED BY 'repl_password';
-
-SQL > GRANT REPLICATION SLAVE ON *.* TO 'repl'@'mysqlv8-1%';
-
-SQL > FLUSH PRIVILEGES;
-
-SQL > SHOW GRANTS FOR 'repl'@'mysqlv8-1%';
-+-------------------------------------------------------+
-| Grants for repl@mysqlv8-1%                            |
-+-------------------------------------------------------+
-| GRANT REPLICATION SLAVE ON *.* TO `repl`@`mysqlv8-1%` |
-+-------------------------------------------------------+
-1 row in set (0.0002 sec)
-SQL >
+SQL > SHOW GRANTS FOR 'repl'@'mysqlv8%';
++------------------------------------------------------------+
+| Grants for repl@mysqlv8%                                   |
++------------------------------------------------------------+
+| GRANT REPLICATION SLAVE ON *.* TO `repl`@`mysqlv8%`        |
+| GRANT BACKUP_ADMIN,CLONE_ADMIN ON *.* TO `repl`@`mysqlv8%` |
++------------------------------------------------------------+
  ```
 
 **mysqlv8-1a:**
