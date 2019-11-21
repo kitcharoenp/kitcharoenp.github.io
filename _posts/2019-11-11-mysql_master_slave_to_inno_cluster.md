@@ -9,12 +9,13 @@ Notes while reading :
 * [Migration from MySQL Master-Slave pair to MySQL InnoDB Cluster](https://lefred.be/content/migration-from-mysql-master-slave-pair-to-mysql-innodb-cluster-howto/)
 * [Migrate from a single MySQL Instance to MySQL InnoDB Cluster using CLONE plugin](https://lefred.be/content/migrate-from-a-single-mysql-instance-to-mysql-innodb-cluster-using-clone-plugin/)
 > Procedure :
-> * Replication from current system
+> * Clone instance
 > * Creation of the cluster with a single instance (using MySQL Shell)
 > * Adding instances to the cluster
+> * Asynchronous Replication
 > * Configure the router
 > * Test phase
-> * Pointing the application to the new solution
+> * Pointing the application
 
 ### Environment
 The application connects to `mysql-repl` which also acts as master.
@@ -72,10 +73,11 @@ plugin-load-add=mysql_clone.so
 
 ```
 
-Then restart MySQL to make the change. For more information please read [Replication with Global Transaction Identifiers](https://dev.mysql.com/doc/refman/8.0/en/replication-gtids.html)
+Then restart server. Done the same thing on `mysqlv8-1a`, `mysqlv8-1b` and `mysqlv8-1c`.
+For more information please read [Replication with Global Transaction Identifiers](https://dev.mysql.com/doc/refman/8.0/en/replication-gtids.html)
 
 #### Check `GTID`
-single:
+mysql-repl:
 ```
 mysql-repl > select @@server_id,@@gtid_mode,@@enforce_gtid_consistency;
 +-------------+-------------+----------------------------+
@@ -431,6 +433,68 @@ JS > cluster.status()
     "groupInformationSourceMember": "mysqlv8-1a:3306"
 }
 JS >
+```
+
+### Asynchronous Replication
+We will use Asynchronous Replication from `mysql-repl` to the Primary Member in the Cluster (`mysqlv8-1a`).
+
+**mysql-repl:**
+```
+SQL > CREATE USER 'repl'@'mysqlv8-1%' IDENTIFIED BY 'repl_password';
+
+SQL > GRANT REPLICATION SLAVE ON *.* TO 'repl'@'mysqlv8-1%';
+
+SQL > FLUSH PRIVILEGES;
+
+SQL > SHOW GRANTS FOR 'repl'@'mysqlv8-1%';
++-------------------------------------------------------+
+| Grants for repl@mysqlv8-1%                            |
++-------------------------------------------------------+
+| GRANT REPLICATION SLAVE ON *.* TO `repl`@`mysqlv8-1%` |
++-------------------------------------------------------+
+1 row in set (0.0002 sec)
+SQL >
+ ```
+
+**mysqlv8-1a:**
+```
+SQL > CHANGE MASTER TO
+    MASTER_HOST ='mysql-repl',
+    MASTER_PORT =3306,
+    MASTER_USER ='repl',
+    MASTER_PASSWORD ='repl_password',
+    MASTER_AUTO_POSITION = 1,
+    MASTER_SSL = 1;
+...
+SQL > START SLAVE;
+
+SQL > show slave status \G
+*************************** 1. row ***************************
+               Slave_IO_State: Waiting for master to send event
+                  Master_Host: mysql-repl
+                  Master_User: repl
+                  Master_Port: 3306
+                Connect_Retry: 60
+              Master_Log_File: binlog.000012
+          Read_Master_Log_Pos: 913
+               Relay_Log_File: mysqlv8-1a-relay-bin.000002
+                Relay_Log_Pos: 1073
+        Relay_Master_Log_File: binlog.000012
+             Slave_IO_Running: Yes
+            Slave_SQL_Running: Yes
+              Replicate_Do_DB:
+          Replicate_Ignore_DB:
+...
+             Master_Server_Id: 21
+                  Master_UUID: a0476bcc-0533-11ea-979a-00163e208658
+             Master_Info_File: mysql.slave_master_info
+                    SQL_Delay: 0
+          SQL_Remaining_Delay: NULL
+      Slave_SQL_Running_State: Slave has read all relay log; waiting for more updates
+           Master_Retry_Count: 86400
+...
+1 row in set (0.0003 sec)
+SQL >    
 ```
 
 ### Fixed
