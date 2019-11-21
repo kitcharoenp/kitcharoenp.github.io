@@ -78,7 +78,7 @@ For more information please read [Replication with Global Transaction Identifier
 
 #### Check `GTID`
 mysql-repl:
-```
+```sql
 mysql-repl > select @@server_id,@@gtid_mode,@@enforce_gtid_consistency;
 +-------------+-------------+----------------------------+
 | @@server_id | @@gtid_mode | @@enforce_gtid_consistency |
@@ -87,7 +87,7 @@ mysql-repl > select @@server_id,@@gtid_mode,@@enforce_gtid_consistency;
 +-------------+-------------+----------------------------+
 ```
 mysqlv8-1a:
-```
+```sql
 mysqlv8-1a > select @@server_id,@@gtid_mode,@@enforce_gtid_consistency;
 +-------------+-------------+----------------------------+
 | @@server_id | @@gtid_mode | @@enforce_gtid_consistency |
@@ -97,7 +97,7 @@ mysqlv8-1a > select @@server_id,@@gtid_mode,@@enforce_gtid_consistency;
 ```
 
 mysqlv8-1b:
-```
+```sql
 mysqlv8-1b > select @@server_id,@@gtid_mode,@@enforce_gtid_consistency;
 +-------------+-------------+----------------------------+
 | @@server_id | @@gtid_mode | @@enforce_gtid_consistency |
@@ -121,7 +121,7 @@ mysql> SELECT PLUGIN_NAME, PLUGIN_STATUS
 #### Clone instance
 Clone instance :  `mysql-repl` to `mysqlv8-1a`
 * Clone `mysql-repl` instance:
-```
+```sql
 mysqlv8-1a > show databases;
 +--------------------+
 | Database           |
@@ -138,7 +138,7 @@ mysqlv8-1a>
 ```
 
 * Set `clone_valid_donor_list`:
-```
+```sql
 mysqlv8-1a > set GLOBAL clone_valid_donor_list='mysql-repl:3306';
 mysqlv8-1a > clone instance from repl@'mysql-repl':3306 IDENTIFIED by 'repl_password';
 ERROR: 3862: Clone Donor Error: Connect failed: 1045 : Access denied for user 'repl'@'mysqlv8-1a' (using password: YES).
@@ -151,7 +151,7 @@ mysql-repl > GRANT REPLICATION SLAVE, BACKUP_ADMIN, CLONE_ADMIN ON *.* TO 'repl'
 ```
 
 * Try again:
-```
+```sql
 mysqlv8-1a > clone instance from repl@'mysql-repl':3306 IDENTIFIED by 'repl_password';
 Query OK, 0 rows affected (8 min 41.1291 sec)
 ...
@@ -175,7 +175,7 @@ SQL > show databases;
 7 rows in set (0.1035 sec)
 ```
 * Show clone status and progress:
-```
+```sql
 mysqlv8-1a > use performance_schema;
 mysqlv8-1a > select * from clone_progress;
 +----+-----------+-----------+----------------------------+----------------------------+---------+-------------+-------------+-------------+------------+---------------+
@@ -438,8 +438,8 @@ JS >
 ### Asynchronous Replication
 We will use Asynchronous Replication from `mysql-repl` to the Primary Member in the Cluster (`mysqlv8-1a`).
 
-**mysql-repl:**
-```
+**:**
+```sql
 SQL > SHOW GRANTS FOR 'repl'@'mysqlv8%';
 +------------------------------------------------------------+
 | Grants for repl@mysqlv8%                                   |
@@ -450,7 +450,7 @@ SQL > SHOW GRANTS FOR 'repl'@'mysqlv8%';
  ```
 
 **mysqlv8-1a:**
-```
+```sql
 SQL > CHANGE MASTER TO
     MASTER_HOST ='mysql-repl',
     MASTER_PORT =3306,
