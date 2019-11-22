@@ -5,6 +5,13 @@ published: false
 categories: [alfresco]
 ---
 
+### Out-of-the-box workflow options in Alfresco
+>Alfresco has two options for implementing workflows within the product. For very simplistic workflows, non-technical end-users can leverage Alfresco's Basic Workflow functionality. For more complex needs, Alfresco has Advanced Workflow functionality.
+
+### Step
+* [Getting Started with the Alfresco Maven SDK](https://ecmarchitect.com/alfresco-developer-series)
+* [Custom Content Types](https://ecmarchitect.com/alfresco-developer-series-tutorials/content/tutorial/tutorial.html)
+
 
 ### Reference
 * [Creating Custom Advanced Workflows in Alfresco](https://ecmarchitect.com/alfresco-developer-series-tutorials/workflow/tutorial/tutorial.html)
