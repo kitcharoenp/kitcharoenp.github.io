@@ -174,20 +174,41 @@ maven-sdk-tutorial-platform           pom.xml
 `Usage: ./run.sh {build_start|build_start_it_supported|start|stop|purge|tail|reload_share|reload_acs|build_test|test}`
 ```
 $  cd maven-sdk-tutorial
-$ sudo ./run.sh build_start
+$ ./run.sh build_start
+
+...
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Summary for AIO - SDK 4.0 1.0-SNAPSHOT:
+[INFO]
+[INFO] AIO - SDK 4.0 ...................................... SUCCESS [  0.577 s]
+[INFO] Alfresco Platform/Repository JAR Module ............ SUCCESS [  4.030 s]
+[INFO] Alfresco Share JAR Module .......................... SUCCESS [  3.405 s]
+[INFO] Integration Tests Module ........................... SUCCESS [  0.806 s]
+[INFO] Alfresco Platform/Repository Docker Module ......... SUCCESS [05:37 min]
+[INFO] Alfresco Share Docker Module ....................... SUCCESS [  0.119 s]
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  05:46 min
+[INFO] Finished at: 2019-11-25T10:03:36Z
+[INFO] ------------------------------------------------------------------------
+
 ```
 
 > If you watch the output, you'll see that Maven is downloading everything it needs to compile the project, creating an AMP, deploying the AMP to the Alfresco WAR, deploying the Alfresco WAR to the embedded Tomcat server, and starting the server up.
 
-### Failed
-```
-Failed to read artifact descriptor for org.slf4j:slf4j-api:jar:1.7.6: Could not transfer artifact org.slf4j:slf4j-parent:pom:1.7.6 from/to alfresco-private-repository (https://artifacts.alfresco.com/nexus/content/groups/private): Not authorized -> [Help 1]
-```
-
 ### [DependencyResolutionException](https://cwiki.apache.org/confluence/display/MAVEN/DependencyResolutionException)
-This error generally occurs when Maven could not download dependencies
+This error generally occurs when Maven could not download dependencies. Try run `./run.sh build_start` until install all dependencies completed.
 
-After correcting the problems, you can resume the build with the command
+### Fixed
 ```
-mvn <args> -rf :maven-sdk-tutorial-platform
+Got permission denied while trying to connect to the Docker daemon socket at unix:///var/run/docker.sock: Post http://%2Fvar%2Frun%2Fdocker.sock/v1.39/volumes/create: dial unix /var/run/docker.sock: connect: permission denied
+Got permission denied while trying to connect to the Docker daemon socket at unix:///var/run/docker.sock: Post http://%2Fvar%2Frun%2Fdocker.sock/v1.39/volumes/create: dial unix /var/run/docker.sock: connect: permission denied
+Got permission denied while trying to connect to the Docker daemon socket at unix:///var/run/docker.sock: Post http://%2Fvar%2Frun%2Fdocker.sock/v1.39/volumes/create: dial unix /var/run/docker.sock: connect: permission denied
+ERROR: Couldn't connect to Docker daemon at http+docker://localunixsocket - is it running?
+
+If it's at a non-standard location, specify the URL with the DOCKER_HOST environment variable.
+ERROR: Couldn't connect to Docker daemon at http+docker://localunixsocket - is it running?
+
+If it's at a non-standard location, specify the URL with the DOCKER_HOST environment variable.
 ```
