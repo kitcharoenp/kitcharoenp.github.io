@@ -8,9 +8,32 @@ categories: [alfresco]
 ### Out-of-the-box workflow options in Alfresco
 >Alfresco has two options for implementing workflows within the product. For very simplistic workflows, non-technical end-users can leverage Alfresco's Basic Workflow functionality. For more complex needs, Alfresco has Advanced Workflow functionality.
 
+Alfresco is an “embedded workflow engine” example. It embeds Activiti, which is an
+example of a standalone engine.
+
+
 ### Step
 * [Getting Started with the Alfresco Maven SDK](https://ecmarchitect.com/alfresco-developer-series)
 * [Custom Content Types](https://ecmarchitect.com/alfresco-developer-series-tutorials/content/tutorial/tutorial.html)
+
+
+### Setup Eclipse
+
+For fixed a error
+```
+$ cat ~/.xinputrc
+export GTK_IM_MODULE=ibus
+export XMODIFIERS=@im=ibus
+export QT_IM_MODULE=ibus
+# im-config(8) generated on Mon, 18 Mar 2019 12:39:52 +0700
+# run_im xim
+# im-config signature: 8e235abbb3df7d3ba78a3a444004a27e  -
+```
+
+There are two model definition files related to this. One is called called bpmModel.xml. It resides in your Alfresco web application root under WEB-INF/classes/alfresco/model. The other is called workflowModel.xml and it resides under WEB-INF/classes/alfresco/workflow.
+
+So, all tasks in which there are Alfresco web client **user interactions must be given a `form key`** that corresponds to the name of a workflow content type.
+
 
 
 ### Reference

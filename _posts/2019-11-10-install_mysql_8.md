@@ -14,7 +14,7 @@ curl -OL https://dev.mysql.com/get/mysql-apt-config_0.8.14-1_all.deb
 ### Install MySQL repository package.
 Scroll down and select the last option - **"Ok"**
 ```
-dpkg -i mysql-apt-config_0.8.14-1_all.deb
+sudo dpkg -i mysql-apt-config_0.8.14-1_all.deb
 
 sudo apt update
 ```
