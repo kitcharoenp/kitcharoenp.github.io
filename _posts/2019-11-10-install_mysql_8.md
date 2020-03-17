@@ -100,3 +100,35 @@ Switching to SQL mode... Commands end with ;
 ```
 $ sudo mysql_secure_installation
 ```
+
+### Fixed
+**`The server requested authentication method unknown to the client`**
+
+```
+# Command to create the new user with the old authentication:
+CREATE USER newuser@"%" IDENTIFIED WITH mysql_native_password BY'password';
+
+#Command to grant permissions to the new user:
+GRANT ALL PRIVILEGES ON *.* TO 'newuser'@'%';
+FLUSH PRIVILEGES;
+```
+
+**`SQLSTATE[22007]: Invalid datetime format: 1292 Incorrect date value: '0000-00-00'`**
+
+To Check MYSQL mode
+```sql
+mysql> SELECT @@GLOBAL.sql_mode global, @@SESSION.sql_mode session \G
+*************************** 1. row ***************************
+ global: ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION
+session: ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION
+1 row in set (0.00 sec)
+```
+
+Disabling NO_ZERO_DATE, NO_ZERO_IN_DATE mode
+
+SET GLOBAL sql_mode = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
+
+
+
+
+[1]: https://stackoverflow.com/questions/36374335/error-in-mysql-when-setting-default-value-for-date-or-datetime/36374690#36374690 "SQL Incorrect date value"
