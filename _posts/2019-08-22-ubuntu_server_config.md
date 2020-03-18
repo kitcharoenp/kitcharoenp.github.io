@@ -94,3 +94,24 @@ PasswordAuthentication yes
 ```shell
 $ rsync -avP --exclude 'app/protected/runtime/uploads/localfiles/*'  ubuntu@10.10.10.12:/home/ubuntu/zurmo /var/www/html
 ```
+
+### [Configure python3 as default interpretter][1]
+```shell
+#configure an alias
+echo "alias python=python3" >> ~/.bash_aliases
+
+#updated information
+source ~/.bash_aliases
+```
+
+### Configure pip3
+```shell
+#install latest version of PIP for Python3
+sudo apt install python3-pip
+
+#
+echo "alias pip=pip3" >> ~/.bash_aliases
+source ~/.bash_aliases
+```
+
+[1]: https://garywoodfine.com/configure-python-3-4-default-ubuntu-14-04-2/ "Configure Python 3 as default on Ubuntu"
