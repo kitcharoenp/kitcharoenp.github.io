@@ -50,7 +50,7 @@ Configuration files of Netplan in `/etc/netplan/01-netcfg.yaml`.
 * ip address `10.10.20.12/24`
 * gateway ipv4 `10.10.10.20`
 
- ```shell
+```shell
 $ ls /etc/netplan
 01-netcfg.yaml  01-netcfg.yaml.default  01-netcfg.yaml.default.bridges
 
@@ -74,19 +74,20 @@ network:
         addresses: [8.8.4.4,8.8.8.8]
       interfaces:
       - eno1
-
 ```
 
-### SSH `Permission denied (publickey).`
+### SSH
+**Problem:** `Permission denied (publickey).`
 
 Change `PasswordAuthentication no` to `PasswordAuthentication yes` in `/etc/ssh/sshd_config`
+
 ```
 # To disable tunneled clear text passwords, change to no here!
 PasswordAuthentication yes
-#PermitEmptyPasswords no
 ```
 
-### Rsync : Exclude Multiple Files and Directories
+### Rsync
+Exclude Multiple Files and Directories
 * **source** : username@ip_source `ubuntu@10.10.10.12` , directory `/home/ubuntu/zurmo`
 * **destination** : directory `/var/www/html`
 * **exclude dir** : `app/protected/runtime/uploads/localfiles/*`
@@ -98,20 +99,38 @@ $ rsync -avP --exclude 'app/protected/runtime/uploads/localfiles/*'  ubuntu@10.1
 ### [Configure python3 as default interpretter][1]
 ```shell
 #configure an alias
-echo "alias python=python3" >> ~/.bash_aliases
+$ echo "alias python=python3" >> ~/.bash_aliases
 
 #updated information
-source ~/.bash_aliases
+$ source ~/.bash_aliases
+
+$ python --version
+Python 3.7.5
+
 ```
 
 ### Configure pip3
 ```shell
 #install latest version of PIP for Python3
-sudo apt install python3-pip
+$ sudo apt install python3-pip
 
 #
-echo "alias pip=pip3" >> ~/.bash_aliases
-source ~/.bash_aliases
+$ echo "alias pip=pip3" >> ~/.bash_aliases
+$ source ~/.bash_aliases
+
+$ pip --version
+pip 18.1 from /usr/lib/python3/dist-packages/pip (python 3.7)
+```
+
+### Create a Python Virtual Environment
+```shell
+$ sudo -H pip3 install virtualenv
+# change directory to `myproject`
+$ cd myproject
+# create virtualenv `env`
+$ virtualenv env
+# activate the virtual environment
+$ source env/bin/activate
 ```
 
 [1]: https://garywoodfine.com/configure-python-3-4-default-ubuntu-14-04-2/ "Configure Python 3 as default on Ubuntu"
