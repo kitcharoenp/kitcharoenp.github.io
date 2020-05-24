@@ -120,6 +120,16 @@ ExecStop=/opt/tomcat/latest/bin/shutdown.sh
 WantedBy=multi-user.target
 ```
 
+### JVM settings
+alfresco version 5.x `../tomcat/bin/setenv.sh`
+```
+...
+JAVA_OPTS="-Xms4G -Xmx8G $JAVA_OPTS " # java-memory-settings
+...
+```
+* `Xmx` specifies the **maximum memory** allocation pool for a Java virtual machine (JVM),
+* `Xms` specifies the **initial memory** allocation pool.
+
 * notify systemd that we created a new unit file
 ```shell
 $ sudo systemctl daemon-reload
