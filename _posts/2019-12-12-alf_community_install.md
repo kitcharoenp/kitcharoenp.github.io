@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Alfresco : Installing Alfresco Community Edition"
-published: false
+published: true
 categories: [alfresco]
 ---
 > Before you start, validate that you have access to the prerequisite software so you can install them in the right order. This includes a JRE, a supported database, Tomcat application server, a message broker (i.e. ActiveMQ), Alfresco Search Services, and additional components (such as ImageMagick).

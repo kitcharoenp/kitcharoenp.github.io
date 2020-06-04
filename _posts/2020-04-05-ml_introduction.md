@@ -21,4 +21,4 @@ categories: [ml]
 
 > To over simplify — in `supervised learning` you know what you want to **teach the computer**, while `unsupervised learning` is about **letting the computer figure out** what can be learned. Supervised learning is the most common type of machine learning, and will be the focus of this course.
 
-[id]: https://www.udacity.com/course/intro-to-tensorflow-for-deep-learning--ud187 "Introduction"
+[1]: https://www.udacity.com/course/intro-to-tensorflow-for-deep-learning--ud187 "Introduction"

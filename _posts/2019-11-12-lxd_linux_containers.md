@@ -5,7 +5,15 @@ published: false
 categories: [lxd]
 ---
 Notes while reading :
-[Remote hosts and container migration](https://stgraber.org/2016/04/12/lxd-2-0-remote-hosts-and-container-migration-612/)
+* [Remote hosts and container migration][2]
+* [Offcial Doc][1]
+
+## Getting the packages
+```
+# ubuntu snap install lxd 4.0
+snap install lxd --channel=4.0/stable
+```
+
 
 ## Interacting with remote hosts
 
@@ -43,3 +51,6 @@ lxc copy foo:c1 c2
 # copy of a container with snapshot
 lxc copy foo:c1/snapshot1 c3
 ```    
+
+[1]: https://lxd.readthedocs.io/en/latest/storage/ "LXD"
+[2]: https://stgraber.org/2016/04/12/lxd-2-0-remote-hosts-and-container-migration-612/ "LXD remote container"
