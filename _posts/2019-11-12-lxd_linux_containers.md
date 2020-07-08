@@ -14,6 +14,11 @@ Notes while reading :
 snap install lxd --channel=4.0/stable
 ```
 
+## [Launch an instance][3]
+```
+lxc launch ubuntu:20.04 ubuntu2004
+```
+
 
 ## Interacting with remote hosts
 
@@ -53,4 +58,7 @@ lxc copy foo:c1/snapshot1 c3
 ```    
 
 [1]: https://lxd.readthedocs.io/en/latest/storage/ "LXD"
+
 [2]: https://stgraber.org/2016/04/12/lxd-2-0-remote-hosts-and-container-migration-612/ "LXD remote container"
+
+[3]: https://linuxcontainers.org/lxd/getting-started-cli/#launch-a-container "Launch an instance"
