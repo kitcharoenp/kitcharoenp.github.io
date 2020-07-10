@@ -43,13 +43,37 @@ $ sudo service proxysql status
            └─1144 /usr/bin/proxysql --idle-threads -c /etc/proxysql.cnf
 ```
 
-### Configuring ProxySQL
+### Configuring
 > First of all, bear in mind that the best way to configure ProxySQL is through its admin interface [2][2]
 
-```shell
-$ mysql -u admin -padmin -h 127.0.0.1 -P6032 --prompt='Admin> '
-```
+* **Install mysql-client:**
+  ```shell
+  $ sudo apt install mysql-client
+  ```   
+
+* **Changing the mysql prompt:**
+
+  Open your MySQL **my.cnf**, add the following line in the `[mysql]` section. If the file does not have one, create it by adding the following line.
+
+  **my.cnf:**
+  ```
+  [mysql]
+
+  prompt=\u@\h:[\d]>\_
+  ```
+
+* **Connect proxysql:**
+  ```shell
+  $ mysql -u admin -padmin -h 127.0.0.1 -P6032
+  Welcome to the MySQL monitor.  Commands end with ; or \g.
+  Your MySQL connection id is 4
+  Server version: 5.5.30 (ProxySQL Admin Module)
+  ...
+  admin@127.0.0.1:[(none)]>
+  ```
 
 [1]: https://proxysql.com/documentation/installing-proxysql/ "Installing ProxySQL"
 
 [2]: https://proxysql.com/documentation/getting-started/ "Getting started"
+
+[3]: https://proxysql.com/documentation/ProxySQL-Configuration/ "configure ProxySQL"
