@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Linux containers"
-published: false
+published: true
 categories: [lxd]
 ---
 Notes while reading :

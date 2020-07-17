@@ -2,8 +2,8 @@
 layout: post
 title:  "Odoo List"
 date:   2018-06-05 12:31:01 +0700
-categories: [odoo, postgresql]
-published: false
+categories: [postgresql]
+published: true
 ---
 
 ### List primary keys for all tables

@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Python : Data Structures"
-published: false
+published: true
 categories: [python]
 ---
 ### [Tuples][1]

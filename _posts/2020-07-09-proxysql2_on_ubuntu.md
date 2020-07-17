@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "ProxySQL on Ubuntu"
+categories: [mysql]
 ---
 ### [Installing][1]
 

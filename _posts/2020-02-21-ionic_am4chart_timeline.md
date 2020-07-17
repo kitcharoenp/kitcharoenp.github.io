@@ -25,7 +25,7 @@ $ npm install @amcharts/amcharts4 --save
 ###
 
 ### Fixed
- 
+
 ```
 let categoryAxis = chart.yAxes.push(new am4charts.CategoryAxis());
 
@@ -41,11 +41,6 @@ Solution
 ```
 let categoryAxis = chart.yAxes.push(new am4charts.CategoryAxis() as any);
 ```
-
-
-
-
-
 
 [0]: https://www.amcharts.com/download/ "Amcharts4 Download"
 [1]: https://www.amcharts.com/docs/v4/chart-types/timeline/ "Amcharts4 TimeLine Chart"
