@@ -5,18 +5,13 @@ categories: [mysql]
 ---
 ### [Installing][1]
 
-
-![ProxySQL respo ](/assets/blog/2020-07-09_01.png)
-
-![ProxySQL respo]({{ "/assets/blog/2020-07-09_01.png" | absolute_url }})
-
-
 * **Adding the repository:**
 ```shell
 wget -O - 'https://repo.proxysql.com/ProxySQL/repo_pub_key' | apt-key add -
 echo deb https://repo.proxysql.com/ProxySQL/proxysql-2.0.x/$(lsb_release -sc)/ ./ \
 | tee /etc/apt/sources.list.d/proxysql.list
 ```
+![ProxySQL respo ](/assets/img/blog/2020-07-09_01.png)
 
 * **Installing ProxySQL:**
 ```shell
