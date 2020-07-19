@@ -9,20 +9,20 @@ categories: [mysql]
 ### show `mysql_replication_hostgroups`
 
 ```sql
-admin@127.0.0.1:[(none)]> SELECT * FROM mysql_replication_hostgroups;
+proxy_admin> SELECT * FROM mysql_replication_hostgroups;
 Empty set (0.00 sec)
 ```
 
 ### insert server to `mysql_replication_hostgroups`
 
 ```sql
-admin@127.0.0.1:[(none)]> INSERT INTO mysql_replication_hostgroups VALUES (1,2,'read_only|innodb_read_only','cluster1');
+proxy_admin> INSERT INTO mysql_replication_hostgroups VALUES (1,2,'read_only|innodb_read_only','cluster1');
 ```
 
 ### show `mysql_replication_hostgroups`
 
 ```sql
-admin@127.0.0.1:[(none)]> SELECT * FROM mysql_replication_hostgroups;
+proxy_admin> SELECT * FROM mysql_replication_hostgroups;
 +------------------+------------------+----------------------------+----------+
 | writer_hostgroup | reader_hostgroup | check_type                 | comment  |
 +------------------+------------------+----------------------------+----------+
@@ -36,7 +36,7 @@ admin@127.0.0.1:[(none)]> SELECT * FROM mysql_replication_hostgroups;
 ### servers status before load to runtime
 
 ```sql
-admin@127.0.0.1:[(none)]> SELECT hostgroup_id, hostname, port, status FROM mysql_servers;
+proxy_admin> SELECT hostgroup_id, hostname, port, status FROM mysql_servers;
 +--------------+--------------+------+--------+
 | hostgroup_id | hostname     | port | status |
 +--------------+--------------+------+--------+
@@ -47,10 +47,10 @@ admin@127.0.0.1:[(none)]> SELECT hostgroup_id, hostname, port, status FROM mysql
 ### load servers to runtime
 
 ```sql
-admin@127.0.0.1:[(none)]> LOAD MYSQL SERVERS TO RUNTIME;
+proxy_admin> LOAD MYSQL SERVERS TO RUNTIME;
 Query OK, 0 rows affected (0.00 sec)
 
-admin@127.0.0.1:[(none)]> SELECT hostgroup_id, hostname, port, status FROM mysql_servers;
+proxy_admin> SELECT hostgroup_id, hostname, port, status FROM mysql_servers;
 +--------------+--------------+------+--------+
 | hostgroup_id | hostname     | port | status |
 +--------------+--------------+------+--------+
@@ -63,10 +63,10 @@ admin@127.0.0.1:[(none)]> SELECT hostgroup_id, hostname, port, status FROM mysql
 ### save the configuration to disk
 
 ```sql
-admin@127.0.0.1:[(none)]> SAVE MYSQL SERVERS TO DISK;
+proxy_admin> SAVE MYSQL SERVERS TO DISK;
 Query OK, 0 rows affected (0.13 sec)
 
-admin@127.0.0.1:[(none)]> SAVE MYSQL VARIABLES TO DISK;
+proxy_admin> SAVE MYSQL VARIABLES TO DISK;
 Query OK, 134 rows affected (0.04 sec)
 ```
 
@@ -76,7 +76,7 @@ Configure the database users and then load configuration to runtime, and save it
 ### The `mysql_users` is initially empty.
 
 ```sql
-admin@127.0.0.1:[(none)]> SELECT * FROM mysql_users;
+proxy_admin> SELECT * FROM mysql_users;
 Empty set (0.00 sec)
 ```
 * **try connect `proxysql[10.10.10.218]` to `backend servers`**
@@ -90,17 +90,17 @@ ERROR 1045 (28000): ProxySQL Error: Access denied for user 'backend_db_user'@'10
 ### insert mysql users
 
 ```sql
-admin@127.0.0.1:[(none)]> INSERT INTO mysql_users(username,password,default_hostgroup) VALUES ('backend_db_user','backend_db_passwd',1);
+proxy_admin> INSERT INTO mysql_users(username,password,default_hostgroup) VALUES ('backend_db_user','backend_db_passwd',1);
 Query OK, 1 row affected (0.00 sec)
 
-admin@127.0.0.1:[(none)]> SELECT * FROM mysql_users;
+proxy_admin> SELECT * FROM mysql_users;
 +----------+-----------+--------+---------+-------------------+----------------+---------------+------------------------+--------------+---------+----------+-----------------+---------+
 | username | password  | active | use_ssl | default_hostgroup | default_schema | schema_locked | transaction_persistent | fast_forward | backend | frontend | max_connections | comment |
 +----------+-----------+--------+---------+-------------------+----------------+---------------+------------------------+--------------+---------+----------+-----------------+---------+
 | backend_db_user    | backend_db_passwd | 1      | 0       | 1                 | NULL           | 0             | 1                      | 0            | 1       | 1        | 10000           |         |
 +----------+-----------+--------+---------+-------------------+----------------+---------------+------------------------+--------------+---------+----------+-----------------+---------+
 
-admin@127.0.0.1:[(none)]> LOAD MYSQL USERS TO RUNTIME;
+proxy_admin> LOAD MYSQL USERS TO RUNTIME;
 Query OK, 0 rows affected (0.00 sec)
 
 ```
