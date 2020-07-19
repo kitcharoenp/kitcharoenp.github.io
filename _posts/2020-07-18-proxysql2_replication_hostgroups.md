@@ -3,23 +3,23 @@ layout: post
 title: "ProxySQL2 Replication hostgroups"
 categories: [mysql]
 ---
-### MySQL replication hostgroups
+## MySQL replication hostgroups
 > **ProxySQL** checks the value of `read_only`  for servers configured in `mysql_replication_hostgroups` table. With this table, the listed hostgroups can be configured in **pairs of writer and reader hostgroups**.[1][1]
 
-* **show `mysql_replication_hostgroups`**
+### show `mysql_replication_hostgroups`
 
 ```sql
 admin@127.0.0.1:[(none)]> SELECT * FROM mysql_replication_hostgroups;
 Empty set (0.00 sec)
 ```
 
-* **insert server to `mysql_replication_hostgroups`**
+### insert server to `mysql_replication_hostgroups`
 
 ```sql
 admin@127.0.0.1:[(none)]> INSERT INTO mysql_replication_hostgroups VALUES (1,2,'read_only|innodb_read_only','cluster1');
 ```
 
-* **show `mysql_replication_hostgroups`**
+### show `mysql_replication_hostgroups`
 
 ```sql
 admin@127.0.0.1:[(none)]> SELECT * FROM mysql_replication_hostgroups;
@@ -33,7 +33,7 @@ admin@127.0.0.1:[(none)]> SELECT * FROM mysql_replication_hostgroups;
 > * If servers have `read_only`=0 , they will be moved to hostgroup 1
 > * If servers have `read_only`=1 , they will be moved to hostgroup 2
 
-* **servers status before load to runtime**
+### servers status before load to runtime
 
 ```sql
 admin@127.0.0.1:[(none)]> SELECT hostgroup_id, hostname, port, status FROM mysql_servers;
@@ -44,7 +44,7 @@ admin@127.0.0.1:[(none)]> SELECT hostgroup_id, hostname, port, status FROM mysql
 | 1            | 10.10.10.210 | 3306 | ONLINE |
 +--------------+--------------+------+--------+
 ```
-* **load servers to runtime**
+### load servers to runtime
 
 ```sql
 admin@127.0.0.1:[(none)]> LOAD MYSQL SERVERS TO RUNTIME;
@@ -60,7 +60,7 @@ admin@127.0.0.1:[(none)]> SELECT hostgroup_id, hostname, port, status FROM mysql
 2 rows in set (0.00 sec)
 ```
 
-* **save the configuration to disk**
+### save the configuration to disk
 
 ```sql
 admin@127.0.0.1:[(none)]> SAVE MYSQL SERVERS TO DISK;
@@ -70,10 +70,10 @@ admin@127.0.0.1:[(none)]> SAVE MYSQL VARIABLES TO DISK;
 Query OK, 134 rows affected (0.04 sec)
 ```
 
-### MySQL Users
+## MySQL Users
 Configure the database users and then load configuration to runtime, and save it to disk to make it persistent across restart.
 
-* **The `mysql_users` is initially empty.**
+### The `mysql_users` is initially empty.
 
 ```sql
 admin@127.0.0.1:[(none)]> SELECT * FROM mysql_users;
@@ -87,7 +87,7 @@ ERROR 1045 (28000): ProxySQL Error: Access denied for user 'backend_db_user'@'10
 
 ```
 
-* **insert mysql users**
+### insert mysql users
 
 ```sql
 admin@127.0.0.1:[(none)]> INSERT INTO mysql_users(username,password,default_hostgroup) VALUES ('backend_db_user','backend_db_passwd',1);
@@ -105,7 +105,7 @@ Query OK, 0 rows affected (0.00 sec)
 
 ```
 
-* **try connect `proxysql[10.10.10.218]` to `backend servers`**
+### try connect `proxysql[10.10.10.218]` to `backend servers`
 
 ```shell
 $ mysql -u backend_db_user -pbackend_db_passwd -h 10.10.10.218 -P6033 -e "SELECT 1"
