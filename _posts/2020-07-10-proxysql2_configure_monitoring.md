@@ -3,7 +3,8 @@ layout: post
 title: "ProxySQL: Configure Monitoring"
 categories: [mysql]
 ---
-## [Configure monitoring][3]
+
+## [Configure monitoring][1]
 
 ### Update `mysql-monitor_username`
 ```sql
