@@ -77,3 +77,7 @@ $ sudo systemctl restart apache2
 [1]: https://www.dexbot.info/2018/06/07/step-by-step-guide-to-secure-an-ubuntu-16-04-lts-server-part-1-of-2/ "secure an Ubuntu"
 
 [2]: https://modsecurity.org/download.html "ModSecurity"
+
+[3]: https://www.liquidweb.com/kb/install-and-configure-mod_security-on-ubuntu-16-04-server/ "Install and Configure ModSecurity"
+
+[4]: https://hostadvice.com/how-to/how-to-setup-modsecurity-for-apache-on-ubuntu-18-04/ "title"
