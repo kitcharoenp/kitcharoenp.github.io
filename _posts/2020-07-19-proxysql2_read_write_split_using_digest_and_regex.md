@@ -120,6 +120,13 @@ LOAD MYSQL QUERY RULES TO RUNTIME;
 SAVE MYSQL QUERY RULES TO DISK;
 ```
 
+###  Reset the contents of the table `stats_mysql_query_digest`
+To achieve this we can simply run any query against `stats_mysql_query_digest_reset`
+```sql
+SELECT * FROM stats_mysql_query_digest_reset LIMIT 1;
+```
+
+
 ### Show result after apply rule
 ```sql
 SELECT hostgroup hg, digest, count_star,

@@ -49,7 +49,9 @@ sudo sysctl -p
 ```
 
 ### Using Mod_security
-> ModSecurity is an open source, cross-platform web application firewall (WAF) module. Known as the "Swiss Army Knife" of WAFs, it enables web application defenders to gain visibility into HTTP(S) traffic and provides a power rules language and API to implement advanced protections. [2][2]
+> ModSecurity is an open source, cross-platform web application firewall (WAF) module.
+Known as the "Swiss Army Knife" of WAFs, it enables web application defenders
+to gain visibility into HTTP(S) traffic and provides a power rules language and API to implement advanced protections. [[2]]
 
 ```shell
 $ sudo apt install libapache2-mod-security2 -y
@@ -64,6 +66,7 @@ should get the below output:
 ```
 security2_module (shared)
 ```
+
 
 ### Using Mod_evasive
 Detects and provides protection against DDOS and HTTP brute force attacks.
