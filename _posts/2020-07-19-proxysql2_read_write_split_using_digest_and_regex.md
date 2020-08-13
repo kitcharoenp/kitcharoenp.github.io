@@ -54,6 +54,47 @@ LOAD MYSQL QUERY RULES TO RUNTIME;
 SAVE MYSQL QUERY RULES TO DISK;
 ```
 
+### Find the top 5 queries based on digest_text start with `'SELECT * FROM%'`
+
+```sql
+SELECT hostgroup hg, digest, count_star,
+sum_time/count_star avg_time,
+SUBSTR(digest_text,0,60)
+FROM stats_mysql_query_digest
+WHERE digest_text LIKE 'SELECT * FROM%'
+ORDER BY count_star DESC LIMIT 5;
+```
+
+**Result:**
+```
++----+--------------------+------------+----------+--------------------------------------------------------+
+| hg | digest             | count_star | avg_time | SUBSTR(digest_text,0,60)                               |
++----+--------------------+------------+----------+--------------------------------------------------------+
+| 1  | 0xCD135403E429330F | 1231223    | 633      | SELECT * FROM `customfield` WHERE ( `id` IN ( ?) )     |
+| 1  | 0x77845D920877E661 | 903642     | 618      | SELECT * FROM `basecustomfield` WHERE ( `id` IN ( ?) ) |
+| 1  | 0x491A4E8F8CE8FD0D | 832885     | 910      | SELECT * FROM `_user` WHERE username = ?               |
+| 1  | 0x405AD87076FBC718 | 355927     | 912      | SELECT * FROM `_user` WHERE ( `id` IN ( ?) )           |
+| 1  | 0x49ED076ADC1D7E11 | 303844     | 658      | SELECT * FROM `item` WHERE ( `id` IN ( ?) )            |
++----+--------------------+------------+----------+--------------------------------------------------------+
+```
+
+### Create query rule by Reg
+ All the queries starting with `SELECT * FROM` can go to `hostgroup 2`
+```sql
+INSERT INTO mysql_query_rules
+(rule_id,active,match_digest,destination_hostgroup,apply,comment)
+VALUES
+(2,1,'^SELECT \* FROM',2,1,'SELECT * FROM');
+```
+
+**Load rule to runtime**
+```sql
+LOAD MYSQL QUERY RULES TO RUNTIME;
+
+--if you want this change to be permanent
+SAVE MYSQL QUERY RULES TO DISK;
+```
+
 
 ### Find the top 5 queries based on count
 
@@ -79,37 +120,20 @@ ORDER BY count_star DESC LIMIT 5;
 ```
 
 
-### Find the top 5 queries based on digest_text start with `'SELECT * FROM%'`
-
-```sql
-SELECT hostgroup hg, digest, count_star,
-sum_time/count_star avg_time,
-SUBSTR(digest_text,0,60)
-FROM stats_mysql_query_digest
-WHERE digest_text LIKE 'SELECT * FROM%'
-ORDER BY count_star DESC LIMIT 5;
-```
-
-**Result:**
-```
-+----+--------------------+------------+----------+--------------------------------------------------------+
-| hg | digest             | count_star | avg_time | SUBSTR(digest_text,0,60)                               |
-+----+--------------------+------------+----------+--------------------------------------------------------+
-| 1  | 0xCD135403E429330F | 1231223    | 633      | SELECT * FROM `customfield` WHERE ( `id` IN ( ?) )     |
-| 1  | 0x77845D920877E661 | 903642     | 618      | SELECT * FROM `basecustomfield` WHERE ( `id` IN ( ?) ) |
-| 1  | 0x491A4E8F8CE8FD0D | 832885     | 910      | SELECT * FROM `_user` WHERE username = ?               |
-| 1  | 0x405AD87076FBC718 | 355927     | 912      | SELECT * FROM `_user` WHERE ( `id` IN ( ?) )           |
-| 1  | 0x49ED076ADC1D7E11 | 303844     | 658      | SELECT * FROM `item` WHERE ( `id` IN ( ?) )            |
-+----+--------------------+------------+----------+--------------------------------------------------------+
-```
-
-### Create query rule
- All the queries starting with `SELECT * FROM` can go to `hostgroup 2`
+### Create query rule by digest
+ Digest `0xAF23BB94F87200A9` and `0xFFBEDA9BDDFE9D44` can go to `hostgroup 2`
 ```sql
 INSERT INTO mysql_query_rules
-(rule_id,active,match_digest,destination_hostgroup,apply,comment)
+(rule_id,active,digest,destination_hostgroup,apply,comment)
 VALUES
-(2,1,'^SELECT \* FROM',2,1,'SELECT * FROM');
+(3,1,'0xAF23BB94F87200A9',2,1,'select id from _user');
+
+-- rule for `0xFFBEDA9BDDFE9D44` digest
+INSERT INTO mysql_query_rules
+(rule_id,active,digest,destination_hostgroup,apply,comment)
+VALUES
+(4,1,'0xFFBEDA9BDDFE9D44',2,1,'select `_user`.`id` id from');
+
 ```
 
 **Load rule to runtime**
