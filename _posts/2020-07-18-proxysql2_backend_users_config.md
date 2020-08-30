@@ -55,4 +55,9 @@ $ mysql -u backend_db_user -pbackend_db_passwd -h 10.10.10.218 -P6033 -e "SELECT
 +--------+
 ```
 
+```sql
+proxy_admin> SAVE MYSQL USERS TO DISK;
+Query OK, 0 rows affected (0.00 sec)
+```
+
 [1]: https://proxysql.com/documentation/ProxySQL-Configuration/ "ProxySQL-Configuration"
