@@ -95,3 +95,15 @@ Exclude Multiple Files and Directories
 ```shell
 $ rsync -avP --exclude 'app/protected/runtime/uploads/localfiles/*'  ubuntu@10.10.10.12:/home/ubuntu/zurmo /var/www/html
 ```
+
+### Shell Prompt
+**~/.bashrc:**
+find then edit 
+```shell
+if [ "$color_prompt" = yes ]; then
+    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u\[\033[00m\]:\[\033[01;34m\]\W\[\033[00m\]\$ '
+else
+# disable show hostname
+    PS1='${debian_chroot:+($debian_chroot)}\u:\W\$ '
+fi
+```
