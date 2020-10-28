@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "Quantify Synchrony"
+published: false
 categories: ['DataScience', 'TimeSeries']
 ---
 # Pearson correlation

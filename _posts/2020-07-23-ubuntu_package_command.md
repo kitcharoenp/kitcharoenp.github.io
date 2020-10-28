@@ -3,9 +3,9 @@ layout: post
 title: "Ubuntu : Package Command"
 categories: [server]
 ---
-### List all installed packages [[1]]
+### List all installed packages
 ```shell
-$ apt list --installed 
+$ apt list --installed
 ```
 
 ### List of files installed from apt package

@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "Python : Underscore"
+published: false
 categories: [python]
 ---
 # Single Leading Underscore: `_var`
