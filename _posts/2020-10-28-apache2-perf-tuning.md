@@ -40,7 +40,7 @@ In **/etc/memcached.conf:** find the line
 ...
 ```
 
-### Apache MPM event
+### [Apache MPM event][2]
 [**MPM Event**][4]: The event Multi-Processing Module (MPM) is designed to allow more requests to be served simultaneously by passing off some processing work to the listeners threads, freeing up the worker threads to serve new requests.
 
 changing the default multi-processing module from `pre-fork` to `event`
@@ -49,7 +49,7 @@ changing the default multi-processing module from `pre-fork` to `event`
 # stop the Apache HTTP service
 $ sudo systemctl stop apache2
 
-# disable the PHP 7.x module connection between PHP and Apache HTTP
+# disable the PHP 7.x module connection between PHP and Apache HTTP with any program running on PHP
 $ sudo a2dismod php7.x
 
 # disable Pre-fork module
