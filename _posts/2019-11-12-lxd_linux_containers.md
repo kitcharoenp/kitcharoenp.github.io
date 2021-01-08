@@ -20,6 +20,45 @@ lxc launch ubuntu:20.04 ubuntu2004
 ```
 
 
+### Chnage bridge IP address 
+```shell
+$ lxc network edit lxdbr0
+
+### This is a YAML representation of the network.
+### Any line starting with a '# will be ignored.
+###
+### A network consists of a set of configuration items.
+###
+### An example would look like:
+### name: lxdbr0
+### config:
+###   ipv4.address: 10.62.42.1/24
+###   ipv4.nat: true
+###   ipv6.address: fd00:56ad:9f7a:9800::1/64
+###   ipv6.nat: true
+### managed: true
+### type: bridge
+###
+### Note that only the configuration can be changed.
+
+config:
+  ipv4.address: 10.10.10.12/24 # ip interface lxdbr0
+  ipv4.nat: "true" #  to create iptables SNAT rule
+  ipv6.address: none
+description: ""
+name: lxdbr0
+type: bridge
+used_by:
+- /1.0/profiles/default
+managed: true
+status: Created
+locations:
+- none
+
+
+```
+
+
 ## Interacting with remote hosts
 
 ### Adding a remote

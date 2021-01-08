@@ -4,6 +4,16 @@ title: "Install Odoo13 on Ubuntu 20.04"
 published: true
 categories: [odoo]
 ---
+### Upgrade Host Server
+```shell
+$ sudo apt update && sudo apt upgrade
+
+$ sudo apt install update-manager-core
+
+$ sudo do-release-upgrade
+
+$ sudo reboot
+```
 
 ### Create a new container
 ```
