@@ -101,24 +101,29 @@ Jun 04 07:11:23 odoo13 systemd[1]: Started Odoo Open Source ERP and CRM.
 ```
 
 ### Create custom module repository
-* [Create repository on **Github**][2] with name `odoo13_cust_mod`
+*   [Create repository on **Github**][2] with name `odoo13_cust_mod`
 
-* clone repository `git clone https://github.com/YOUR-USERNAME/YOUR-REPOSITORY`
+*   clone repository `git clone https://github.com/YOUR-USERNAME/YOUR-REPOSITORY`
 ```shell
 cd /opt
 git clone https://github.com/kitcharoenp/odoo13_cust_mod.git
 ```
 
-* change owner and permit group `odoo` to write
+*   change owner and permit group `odoo` to write
 ```shell
-ls /opt
+ls -la /opt
 drwxr-xr-x  4 root root  5 Jun  4 07:29 odoo13_cust_mod
 ...
 chown -R odoo:odoo /opt/odoo13_cust_mod
 chmod -R g+w /opt/odoo13_cust_mod
 ...
-ls /opt
+ls -la /opt
 drwxrwxr-x  4 odoo odoo  5 Jun  4 07:29 odoo13_cust_mod
+```
+
+*   add an existing user to a `odoo` group
+```shell
+$ sudo usermod -a -G odoo ubuntu
 ```
 
 ### Configuring the `addons_path` point to custom module
