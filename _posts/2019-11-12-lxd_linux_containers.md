@@ -20,7 +20,7 @@ lxc launch ubuntu:20.04 ubuntu2004
 ```
 
 
-### Chnage bridge IP address 
+### Chnage bridge IP address
 ```shell
 $ lxc network edit lxdbr0
 
@@ -94,7 +94,19 @@ lxc copy foo:c1 c2
 
 # copy of a container with snapshot
 lxc copy foo:c1/snapshot1 c3
-```    
+```
+
+### Deletion protection for containers
+```
+# Set protection.delete
+$ lxc config set c1 security.protection.delete true
+$ lxc delete c1
+Error: Container is protected
+
+# Unset protection.delete
+$ lxc config unset c1 security.protection.delete
+$ lxc delete c1
+```
 
 [1]: https://lxd.readthedocs.io/en/latest/storage/ "LXD"
 
