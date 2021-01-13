@@ -133,7 +133,7 @@ $ sudo usermod -a -G odoo ubuntu
 cp /etc/odoo/odoo.conf /etc/odoo/odoo.conf.default
 ```
 
-* append custom module  `/opt/odoo13_cust_mod` to `addons_path`
+*   append custom module  `/opt/odoo13_cust_mod` to `addons_path`
 ```shell
 # show odoo configuration file
 cat /etc/odoo/odoo.conf
@@ -149,11 +149,22 @@ db_password = False
 addons_path = /usr/lib/python3/dist-packages/odoo/addons, /opt/odoo13_cust_mod
 ```
 
-* restart service
+*   restart service
 ```shell
 service odoo restart
 ```
 
+### Installing wkhtmltopdf
+
+download from Github:
+```shell
+$ wget https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6-1/wkhtmltox_0.12.6-1.focal_amd64.deb
+```
+
+install
+```shell
+$ sudo apt install ./wkhtmltox_0.12.6-1.focal_amd64.deb
+```
 [1]: https://www.odoo.com/documentation/13.0/setup/install.html#repository "Install from Repository"
 
 [2]: https://help.github.com/en/github/getting-started-with-github/create-a-repo "Create a repo"
