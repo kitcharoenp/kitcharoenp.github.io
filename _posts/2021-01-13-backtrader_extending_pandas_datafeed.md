@@ -4,7 +4,7 @@ title:  "backtrader: extending  pandas datafeed"
 categories: [backtrader]
 published: true
 ---
-Extend the existing mechanisms to add extra information in the form of lines [2][2]
+Extend the existing mechanisms to add extra information in the form of lines [[1]][1]
 
 ```python
 import backtrader.feeds as btfeeds
@@ -18,6 +18,8 @@ class PandasDivergence(btfeeds.PandasData):
              'div_at_btm')
 
     # add the parameter to the parameters inherited from the base class
+    #  -1 : autodetect position or case-wise equal name
+    #  string : column name (as index) in the pandas dataframe
     params = (('div_pos', -1),
               ('div_neg', -1),
               ('div_at_top', -1),
@@ -29,7 +31,7 @@ class PandasDivergence(btfeeds.PandasData):
             ['div_pos', 'div_neg', 'div_at_top', 'div_at_btm'])
 ```
 
-**using:**
+**[samples:][2]**
 ```python
 ...
   # Get ohlc data from file
@@ -46,6 +48,6 @@ class PandasDivergence(btfeeds.PandasData):
   ...
 ```
 
-
+[1]: https://www.backtrader.com/docu/pandas-datafeed/pandas-datafeed/ "Pandas DataFeed"
 
 [2]: https://github.com/mementum/backtrader/blob/master/samples/data-pandas/data-pandas-optix.py "data-pandas-optix"
