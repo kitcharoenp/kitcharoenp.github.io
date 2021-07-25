@@ -2,7 +2,7 @@
 layout : post
 title : "plotly : color sequence"
 categories : [plotly]
-published : true
+published : false
 ---
 
 By default, Plotly Express will use the **color sequence** from the active template's layout

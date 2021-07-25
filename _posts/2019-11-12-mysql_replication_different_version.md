@@ -75,6 +75,12 @@ InnoDB: Shutdown completed; log sequence number 39984943813
 mysql> CREATE USER 'repl'@'10.254.162.249' IDENTIFIED BY 'repl_password';
 ```
 
+### Change password
+```mysql
+mysql> ALTER USER 'repl'@'10.254.162.249' IDENTIFIED BY 'repl_password';
+mysql> FLUSH PRIVILEGES;
+```
+
 #### Grant access to the replication slave
 ```
  mysql> GRANT REPLICATION SLAVE ON *.* TO 'repl'@'10.254.162.249';
