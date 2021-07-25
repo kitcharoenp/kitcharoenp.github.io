@@ -2,7 +2,7 @@
 layout : post
 title : "Zurmo Database Troubleshooting"
 categories : [zurmo, mariadb]
-published : false
+published : true
 ---
 
 #### [ERROR 1419 (HY000):][1]  You do not have the SUPER privilege ..
@@ -66,6 +66,14 @@ optimizer-search-depth=0
 # bind-address          = 127.0.0.1  
 ```
 
+### instance read only
+```sql
+# check read only mode:
+mysql> SELECT @@global.read_only;
+
+# set at Runtime
+mysql> SET GLOBAL read_only=1;
+```
 
 [1]: https://stackoverflow.com/questions/56389698/why-super-privileges-are-disabled-when-binary-logging-option-is-on
  "ERROR 1419 (HY000)"

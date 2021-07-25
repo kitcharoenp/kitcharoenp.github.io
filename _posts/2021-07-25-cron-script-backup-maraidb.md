@@ -7,7 +7,7 @@ published : true
 ### Testing `mariabackup`
 ```shell
 # test connection
-$ mysql -u mariabackup_usr -p
+$ mysql -u xtrabackup_usr -p
 
 # mariabackup
 $ sudo mariabackup --backup \
