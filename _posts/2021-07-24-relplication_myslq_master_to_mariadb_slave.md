@@ -122,7 +122,7 @@ $ sudo  chown mysql:mysql /var/lib/mysql
 
 ```
 
-### Configure ` my.cnf`.
+### Configure `my.cnf`.
 
 ```
 [mysqld]
