@@ -67,7 +67,6 @@ Database : MariaDB 10.2
 
 ### [Install MariaDB 10.2 on Ubuntu 18.04 LTS][1]
 
-Install via APT (Debian/Ubuntu)
 1. Configure the APT package repository.
 
 ```shell

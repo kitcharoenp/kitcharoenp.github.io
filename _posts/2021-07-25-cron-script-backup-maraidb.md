@@ -52,7 +52,7 @@ $ sudo cat xtrabackup_info
 
 # prepare
 $ sudo mariabackup --prepare \
-    --target-dir=/opt/mariabackup/
+    --target-dir=/opt/mariabackup/2021-07-25/
 
     ...
     [00] 2021-07-25 11:22:23 mariabackup: Recovered WSREP position: a610f3de-4440-11e7-83d7-3a380b55dcb9:282082904

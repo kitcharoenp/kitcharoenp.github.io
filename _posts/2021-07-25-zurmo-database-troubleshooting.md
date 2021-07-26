@@ -13,8 +13,10 @@ log_bin_trust_function_creators variable)
 **Solution:** Set the global `log_bin_trust_function_creators` system variable to 1.
 
 ```sql
-mysql> SET GLOBAL log_bin_trust_function_creators = 1;
-
+SET GLOBAL log_bin_trust_function_creators = 1;
+```
+or
+```
 ## my.cnf
 log_bin_trust_function_creators = 1
 ```
@@ -69,10 +71,12 @@ optimizer-search-depth=0
 ### instance read only
 ```sql
 # check read only mode:
-mysql> SELECT @@global.read_only;
+SELECT @@global.read_only;
+```
 
+```sql
 # set at Runtime
-mysql> SET GLOBAL read_only=1;
+SET GLOBAL read_only=1;
 ```
 
 [1]: https://stackoverflow.com/questions/56389698/why-super-privileges-are-disabled-when-binary-logging-option-is-on
