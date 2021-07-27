@@ -31,23 +31,23 @@ Database : MariaDB 10.5
 # Primary
 
 ### Configuring
-1.  Give the master a unique **server_id**
+*   Give the master a unique **server_id**
 
-2.  Enable binary logging  if it's not already enabled.
+*   Enable binary logging  if it's not already enabled.
 
-**/etc/mysql/my.cnf:**
-```
-server-id               = 10210
-log_bin                 = /var/log/mysql/mariadb-bin
-```  
+    **/etc/mysql/my.cnf:**
+    ```
+    server-id               = 10210
+    log_bin                 = /var/log/mysql/mariadb-bin
+    ```  
 
-3.  Replica will need permission to connect and start replicating from a server.
+*   Replica will need permission to connect and start replicating from a server.
 
-```sql
-CREATE USER 'repl'@'10.10.10.211' IDENTIFIED BY 'repl_password';
-GRANT REPLICATION SLAVE ON *.* TO 'repl'@'10.10.10.211';
-FLUSH PRIVILEGES;
-```
+    ```sql
+    CREATE USER 'repl'@'10.10.10.211' IDENTIFIED BY 'repl_password';
+    GRANT REPLICATION SLAVE ON *.* TO 'repl'@'10.10.10.211';
+    FLUSH PRIVILEGES;
+    ```
 
 ### [Backup and prepare][3]
 
@@ -95,60 +95,61 @@ FLUSH PRIVILEGES;
 
 ### [Install MariaDB 10.5 on Ubuntu 20.04 LTS][2]
 
-1.  Configure the APT package repository.
+*   Configure the APT package repository.
 
-```shell
-$ wget https://downloads.mariadb.com/MariaDB/mariadb_repo_setup
+    ```shell
+    $ wget https://downloads.mariadb.com/MariaDB/mariadb_repo_setup
 
-$ echo "32e01fbe65b4cecc074e19f04c719d1a600e314236c3bb40d91e555b7a2abbfc mariadb_repo_setup" \
-    | sha256sum -c -
+    $ echo "32e01fbe65b4cecc074e19f04c719d1a600e314236c3bb40d91e555b7a2abbfc mariadb_repo_setup" \
+        | sha256sum -c -
 
-    mariadb_repo_setup: OK
+        mariadb_repo_setup: OK
 
-$ chmod +x mariadb_repo_setup
+    $ chmod +x mariadb_repo_setup
 
-$ sudo ./mariadb_repo_setup \
-   --mariadb-server-version="mariadb-10.5"
+    $ sudo ./mariadb_repo_setup \
+       --mariadb-server-version="mariadb-10.5"
 
-   [info] Checking for script prerequisites.
-   [info] Repository file successfully written to /etc/apt/sources.list.d/mariadb.list
-   [info] Adding trusted package signing keys...
-   [info] Running apt-get update...
-   [info] Done adding trusted package signing keys
+       [info] Checking for script prerequisites.
+       [info] Repository file successfully written to /etc/apt/sources.list.d/mariadb.list
+       [info] Adding trusted package signing keys...
+       [info] Running apt-get update...
+       [info] Done adding trusted package signing keys
 
-```
+    ```
 
-2.  Install MariaDB
+*   Install MariaDB
 
-```shell
-$ sudo apt install mariadb-server mariadb-backup
+    ```shell
+    $ sudo apt install mariadb-server mariadb-backup
 
-  Reading package lists... Done
-  Building dependency tree
-  ...
-  After this operation, 256 MB of additional disk space will be used.
-  Do you want to continue? [Y/n] Y
-```
+      Reading package lists... Done
+      Building dependency tree
+      ...
+      After this operation, 256 MB of additional disk space will be used.
+      Do you want to continue? [Y/n] Y
+    ```
 
-3.  Check service
+*   Check service
 
-```shell
-$ sudo service mariadb status
-● mariadb.service - MariaDB 10.5.11 database server
-     Loaded: loaded (/lib/systemd/system/mariadb.service; enabled; vendor preset: enabled)
-    Drop-In: /etc/systemd/system/mariadb.service.d
-             └─migrated-from-my.cnf-settings.conf
-     Active: active (running) since Mon 2021-07-26 03:03:05 UTC; 55s ago
-       Docs: man:mariadbd(8)
-             https://mariadb.com/kb/en/library/systemd/
-...
-Jul 26 03:03:23 p105 /etc/mysql/debian-start[2230]: Phase 7/7: Running 'FLUSH PRIVILEGES'
-Jul 26 03:03:23 p105 /etc/mysql/debian-start[2230]: OK
+    ```shell
+    $ sudo service mariadb status
+    ● mariadb.service - MariaDB 10.5.11 database server
+         Loaded: loaded (/lib/systemd/system/mariadb.service; enabled; vendor preset: enabled)
+        Drop-In: /etc/systemd/system/mariadb.service.d
+                 └─migrated-from-my.cnf-settings.conf
+         Active: active (running) since Mon 2021-07-26 03:03:05 UTC; 55s ago
+           Docs: man:mariadbd(8)
+                 https://mariadb.com/kb/en/library/systemd/
+    ...
+    Jul 26 03:03:23 p105 /etc/mysql/debian-start[2230]: Phase 7/7: Running 'FLUSH PRIVILEGES'
+    Jul 26 03:03:23 p105 /etc/mysql/debian-start[2230]: OK
 
-```
+    ```
 
 ### Configuring the Replica
-**my.cnf:**
+
+**/etc/mysql/mariadb.cnf:**
   ```
   [mariadb]
   log-bin
@@ -161,12 +162,14 @@ Jul 26 03:03:23 p105 /etc/mysql/debian-start[2230]: OK
 
 
 ### Copy the Backup to the New Replica
+
 copy backup from primary the new replica
 ```shell
 $ sudo rsync -avP  -e ssh ubuntu@10.10.10.210:/opt/mariabackup/for_replica/ /opt/mariabackup/
 ```
 
 ### [Restore the Backup on the New Replica][3]
+
 restore the backup to the datadir
 
 ```shell
