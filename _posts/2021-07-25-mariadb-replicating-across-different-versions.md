@@ -31,23 +31,23 @@ Database : MariaDB 10.5
 # Primary
 
 ### Configuring
-1. Give the master a unique **server_id**
+1.  Give the master a unique **server_id**
 
-2. Enable binary logging  if it's not already enabled.
+2.  Enable binary logging  if it's not already enabled.
 
-  **/etc/mysql/my.cnf:**
-  ```
-  server-id               = 10210
-  log_bin                 = /var/log/mysql/mariadb-bin
-  ```
+**/etc/mysql/my.cnf:**
+```
+server-id               = 10210
+log_bin                 = /var/log/mysql/mariadb-bin
+```  
 
-3. Slaves will need permission to connect and start replicating from a server.
+3.  Replica will need permission to connect and start replicating from a server.
 
-  ```sql
-  CREATE USER 'repl'@'10.10.10.211' IDENTIFIED BY 'repl_password';
-  GRANT REPLICATION SLAVE ON *.* TO 'repl'@'10.10.10.211';
-  FLUSH PRIVILEGES;
-  ```
+```sql
+CREATE USER 'repl'@'10.10.10.211' IDENTIFIED BY 'repl_password';
+GRANT REPLICATION SLAVE ON *.* TO 'repl'@'10.10.10.211';
+FLUSH PRIVILEGES;
+```
 
 ### [Backup and prepare][3]
 
@@ -95,7 +95,7 @@ Database : MariaDB 10.5
 
 ### [Install MariaDB 10.5 on Ubuntu 20.04 LTS][2]
 
-1. Configure the APT package repository.
+1.  Configure the APT package repository.
 
 ```shell
 $ wget https://downloads.mariadb.com/MariaDB/mariadb_repo_setup
@@ -118,7 +118,7 @@ $ sudo ./mariadb_repo_setup \
 
 ```
 
-2. Install MariaDB
+2.  Install MariaDB
 
 ```shell
 $ sudo apt install mariadb-server mariadb-backup
@@ -130,7 +130,7 @@ $ sudo apt install mariadb-server mariadb-backup
   Do you want to continue? [Y/n] Y
 ```
 
-3. Check service
+3.  Check service
 
 ```shell
 $ sudo service mariadb status
