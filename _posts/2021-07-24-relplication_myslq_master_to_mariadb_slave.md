@@ -164,6 +164,30 @@ mysql> SHOW SLAVE STATUS \G
          ...
 ```
 
+### GTID
+Percona XtraDB Cluster 5.7 does not support MariaDB global transaction id.
+
+**Master gtid variables***
+```
+show global variables like '%gtid%';
++----------------------------------+-----------------------------------+
+| Variable_name                    | Value                             |
++----------------------------------+-----------------------------------+
+| binlog_gtid_simple_recovery      | ON                                |
+| enforce_gtid_consistency         | ON                                |
+...
+| gtid_executed_compression_period | 1000                              |
+| gtid_mode                        | ON                                |
+...
+| session_track_gtids              | OFF                               |
++----------------------------------+-----------------------------------+
+```
+
+Testing `CHANGE MASTER TO master_use_gtid = current_pos;` get error
+```
+Last_IO_Error: The slave I/O thread stops because master does not support MariaDB global transaction id. A fatal error is encountered when it tries to SELECT @@GLOBAL.gtid_domain_id. Error: Unknown system variable 'gtid_domain_id'
+```
+
 [1]: https://mariadb.com/docs/deploy/upgrade-community-server-cs102-ubuntu18/#uninstall-the-old-version "MariaDB Community Server 10.2 on Ubuntu"
 
 [2]: https://mariadb.com/kb/en/percona-xtrabackup-overview/#compatibility-with-mariadb-102 "compatibility-with-mariadb-102"
