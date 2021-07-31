@@ -11,12 +11,12 @@ On a master server, all updates to the database (DML and DDL) are written into t
 
  A replica server keeps track of the position in the primary's binlog of the last event applied on the replica. **Global transaction ID** introduces a new event attached to each event group in the binlog.  \| [2][2]  \|
 
- ## Benefits
+### Benefits
  *   Easy to change a replica server to connect to and replicate from a different primary server.
 
  *  The state of the replica is recorded in a crash-safe way.
 
-The replica keeps track of its current position (the global transaction ID of the last transaction applied) in the **mysql.gtid_slave_pos** system table.  If this table is using a transactional storage engine (such as InnoDB, which is the default), then updates to the state are done in the same transaction as the updates to the data. This makes the state crash-safe; \[2][2]\
+The replica keeps track of its current position (the global transaction ID of the last transaction applied) in the **mysql.gtid_slave_pos** system table.  If this table is using a transactional storage engine (such as InnoDB, which is the default), then updates to the state are done in the same transaction as the updates to the data. This makes the state crash-safe;  \| [2][2]  \|
 
 
 Global transaction ID integrates smoothly with old-style replication, and **the two can be used freely together** in the same replication hierarchy.  However, it must be explicitly **set for a replica server** with the appropriate **CHANGE MASTER** option;
