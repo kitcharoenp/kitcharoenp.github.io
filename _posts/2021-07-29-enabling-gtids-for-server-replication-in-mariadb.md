@@ -5,11 +5,11 @@ categories : [mariadb]
 published : true
 ---
 
-MariaDB implements GTIDs differently from MySQL, making it possible to enable and disable them with no downtime. \[1|][1]\
+MariaDB implements GTIDs differently from MySQL, making it possible to enable and disable them with no downtime. \| [1][1]  \|
 
-On a master server, all updates to the database (DML and DDL) are written into the binary log as binlog events. A server can be both a primary and a replica at the same time, and it is thus possible for binlog events to replicated through multiple levels of servers. [\2\][2]
+On a master server, all updates to the database (DML and DDL) are written into the binary log as binlog events. A server can be both a primary and a replica at the same time, and it is thus possible for binlog events to replicated through multiple levels of servers. \| [2][2]  \|
 
- A replica server keeps track of the position in the primary's binlog of the last event applied on the replica. **Global transaction ID** introduces a new event attached to each event group in the binlog. \[2][2]\
+ A replica server keeps track of the position in the primary's binlog of the last event applied on the replica. **Global transaction ID** introduces a new event attached to each event group in the binlog.  \| [2][2]  \|
 
  ## Benefits
  *   Easy to change a replica server to connect to and replicate from a different primary server.
