@@ -79,5 +79,26 @@ SELECT @@global.read_only;
 SET GLOBAL read_only=1;
 ```
 
-[1]: https://stackoverflow.com/questions/56389698/why-super-privileges-are-disabled-when-binary-logging-option-is-on
- "ERROR 1419 (HY000)"
+### SQLSTATE[22007]: Invalid datetime format: 1292 Incorrect datetime
+
+>The reason for this by default MariaDB’s sql mode has NO_ZERO_DATE which won’t allow zero dates to be entered only valid or null is allowed. \[[2]\]
+
+**current varialble of mariadb 10.2**
+```sql
+SELECT @@SQL_MODE, @@GLOBAL.SQL_MODE \G
+*************************** 1. row ***************************
+       @@SQL_MODE: STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION
+@@GLOBAL.SQL_MODE: STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION
+```
+
+Fixed by edit **my.cnf**
+
+```
+sql_mode=NO_AUTO_CREATE_USER
+```
+
+
+
+[1]: https://stackoverflow.com/questions/56389698/why-super-privileges-are-disabled-when-binary-logging-option-is-on "EO[2]R 1419 (HY000)"
+
+[2]: https://dcblog.dev/mariabdb-avoid-invalid-datetime-format-when-date-is-empty "Invalid datetime format"
