@@ -8,10 +8,10 @@ Note from read ["Memorization Strategies"][1]
 
 Fortunately, though, memorizing is not just for an elite group of people born with the right skills—anyone can train and develop their memorizing abilities.
 
- Research shows that students who use memory tricks perform better than those who do not. Memory tricks help you expand your working memory and access long term memory.
+Research shows that students who use memory tricks perform better than those who do not. Memory tricks help you expand your working memory and access long term memory.
 
- ### Simple memory tips and tricks
- Check out this [video][2] from the Learning Center for a quick explanation of many of these tips.
+### Simple memory tips and tricks
+Check out this [video][2] from the Learning Center for a quick explanation of many of these tips.
 
  *  **Try to understand the information first.**
 
@@ -35,7 +35,7 @@ Fortunately, though, memorizing is not just for an elite group of people born wi
 
  *  **Practice interleaving.** Interleaving is the idea of mixing or alternating skills or concepts that you want to memorize. For example, **spend some time memorizing vocabulary words for your science** class and then immediately **switch to studying historical dates and names** for your history class.
 
- ### Visual and spatial techniques
+### Visual and spatial techniques
 
 Visual and spatial techniques are memory tricks that involve your five senses. They utilize images, songs, feelings, and our bodies to help information stick.
 

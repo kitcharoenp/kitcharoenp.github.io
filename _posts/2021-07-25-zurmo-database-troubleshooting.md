@@ -97,7 +97,7 @@ Fixed by edit **my.cnf**
 sql_mode=NO_AUTO_CREATE_USER
 ```
 
-
+### show_compatibility_56
 
 [1]: https://stackoverflow.com/questions/56389698/why-super-privileges-are-disabled-when-binary-logging-option-is-on "EO[2]R 1419 (HY000)"
 
