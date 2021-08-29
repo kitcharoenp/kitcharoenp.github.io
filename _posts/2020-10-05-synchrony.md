@@ -25,3 +25,15 @@ categories: ['DataScience', 'TimeSeries']
 [3]: https://en.wikipedia.org/wiki/Homoscedasticity "Homoscedasticity"
 
 [4]: https://www.investopedia.com/terms/h/heteroskedasticity.asp "Basics of Heteroskedasticity"
+
+
+https://machinelearningmastery.com/how-to-use-correlation-to-understand-the-relationship-between-variables/
+
+
+https://realpython.com/numpy-scipy-pandas-correlation-python/#visualization-of-correlation
+
+
+https://stackabuse.com/calculating-pearson-correlation-coefficient-in-python-with-numpy/
+
+
+https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.corr.html

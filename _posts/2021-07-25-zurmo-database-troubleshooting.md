@@ -97,7 +97,20 @@ Fixed by edit **my.cnf**
 sql_mode=NO_AUTO_CREATE_USER
 ```
 
-### show_compatibility_56
+### Error : Column count of mysql.proc is wrong...Please use mariadb-upgrade to fix this error
+
+```shell
+$ mysql_upgrade -u root -p
+Phase 2/7: Installing used storage engines... Skipped
+Phase 3/7: Fixing views
+sys.host_summary
+Error    : Column count of mysql.proc is wrong. Expected 21, found 20. Created with MariaDB 100239, now running 100511. Please use mariadb-upgrade to fix this error
+
+...
+
+Phase 7/7: Running 'FLUSH PRIVILEGES'
+OK
+```
 
 [1]: https://stackoverflow.com/questions/56389698/why-super-privileges-are-disabled-when-binary-logging-option-is-on "EO[2]R 1419 (HY000)"
 
