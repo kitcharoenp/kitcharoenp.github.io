@@ -31,6 +31,93 @@ CHANGE MASTER TO master_use_gtid = { slave_pos | current_pos | no }
 ```
 
 
+### [Setting up a New Replica From a Backup][3]
+
+It is important that the position at which replication is started corresponds exactly to the state of the data at the point in time that the backup was taken.
+
+#### Display backup info
+```shell
+$ sudo cat /var/lib/mysql/xtrabackup_info 
+uuid = 5edaaca3-0edb-11ec-bd4d-00163ea0d2f6
+name = 
+tool_name = mariabackup
+tool_command = --backup --target-dir=/opt/mariabackup//2021-09-06 --user=xtrabackup_usr --password=... --no-timestamp --parallel=4
+tool_version = 10.2.39-MariaDB
+ibbackup_version = 10.2.39-MariaDB
+server_version = 10.2.39-MariaDB-1:10.2.39+maria~bionic-log
+start_time = 2021-09-06 06:25:02
+end_time = 2021-09-06 06:26:29
+lock_time = 0
+binlog_pos = filename 'mariadb-bin.000026', position '14563409', GTID of the last change '0-10210-2631941'
+innodb_from_lsn = 0
+innodb_to_lsn = 437483551527
+partial = N
+incremental = N
+format = file
+compressed = N
+
+```
+
+#### Setting Replica
+```sql
+SET GLOBAL gtid_slave_pos = "0-10210-2631941"; -- GTID of the last change
+
+CHANGE MASTER TO 
+  MASTER_HOST ='10.10.10.210', -- Master Host IP
+  MASTER_USER ='repl', -- replica user
+  MASTER_PASSWORD ='repl_password',  -- replica password
+  master_use_gtid=slave_pos;
+
+START SLAVE;
+```
+
+### Show replica status
+```sql
+SHOW SLAVE STATUS \G
+
+Slave_IO_State: Waiting for master to send event
+                   Master_Host: 10.10.10.210
+                   Master_User: repl
+                   Master_Port: 3306
+                 Connect_Retry: 60
+               Master_Log_File: mariadb-bin.000026
+           Read_Master_Log_Pos: 74025276
+                Relay_Log_File: mysqld-relay-bin.000002
+                 Relay_Log_Pos: 39225506
+         Relay_Master_Log_File: mariadb-bin.000026
+              Slave_IO_Running: Yes
+             Slave_SQL_Running: Yes
+...
+           Exec_Master_Log_Pos: 53941434
+               Relay_Log_Space: 59309658
+               Until_Condition: None
+... 
+         Seconds_Behind_Master: 19014
+ Master_SSL_Verify_Server_Cert: No
+                 Last_IO_Errno: 0
+                 Last_IO_Error: 
+                Last_SQL_Errno: 0
+                Last_SQL_Error: 
+   Replicate_Ignore_Server_Ids: 
+              Master_Server_Id: 10210
+                Master_SSL_Crl: 
+            Master_SSL_Crlpath: 
+                    Using_Gtid: Slave_Pos
+                   Gtid_IO_Pos: 0-10210-2755602
+       Replicate_Do_Domain_Ids: 
+   Replicate_Ignore_Domain_Ids: 
+                 Parallel_Mode: optimistic
+                     SQL_Delay: 0
+           SQL_Remaining_Delay: NULL
+       Slave_SQL_Running_State: Sending data
+              Slave_DDL_Groups: 1735
+Slave_Non_Transactional_Groups: 0
+    Slave_Transactional_Groups: 77259
+1 row in set (0.000 sec)
+
+```
+
+
 ### Switching An Existing Old-Style Replica To Use GTID.
 
 When a replica connects to a primary using old-style binlog positions, and the **primary supports GTID** (i.e. is MariaDB 10.0.2 or later), then the **replica automatically downloads the GTID position at connect and updates it during replication.**
@@ -60,18 +147,6 @@ SHOW SLAVE STATUS\G
 Using_Gtid: Slave_Pos
 Gtid_IO_Pos: 0-10210-3
 ...
-```
-
-### [Setting up a New Replica From a Backup][3]
-
-It is important that the position at which replication is started corresponds exactly to the state of the data at the point in time that the backup was taken.
-```sql
-
-SELECT BINLOG_GTID_POS("master-bin.000001", 600);
-
-SET GLOBAL gtid_slave_pos = "0-1-2";
-CHANGE MASTER TO master_host="127.0.0.1", master_port=3310, master_user="root", master_use_gtid=slave_pos;
-START SLAVE;
 ```
 
 [1]: https://mariadb.com/resources/blog/enabling-gtids-for-server-replication-in-mariadb-server-10-2/ "Enabling GTIDs MariaDB"
