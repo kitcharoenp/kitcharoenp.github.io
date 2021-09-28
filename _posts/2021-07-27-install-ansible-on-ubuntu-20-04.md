@@ -10,7 +10,7 @@ Use the default Ubuntu repositories:
 
 ```shell
 $ lsb_release -cs
-hirsute
+focal
 
 $ sudo apt update
 
@@ -98,7 +98,7 @@ all:
 
 ```
 
-### Testing Connection
+### Testing Connection to Ansible Hosts
 
 ```shell
 # Testing Connection with valid SSH credentials
@@ -167,3 +167,4 @@ repl2 | UNREACHABLE! => {
 [2]: https://www.digitalocean.com/community/tutorials/how-to-set-up-ansible-inventories "Set Up Ansible Inventories"
 
 [3]: https://www.digitalocean.com/community/cheatsheets/how-to-manage-multiple-servers-with-ansible-ad-hoc-commands "Manage Multiple Servers with Ansible Ad Hoc Commands"
+

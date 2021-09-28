@@ -66,7 +66,7 @@ CHANGE MASTER TO
   MASTER_HOST ='10.10.10.210', -- Master Host IP
   MASTER_USER ='repl', -- replica user
   MASTER_PASSWORD ='repl_password',  -- replica password
-  master_use_gtid=slave_pos;
+  MASTER_USE_GTID=slave_pos;
 
 START SLAVE;
 ```
@@ -147,6 +147,41 @@ SHOW SLAVE STATUS\G
 Using_Gtid: Slave_Pos
 Gtid_IO_Pos: 0-10210-3
 ...
+```
+
+### Reconnect Other Slaves to the New Master
+
+point slave to the new master
+```sql
+
+STOP SLAVE [connection_name];
+
+CHANGE MASTER [connection_name] TO MASTER_HOST="new_master_name",
+MASTER_PORT=3306, MASTER_USER='root', MASTER_USE_GTID=current_pos,
+MASTER_LOG_FILE="XXX", MASTER_LOG_POS=XXX;
+
+START SLAVE;
+```
+
+
+```sql
+show slave status \G
+...
+Master_User: repl
+                   Master_Port: 3306
+                 Connect_Retry: 60
+               Master_Log_File: mysqld-bin.000012
+           Read_Master_Log_Pos: 3693482
+...
+
+STOP SLAVE;
+
+CHANGE MASTER TO MASTER_HOST="10.10.10.40", -- new master ip
+MASTER_PORT=3306, MASTER_USER='repl', MASTER_USE_GTID=current_pos,
+MASTER_LOG_FILE="mysqld-bin.000012", MASTER_LOG_POS=3693482;
+
+START SLAVE;
+
 ```
 
 [1]: https://mariadb.com/resources/blog/enabling-gtids-for-server-replication-in-mariadb-server-10-2/ "Enabling GTIDs MariaDB"

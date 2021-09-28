@@ -108,8 +108,20 @@ $ lxc config unset c1 security.protection.delete
 $ lxc delete c1
 ```
 
+### [Delete alias]
+
+One is to setup an alias from `lxc delete` to `lxc delete -i`:
+
+```
+stgraber@castiana:~$ lxc alias add delete "delete -i"
+stgraber@castiana:~$ lxc delete c1
+Remove c1 (yes/no): 
+```
+
 [1]: https://lxd.readthedocs.io/en/latest/storage/ "LXD"
 
 [2]: https://stgraber.org/2016/04/12/lxd-2-0-remote-hosts-and-container-migration-612/ "LXD remote container"
 
 [3]: https://linuxcontainers.org/lxd/getting-started-cli/#launch-a-container "Launch an instance"
+
+[4]: https://github.com/lxc/lxd/issues/4747#issuecomment-403031023 "alias add delete"

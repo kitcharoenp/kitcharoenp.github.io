@@ -56,9 +56,8 @@ Database : MariaDB 10.5
   # source database server is the desired replication master
   $ sudo mariabackup --backup \
     --target-dir=/opt/mariabackup/for_replica/ \
-    --user="mariabackup_usr" \
-    --password="mariabackup_passwd" \
-    --no-timestamp \
+    --user="xtrabackup_usr" \
+    --password="s3cret" \
     --parallel=4
       ...
       completed OK!
@@ -67,9 +66,8 @@ Database : MariaDB 10.5
   $ sudo mariabackup --backup \
     --slave-info --safe-slave-backup \
     --target-dir=/opt/mariabackup/for_replica/ \
-    --user="mariabackup_usr" \
-    --password="mariabackup_passwd" \
-    --no-timestamp \
+    --user="xtrabackup_usr" \
+    --password="s3cret" \
     --parallel=4
       ...
       completed OK!
@@ -95,26 +93,16 @@ Database : MariaDB 10.5
 
 ### [Install MariaDB 10.5 on Ubuntu 20.04 LTS][2]
 
-*   Configure the APT package repository.
+*   Using the MariaDB Package Repository Setup Script
 
     ```shell
-    $ wget https://downloads.mariadb.com/MariaDB/mariadb_repo_setup
+    $ curl -sS https://downloads.mariadb.com/MariaDB/mariadb_repo_setup | sudo bash
 
-    $ echo "32e01fbe65b4cecc074e19f04c719d1a600e314236c3bb40d91e555b7a2abbfc mariadb_repo_setup" \
-        | sha256sum -c -
-
-        mariadb_repo_setup: OK
-
-    $ chmod +x mariadb_repo_setup
-
-    $ sudo ./mariadb_repo_setup \
-       --mariadb-server-version="mariadb-10.5"
-
-       [info] Checking for script prerequisites.
-       [info] Repository file successfully written to /etc/apt/sources.list.d/mariadb.list
-       [info] Adding trusted package signing keys...
-       [info] Running apt-get update...
-       [info] Done adding trusted package signing keys
+    [info] Checking for script prerequisites.
+    [info] Repository file successfully written to /etc/apt/sources.list.d/mariadb.list
+    [info] Adding trusted package signing keys...
+    [info] Running apt-get update...
+    [info] Done adding trusted package signing keys
 
     ```
 
@@ -165,7 +153,7 @@ Database : MariaDB 10.5
 
 copy backup from primary the new replica
 ```shell
-$ sudo rsync -avP  -e ssh ubuntu@10.10.10.210:/opt/mariabackup/for_replica/ /opt/mariabackup/
+$ sudo rsync -avP  -e ssh ubuntu@10.10.10.210:/opt/mariabackup/for_replica /opt/mariabackup/
 ```
 
 ### [Restore the Backup on the New Replica][3]
@@ -182,7 +170,7 @@ $ sudo mv /var/lib/mysql/* /tmp/mysql
 
 # Move backup
 $ sudo mariabackup --copy-back \
-   --target-dir=/opt/mariabackup/
+   --target-dir=/opt/mariabackup/for_replica/
 
 # Change permissions
 $ sudo chown -R mysql:mysql /var/lib/mysql/
