@@ -44,15 +44,13 @@ FLUSH PRIVILEGES;
 
 ### Configuring the monitor
 
-```
+```sql
 CREATE USER 'maxscale_monitor'@'10.10.10.%' IDENTIFIED BY 'maxscale_mon_s3cret';
 GRANT REPLICATION CLIENT on *.* to 'maxscale_monitor'@'10.10.10.%';
 FLUSH PRIVILEGES;
 ```
 
-change user password on mysql
-ALTER USER 'maxscale_monitor'@'10.10.10.%' IDENTIFIED BY 'maxscale_mon_s3cret';
-FLUSH PRIVILEGES;
+
 
 ### Configuring the services and listeners
 
@@ -69,8 +67,54 @@ GRANT SELECT ON mysql.proxies_priv TO 'maxscale'@'maxscalehost';
 
 ### Starting MaxScale
 
+```shell
+# start service
+sudo service maxscale start
+
+# view service status
+sudo journalctl -u maxscale.service -n200 -f 
+```
+
 ### Checking MaxScale status with MaxCtrl
 
+```shell
+ubuntu@maxscale:~$ sudo maxctrl list servers
+┌─────────┬──────────────┬──────┬─────────────┬─────────────────────────────┬──────┐
+│ Server  │ Address      │ Port │ Connections │ State                       │ GTID │
+├─────────┼──────────────┼──────┼─────────────┼─────────────────────────────┼──────┤
+│ primary │ 10.10.10.40  │ 3306 │ 0           │ Master, Auth Error, Running │      │
+├─────────┼──────────────┼──────┼─────────────┼─────────────────────────────┼──────┤
+│ repl01  │ 10.10.10.212 │ 3306 │ 0           │ Auth Error, Running         │      │
+└─────────┴──────────────┴──────┴─────────────┴─────────────────────────────┴──────┘
+```
+Fixed **Auth Error**
+
+` maxscale[522]: Error during monitor permissions test for server 'primary': Query 'SHOW SLAVE STATUS;' failed: 'Access denied; you need (at least one of) the SUPER, SLAVE MONITOR privilege(s) for this operation'.`
+
+```sql
+GRANT SLAVE MONITOR ON *.* TO 'maxscale_monitor'@'10.10.10.%';
+FLUSH PRIVILEGES;
+```
+
+**Show servers status:**
+```shell
+ubuntu@maxscale:~$ sudo maxctrl list servers
+┌─────────┬──────────────┬──────┬─────────────┬─────────────────┬─────────────────┐
+│ Server  │ Address      │ Port │ Connections │ State           │ GTID            │
+├─────────┼──────────────┼──────┼─────────────┼─────────────────┼─────────────────┤
+│ primary │ 10.10.10.40  │ 3306 │ 3           │ Master, Running │ 0-22040-9936180 │
+├─────────┼──────────────┼──────┼─────────────┼─────────────────┼─────────────────┤
+│ repl01  │ 10.10.10.212 │ 3306 │ 3           │ Slave, Running  │ 0-22040-9936179 │
+└─────────┴──────────────┴──────┴─────────────┴─────────────────┴─────────────────┘
+```
+
+
+
+### Change user password
+```sql
+ALTER USER 'maxscale_monitor'@'10.10.10.%' IDENTIFIED BY 'maxscale_mon_s3cret';
+FLUSH PRIVILEGES;
+```
 [1]: https://mariadb.com/kb/en/mariadb-maxscale-6-setting-up-mariadb-maxscale/ "Install MariaDB MaxScale"
 
 [2]: https://dba.stackexchange.com/questions/151680/master-slave-mysql-error-in-replication "sss"

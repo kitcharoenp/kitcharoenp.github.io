@@ -4,6 +4,16 @@ title : "Zurmo Database Troubleshooting"
 categories : [zurmo, mariadb]
 published : true
 ---
+### Performance Depend on:
+*  Database 
+   *  `Percona` is better than `MariaDb`
+   *  `Local` store is better than `Container` [lxc, docker]
+
+
+* `securityOptimized` set up in `debug.php`
+  * `Off` to use **php** to do permissions, rights, and polices.
+  * `On` to use **mysql** stored `functions and procedures`
+
 
 #### [ERROR 1419 (HY000):][1]  You do not have the SUPER privilege ..
 You do not have the SUPER privilege and

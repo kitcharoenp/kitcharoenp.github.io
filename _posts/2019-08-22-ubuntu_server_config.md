@@ -50,6 +50,9 @@ Configuration files of Netplan in `/etc/netplan/01-netcfg.yaml`.
 * ip address `10.10.20.12/24`
 * gateway ipv4 `10.10.10.20`
 
+**Note** the `optional: true` key declarations that *allow booting to occur without waiting for* those interfaces to activate fully.
+
+
 ```shell
 $ ls /etc/netplan
 01-netcfg.yaml  01-netcfg.yaml.default  01-netcfg.yaml.default.bridges
@@ -65,6 +68,7 @@ network:
     eno2:
       dhcp4: no
       addresses: [10.10.20.12/24]
+      optional: true
   bridges:
     br0:
       dhcp4: no        
