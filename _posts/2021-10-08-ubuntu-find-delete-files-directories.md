@@ -1,6 +1,6 @@
 ---
 layout : post
-title : "Ubuntu : Command"
+title : "Ubuntu : Find files and directory then delete"
 categories : [ubuntu]
 published : false
 ---

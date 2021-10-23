@@ -153,7 +153,7 @@ Database : MariaDB 10.5
 
 copy backup from primary the new replica
 ```shell
-$ sudo rsync -avP  -e ssh ubuntu@10.10.10.210:/opt/mariabackup/for_replica /opt/mariabackup/
+$ sudo rsync -avP  -e ssh ubuntu@10.10.10.210:/opt/mariabackup/for_replica/ /opt/mariabackup/
 ```
 
 ### [Restore the Backup on the New Replica][3]
@@ -183,7 +183,7 @@ $ sudo chown -R mysql:mysql /var/lib/mysql/
 $ sudo service mariadb start
 
 # Finding the binary log position
-$ cat /opt/mariabackup/xtrabackup_binlog_info
+$ cat /opt/mariabackup/for_replica/xtrabackup_binlog_info
 mariadb-bin.000006	330
 
 # test connection to primary
@@ -210,7 +210,7 @@ $ sudo mariadb-upgrade -u root -p
 ```
 
 
-Start the Slave
+### Start the Slave
 ```sql
 STOP SLAVE;
 
@@ -224,7 +224,7 @@ CHANGE MASTER TO
 START SLAVE;
 ```
 
-Check that the replication is working
+### Check that the replication is working
 
 ```sql
 SHOW SLAVE STATUS \G
@@ -233,7 +233,20 @@ SHOW SLAVE STATUS \G
          Slave_SQL_Running: Yes
          ...
 ```
+### Switching Replica To Use GTID
 
+```sql
+-- stop slave then enable using GTID
+STOP SLAVE;
+CHANGE MASTER TO master_use_gtid = slave_pos;
+START SLAVE;
+
+SHOW SLAVE STATUS\G
+...
+Using_Gtid: Slave_Pos
+Gtid_IO_Pos: 0-10210-3
+...
+```
 
 [1]: https://mariadb.com/kb/en/setting-up-replication/ "Setting Up Replication"
 

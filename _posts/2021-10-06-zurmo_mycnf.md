@@ -47,45 +47,46 @@ sql_mode                = "NO_AUTO_CREATE_USER"
 query_cache_type        = 0
 query_cache_size        = 0
 
+
+# Skip reverse DNS lookup 
+skip-name-resolv        = ON
+
+
+[mariadb]
 #
 # * Replication
 #
-
 log-bin
 server_id               = 1030
 read_only
 
 
 #
+# * Thread Pool
+#
+thread_handling=pool-of-threads
+
+
+#
 # * InnoDB
 #
-
 default_storage_engine  = InnoDB
-innodb_buffer_pool_size = 40G   # (50% of RAM)
+innodb_buffer_pool_size = 16G 
 innodb_io_capacity      = 400
+
+#
+# * Tunning for ZFS 
+#
+innodb_log_write_ahead_size     = 16384
+innodb_doublewrite              = 0
+innodb_flush_neighbors          = 0
+innodb_use_native_aio           = 0
+innodb_use_atomic_writes        = 0
+innodb_flush_log_at_trx_commit  = 0
+innodb_compression_default      = OFF
+sync_binlog                     = 0
+innodb_file_per_table           = ON
 ```
-
-### [Installing Percona XtraBackup][d]
-
-```shell
-$ wget https://repo.percona.com/apt/percona-release_latest.$(lsb_release -sc)_all.deb
-
-$ sudo dpkg -i percona-release_latest.$(lsb_release -sc)_all.deb
-
-$ sudo apt-get install percona-xtrabackup-24
-
-```
-[d]: https://www.percona.com/doc/percona-xtrabackup/2.4/installation/apt_repo.html "XtraBackup"
-
-
-### InnoDB Buffer Pool 
-
-
-https://dev.mysql.com/doc/refman/5.7/en/innodb-buffer-pool-resize.html
-
-https://itectec.com/database/thesql-how-large-should-be-thesql-innodb_buffer_pool_size/
-
-https://dba.stackexchange.com/questions/19164/what-to-set-innodb-buffer-pool-and-why/19181#19181
 
 
 ### [Get size of a mysql database][c]
@@ -118,7 +119,6 @@ query_cache_size                = 0
 
 > To disable the query cache at server startup, set the query_cache_size system variable to 0. By disabling the query cache code, there is no noticeable overhead. \[[a]\]
 
-> To disable the query cache at server startup, set the query_cache_size system variable to 0. By disabling the query cache code, there is no noticeable overhead. \[[a]\]
 
 [a]: https://dev.mysql.com/doc/refman/5.7/en/query-cache.html "query-cache"
 
@@ -144,9 +144,3 @@ MariaDB [(none)]> show variables like 'query_cache_%';
 +------------------------------+----------+
 6 rows in set (0.001 sec)
 ```
-
-
-mysqldump -u root -p --all-databases --single-transaction --quick --lock-tables=false > all-backup.sql
-
-### Restore all database
-$ mysql -u root -p < all-backup.sql
