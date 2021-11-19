@@ -16,4 +16,4 @@ mariadb> REVOKE ALL PRIVILEGES, GRANT OPTION FROM 'bloguser'@'localhost';
 
 mariadb> DROP USER 'bloguser'@'localhost';
 
-``
+```
