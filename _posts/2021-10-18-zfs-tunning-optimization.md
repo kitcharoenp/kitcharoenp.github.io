@@ -81,17 +81,24 @@ In technical terms, `sync=disabled` tells ZFS “when an application requests th
 
 **command:**
 ```
-sudo zfs set  sync=disabled 
+sudo zfs set  sync=disabled \
 atime=off \
 compression=lz4 \
 logbias=throughput \
 primarycache=metadata \
 recordsize=16k \
 xattr=sa \
-redundant_metadata=most  lxd/containers/NAME
-
+redundant_metadata=most  default/containers/NAME
 ```
 
+* **default** : zfs pool name
+* **NAME** : lxc container name
+
+### [Querying ZFS Properties](https://docs.oracle.com/cd/E19253-01/819-5461/gazuk/index.html)
+
+```
+sudo zfs get all default/containers/NAME
+``` 
 
 ### [MYSQL TUNING AND OPTIMIZATION FOR ZFS][6]
 ```
