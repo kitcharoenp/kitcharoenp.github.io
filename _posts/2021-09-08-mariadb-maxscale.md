@@ -1,6 +1,6 @@
 ---
 layout : post
-title : "MMariaDB MaxScale"
+title : "MariaDB MaxScale"
 categories : [mariadb,]
 published : true
 ---
