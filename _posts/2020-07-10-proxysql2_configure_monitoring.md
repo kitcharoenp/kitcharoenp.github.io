@@ -4,19 +4,28 @@ title: "ProxySQL: Configure Monitoring"
 categories: [mysql]
 ---
 
-## [Configure monitoring][1]
 
-### Update `mysql-monitor_username`
+### Creating & Monitoring User 
+
+```sql
+-- create `proxysql` user
+CREATE USER 'proxysql'@'%' IDENTIFIED WITH mysql_native_password by  'pmm_mon1t0r';
+
+-- grant privilelge
+GRANT USAGE ON *.* TO 'proxysql'@'%';
+```
+
+### [Update `mysql-monitor_username`][1]
 ```sql
 UPDATE global_variables
-SET variable_value='proxysql_monitor'
+SET variable_value='proxysql'
 WHERE variable_name='mysql-monitor_username';
 ```
 
 ### Update `mysql-monitor_password`
 ```sql
 UPDATE global_variables
-SET variable_value='sql_mon1t0r'
+SET variable_value='pmm_mon1t0r'
 WHERE variable_name='mysql-monitor_password';
 ```
 

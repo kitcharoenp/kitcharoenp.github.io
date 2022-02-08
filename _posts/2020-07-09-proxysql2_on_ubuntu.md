@@ -7,18 +7,22 @@ categories: [mysql]
 
 * **Adding the repository:**
 ```shell
-wget -O - 'https://repo.proxysql.com/ProxySQL/repo_pub_key' | apt-key add -
-echo deb https://repo.proxysql.com/ProxySQL/proxysql-2.0.x/$(lsb_release -sc)/ ./ \
-| tee /etc/apt/sources.list.d/proxysql.list
+wget -O - 'https://repo.proxysql.com/ProxySQL/repo_pub_key' | sudo apt-key add -
+
+# 
+echo deb https://repo.proxysql.com/ProxySQL/proxysql-2.2.x/$(lsb_release -sc)/ ./ \
+| sudo tee /etc/apt/sources.list.d/proxysql.list
 ```
 ![ProxySQL respo ](/assets/img/blog/2020-07-09_01.png)
+
+* For 2.0.x series releases use https://repo.proxysql.com/ProxySQL/proxysql-2.0.x/$(lsb_release -sc)/ ./ instead.
 
 * **Installing ProxySQL:**
 ```shell
 $ sudo apt update
 $ sudo apt install proxysql
 $ proxysql --version
-ProxySQL version 2.0.12-38-g58a909a0, codename Truls
+ProxySQL version 2.2.2-11-g0e7630d, codename Truls
 ```
 
 * **Service Status:**

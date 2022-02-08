@@ -8,7 +8,7 @@ published : true
 
 ```shell
 # Downloading Dependencies
-sudo apt-get install apt-transport-https ca-certificates curl software-properties-common
+sudo apt-get install apt-transport-https ca-certificates curl gnupg-agent software-properties-common
 
 # Adding Docker’s GPG Key
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
@@ -19,7 +19,7 @@ sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubun
 # Installing the Latest Docker
 sudo apt update
 
-sudo apt-get install docker-ce
+sudo apt-get install docker-ce docker-ce-cli containerd.io
 
 # Verifying Docker Installation
 docker --version
