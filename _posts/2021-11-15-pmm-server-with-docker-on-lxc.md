@@ -83,8 +83,23 @@ FullCommit: 2af1c987f304a3fa375af0986b6af6a0390d41bd
 ### [Register Node](https://www.percona.com/doc/percona-monitoring-and-management/2.x/setting-up/client/index.html#register)
 
 ```shell
-$ sudo pmm-admin config --server-insecure-tls --server-url=https://admin:admin@X.X.X.X:443 Y.Y.Y.Y generic mynode
+# Register your client node with PMM Server.
+sudo pmm-admin config --server-insecure-tls --server-url=https://admin:passwd_admin@X.X.X.X:443 Y.Y.Y.Y generic mynode
+
+# Output
+X.X.X.X:443 Y.Y.Y.Y generic mynode
+Checking local pmm-agent status...
+pmm-agent is running.
+Registering pmm-agent on PMM Server...
+Registered.
+Configuration file /usr/local/percona/pmm2/config/pmm-agent.yaml updated.
+Reloading pmm-agent configuration...
+Configuration reloaded.
+Checking local pmm-agent status...
+pmm-agent is running.
 ```
+
+* `admin/passwd_admin` is the  PMM username and password. This is the same account you use to log into the PMM user interface.
 * `X.X.X.X` : is the address of your PMM Server.
 * `Y.Y.Y.Y` : is the address of your PMM Client Node.
 * `generic` : type
@@ -117,7 +132,8 @@ performance-schema-consumer-events-stages-history-long=ON
 ### [Add service](https://www.percona.com/doc/percona-monitoring-and-management/2.x/setting-up/client/mysql.html#add-service)
 
 ```shell
-pmm-admin add mysql --query-source=perfschema --username=pmm --password=pass REPL1041
+# pmm client
+pmm-admin add mysql --query-source=perfschema --username=pmm --password=pass MYSQL_NODE
 ```
 * **MYSQL_NODE** : name show on pmmserver
 
