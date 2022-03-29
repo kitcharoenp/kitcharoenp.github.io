@@ -40,7 +40,7 @@ plugins:
   - "jekyll-github-metadata"
 
 # Google Analytics
-google_analytics: UA-119899033-1
+google_analytics: G-RYVFG53DY9
 
 sass:
   sass_dir: _sass
