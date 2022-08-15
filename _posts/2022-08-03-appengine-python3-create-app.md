@@ -44,10 +44,6 @@ source env/bin/activate
 ```shell
 pip install dash
 pip install plotly
-
-# create requirements.txt file.
-pip freeze > requirements.txt
-
 ```
 
 ### Create `.gcloudignore`
@@ -85,6 +81,33 @@ env
 
 ### [Enable the Cloud Build API](https://cloud.google.com/appengine/docs/standard/python3/building-app/creating-gcp-project)
 
+If not enable the Cloud Build API will get this error:
+```
+ERROR: (gcloud.app.deploy) Error Response: [7] Access Not Configured. Cloud Build has not been used in project kfinviz before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/cloudbuild.googleapis.com/overview?project=kfinviz then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry.
+```
+
+
+**app.yaml:**
+```
+runtime: python310
+
+resources:
+    cpu: 1
+    memory_gb: 1
+    disk_size_gb: 1
+```
+if not set `disk_size_gb` will get this error:
+```
+ERROR: (gcloud.app.deploy) Error Response: [13] Container 'asia.gcr......' status is ERROR; Failed to move user code into storage, please verify the pod configuration and try it again.
+````
+
+**requirements.txt:**
+```
+dash==2.6.1
+Flask==2.2.0
+plotly==5.9.0
+pandas==1.3.5
+```
 
 ### Deploy and run Dash App on App Engine
 
@@ -129,13 +152,4 @@ gcloud app browse
 ```
 
 
-### Fixed Error
-Enable the Cloud Build API:
-```
-ERROR: (gcloud.app.deploy) Error Response: [7] Access Not Configured. Cloud Build has not been used in project kfinviz before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/cloudbuild.googleapis.com/overview?project=kfinviz then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry.
-```
 
-
-```
-ERROR: (gcloud.app.deploy) Error Response: [13] Container 'asia.gcr......' status is ERROR; Failed to move user code into storage, please verify the pod configuration and try it again.
-````
