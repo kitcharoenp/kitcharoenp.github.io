@@ -32,7 +32,7 @@ $ sudo snap stop lxd
 ```shell
 $ sudo truncate -s +20G /var/snap/lxd/common/lxd/disks/default.img
 
-$ sudo snap stop lxd 
+$ sudo snap start lxd 
 $ sudo zpool set autoexpand=on default
 $ sudo zpool online -e default /var/snap/lxd/common/lxd/disks/default.img
 $ sudo zpool set autoexpand=off default
