@@ -21,6 +21,8 @@ $ sudo apt install apache2 # webserver
 $ sudo apt install php7.4 php7.4-cgi php7.4-curl php7.4-dev php7.4-fpm php7.4-gd
 $ sudo apt install php7.4-imap php7.4-json php7.4-mbstring php7.4-mysql php7.4-soap
 $ sudo apt install php7.4-xml php7.4-xmlrpc
+# Fixed execute .php 
+$ sudo apt install libapache2-mod-php7.4
 ```
 
 # Get sourecode 
@@ -34,6 +36,8 @@ drwxr-xr-x 3 root   root       3 Apr 20 07:45 ..
 -rw-r--r-- 1 root   root   10918 Apr 20 07:45 index.html
 drwxrwxrwx 6 ubuntu ubuntu    11 Jan 26 04:14 zurmo
 ```
+
+* https://www.rosehosting.com/blog/install-zurmo-crm-with-apache-mysql-and-php-on-an-ubuntu-vps/
 
 ## Testing Database Connections
 
@@ -79,21 +83,45 @@ $ sudo apt install php-fpm
 
 
 ### ERROR
-* PHP Fatal error:  Array and string offset access syntax with curly braces is no longer supported in /var/www/zurmo/yii/framework/utils/CFormatter.php on line 207
+* `PHP Fatal error:  Uncaught Error: Class 'SecurableModule' not found in ...`
 
-* [php] Trying to access array offset on value of type null
+    **solution:**
+    ```shell
+    $ cd /var/www/html/zurmo/
+    $ sudo chmod o+w app/assets
+    $ sudo chmod o+w app/protected/runtime
+    ```
 
-* [Troubleshooting](https://gitlab.com/kitcharoenp/zurmo/-/wikis/Zurmo-:-Troubleshooting-&-Tunning)
+* `PHP Notice:  Undefined property: WebApplication::$minScript`
 
-* https://freek.dev/1518-automatically-convert-your-code-to-php-74-syntax-using-rector
+    **solution:**
+    ```shell
+    $ cd /var/www/html/zurmo/
+    $ sudo rm -rf app/protected/runtime/minScript/
+    ```
 
-* Unknown named parameter `$offset`
+* `[error] [php] Undefined variable: name`
 
-* [error] [exception.TypeError] TypeError: count(): Argument #1 ($value) must be of type Countable|array, DropDownDependencyDerivedAttributeMetadata given
-Fixed disable ~E_Waring & & ~E_NOTICE
+    **solution:**
+    ```shell
+    # edit /etc/php/7.4/apache2/php.ini
+    ...
+
+   error_reporting = E_ALL & ~E_DEPRECATED & ~E_STRICT & ~E_NOTICE & ~E_WARNING
+
+   ...
+    ```
+    **restart apache2**
+    ```shell
+    sudo systemctl restart apache2
+    
+    # for enable http2
+    sudo service php7.4-fpm restart
+    ```
 
 
-### 7.2
-* [error] [exception.ParseError] ParseError: syntax error, unexpected 'const' (T_CONST), expecting variable (T_VARIABLE) in /var/www/zurmo/yii/framework/web/helpers/CJSON.php:66
 
-*  Function get_magic_quotes_gpc() is deprecated 
+### Other
+ * [Rector](https://freek.dev/1518-automatically-convert-your-code-to-php-74-syntax-using-rector)
+
+ * [Gilab Wiki](https://gitlab.com/kitcharoenp/zurmo/-/wikis/Zurmo-:-Troubleshooting-&-Tunning)
