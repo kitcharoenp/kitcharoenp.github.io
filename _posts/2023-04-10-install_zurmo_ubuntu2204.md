@@ -2,7 +2,7 @@
 layout : post
 title : "Install Zurmo on Ubuntu 22.04"
 categories : [zurmo]
-published : true
+published : false
 ---
 
 
