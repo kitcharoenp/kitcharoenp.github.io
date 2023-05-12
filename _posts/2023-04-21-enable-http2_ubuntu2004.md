@@ -35,6 +35,15 @@ Content-Type: text/html
 ..
 ```
 
+# Install php7.4  packages 
+```shell
+sudo apt install php7.4 php7.4-cgi php7.4-curl php7.4-dev php7.4-fpm php7.4-gd
+sudo apt install php7.4-imap php7.4-json php7.4-mbstring php7.4-mysql php7.4-soap
+sudo apt install php7.4-xml php7.4-xmlrpc
+# Fixed execute .php 
+sudo apt install libapache2-mod-php7.4
+```
+
 ### Disable the mod_php module
 
 ```shell
@@ -94,6 +103,27 @@ sudo a2ensite default-ssl.conf
 #  activate these new modules,
 sudo systemctl restart apache2
 sudo service php7.4-fpm restart
+```
+
+### Check HTTP
+```shell
+$ curl --head --insecure https://localhost/
+HTTP/2 200 
+date: Thu, 11 May 2023 04:43:08 GMT
+server: Apache/2.4.41 (Ubuntu)
+last-modified: Thu, 11 May 2023 04:16:07 GMT
+etag: "2aa6-5fb633f5f93d2"
+accept-ranges: bytes
+content-length: 10918
+vary: Accept-Encoding
+content-type: text/html
+
+```
+
+### View header and body with curl
+```shell
+curl -v -H "Accept: application/text" --insecure https://localhost
+
 ```
 
 

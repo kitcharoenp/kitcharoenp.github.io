@@ -2,14 +2,14 @@
 layout : post
 title : "Use SSHFS Mounting a Remote Filesystem"
 categories : []
-published : false
+published : true
 ---
 ### Create a container
 ```shell
 $ lxc launch ubuntu:22.04 fileserver
 ```
 
-**remote_server :**
+## **Remote Server : files_server**
 ```shell
 # create a directory for store files
 $ sudo mkdir /opt/remote_localfiles
@@ -19,21 +19,28 @@ $ sudo chown -R ubuntu:ubuntu /opt/remote_localfiles
 $ chmod o+w /opt/remote_localfiles
 ```
 
+## **Local Server :**
 ### Install `sshfs` package
-**local_server :**
+
 ```shell
 $ sudo apt install sshfs
+
+# create keys for use by SSH
+$ ssh-keygen
+
+# copied your SSH key to the remote system
+$ ssh-copy-id -i /home/ubuntu/.ssh/id_rsa.pub ubuntu@remote_server
 
 # create a directory for mount point
 $ mkdir /var/www/../runtime/uploads/localfiles
 
-# copied your SSH key to the remote system
-$ ssh-copy-id ubuntu@remote_server
+# change mount directory permission
+$ chmod o+w /var/www/../runtime/uploads/localfiles
 ```
 
 ### Mount a remote directory
 ```shell
-$ sudo sshfs -o allow_other,default_permissions ubuntu@remote_server:/opt/remote_localfiles/ /var/www/../runtime/uploads/localfiles
+$ sshfs -o allow_other,default_permissions ubuntu@remote_server:/opt/remote_localfiles/ /var/www/../runtime/uploads/localfiles
 ```
 
 ### [Permanently Mounting the Remote Filesystem](https://adamtheautomator.com/sshfs-mount/)
@@ -43,29 +50,45 @@ edit **/etc/fstab:**
 ubuntu@remote_server:/opt/remote_localfiles  /var/www/../runtime/uploads/localfiles fuse.sshfs identityfile=/home/ubuntu/.ssh/id_rsa,allow_other,_netdev 0 0
 ```
 
+**Validate fstab without rebooting**
+```shell
+# -a Mount all filesystems (of the given types) mentioned in fstab.
+$ mount -a
+```
 
-### Reference
- * [digitalocean](https://www.digitalocean.com/community/tutorials/how-to-use-sshfs-to-mount-remote-file-systems-over-ssh)
- * [adamtheautomator](https://adamtheautomator.com/sshfs-mount/)
-
+**Show result**
+```shell
+$ df -h
+Filesystem                               Size  Used Avail Use% Mounted on
+..
+tmpfs                                    100K     0  100K   0% /dev/lxd
+tmpfs                                    100K     0  100K   0% /dev/.lxd-mounts
+tmpfs                                     32G     0   32G   0% /dev/shm
+..
+snapfuse                                  54M   54M     0 100% /snap/snapd/19122
+ubuntu@remote_server:/opt/remote_localfiles  371G  199G  172G  54% /var/www/../runtime/uploads/localfiles
+tmpfs                                    6.3G     0  6.3G   0% /run/user/1000
+```
 
 ### Error
 
-```shell
-localfiles /home/oamp00/crm_localfiles
-fuse: mountpoint is not empty
-fuse: e
+* **option allow_other**
+ ```
+ fusermount: option allow_other only allowed if 'user_allow_other' is set in /etc/fuse.conf
+ ```
+ edit `/etc/fuse.conf` uncomment line `user_allow_other`
+
+* **no write access**
 ```
+fusermount: user has no write access to mountpoint ...
+```
+check mount directory permission
 
- sudo sshfs -o allow_other,default_permissions ubuntu@10.10.10.122:/opt/crm_localfiles /home/oamp00/crm_localfiles
+[Solution](https://askubuntu.com/questions/270164/trying-to-use-sshfs-on-ubuntu)
 
- sshfs -o uid=$(id -u www-data) -o gid=$(id -g www-data) user@host:/path mountpoint
-
- sudo sshfs -o uid=33,gid=33,allow_other root@192.168.0.100:/var/www/a /home/gruz/debian
-
- sshfs -o uid=$(id -u www-data), gid=$(id -g www-data),allow_other ubuntu@192.168.0.100:/var/www/a /home/gruz/debian
+### Reference
+ * [Digitalocean](https://www.digitalocean.com/community/tutorials/how-to-use-sshfs-to-mount-remote-file-systems-over-ssh)
+ * [Adamtheautomator](https://adamtheautomator.com/sshfs-mount/)
 
 
- https://unix.stackexchange.com/questions/361930/sshfs-mount-files-folder-are-created-as-root-disregarding-uid-gid-options
- https://unix.stackexchange.com/questions/387645/why-cant-www-data-access-an-sshfs-mount
- https://unix.stackexchange.com/questions/59685/sshfs-mount-sudo-gets-permission-denied
+

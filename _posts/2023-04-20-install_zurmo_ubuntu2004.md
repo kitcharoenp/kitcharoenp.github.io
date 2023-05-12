@@ -104,7 +104,7 @@ $ sudo apt install php-fpm
 
     **solution:**
     ```shell
-    # edit /etc/php/7.4/apache2/php.ini
+    # edit /etc/php/7.4/fpm/php.ini
     ...
 
    error_reporting = E_ALL & ~E_DEPRECATED & ~E_STRICT & ~E_NOTICE & ~E_WARNING
