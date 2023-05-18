@@ -2,7 +2,7 @@
 layout : post
 title : "HTTPS load balancing using NGINX"
 categories : [nginx, https]
-published : false
+published : true
 ---
 > HTTP(S) load balancing is an invaluable tool for scaling your website or web application, allowing you to route your traffic through a single IP and distribute it across multiple backends.
 
