@@ -1,9 +1,15 @@
 ---
 layout : post
-title : "Nginx as a Load Balancing"
-categories : [nginx, apache]
+title : "HTTPS load balancing using NGINX"
+categories : [nginx, https]
 published : false
 ---
+> HTTP(S) load balancing is an invaluable tool for scaling your website or web application, allowing you to route your traffic through a single IP and distribute it across multiple backends.
+
+
+![load balancer architecture](/assets/img/blog/nginx-load-balancer-overview.svg)
+
+Figure 1: Architecture of NGINX-based HTTPS load balancer [(Google Cloud Community Tutorials 2015)](https://cloud.google.com/community/tutorials/https-load-balancing-nginx) 
 
 ### Create a container
 
@@ -69,7 +75,7 @@ $ sudo openssl dhparam -out /etc/nginx/dhparam.pem 4096
    ssl_protocols TLSv1.3;
    ssl_prefer_server_ciphers on;
    ssl_dhparam /etc/nginx/dhparam.pem; 
-   ssl_ciphers EECDH+AESGCM:EDH+AESGCM;
+   ssl_ciphers EECDH+CHACHA20:EECDH+AES128:RSA+AES128:EECDH+AES256:RSA+AES256:EECDH+3DES:RSA+3DES:!MD5;
    ssl_ecdh_curve secp384r1;
    ssl_session_timeout  10m;
    ssl_session_cache shared:SSL:10m;
@@ -92,7 +98,16 @@ $ sudo openssl dhparam -out /etc/nginx/dhparam.pem 4096
 ```
 
 Within this file will look like the following:
+
 ```
+# Create a new top-level upstream directive and add your backend server instances to it
+
+upstream backend_crm {
+  server IP_ADDRESS_1:443;
+  server IP_ADDRESS_2:443;
+  server IP_ADDRESS_3:443;
+}
+
 # Default server configuration
 #
 server {
@@ -124,12 +139,21 @@ server {
         # Add index.php to the list if you are using PHP
         index index.html index.htm index.nginx-debian.html;
 
-        server_name 10.137.61.224;
+        server_name LOAD_BALANCER_IP;
 
         location / {
                 # First attempt to serve request as file, then
                 # as directory, then fall back to displaying a 404.
-                try_files $uri $uri/ =404;
+                # try_files $uri $uri/ =404;
+
+                # 
+                proxy_pass https://backend_crm;
+
+                proxy_set_header Host $host;
+                proxy_set_header X-Real-IP $remote_addr;
+                proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+                proxy_set_header X-Forwarded-Proto $scheme;
+
         }
 }
 # This is a bare-bones configuration that listens on port 80 and performs the redirect to HTTPS.
@@ -138,16 +162,17 @@ server {
     listen 80;
     listen [::]:80;
 
-    server_name 10.137.61.224;
+    server_name LOAD_BALANCER_IP;
 
-    return 302 https://$server_name$request_uri;
+    # Redirect
+
+    # return 302 https://$server_name$request_uri;
+    # Permanent 
+    return 301 https://$server_name$request_uri;
 }
-
-
 ```
 
+
 ### Reference
-* https://devpress.csdn.net/linux/62e797f5907d7d59d1c8cf96.html
-* [Nginx : Load Balancing](https://www.server-world.info/en/note?os=Ubuntu_22.04&p=nginx&f=11)
-* [Configure Nginx as a Load Balancer](https://cloudinfrastructureservices.co.uk/nginx-load-balancing/)
-* https://github.com/certsimple/nginx-http2-load-balancing-config
+* [Self-Signed SSL Certificate for Nginx](https://www.digitalocean.com/community/tutorials/how-to-create-a-self-signed-ssl-certificate-for-nginx-in-ubuntu-22-04)
+* [Configure Nginx as a Load Balancer](https://cloud.google.com/community/tutorials/https-load-balancing-nginx)
