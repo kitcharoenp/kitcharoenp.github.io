@@ -116,8 +116,8 @@ server {
 
         # SSL configuration
         #
-        listen 443 ssl default_server;
-        listen [::]:443 ssl default_server;
+        listen 443 ssl http2 default_server;
+        listen [::]:443 ssl http2 default_server;
         #
         # Note: You should disable gzip for SSL traffic.
         # See: https://bugs.debian.org/773332
@@ -149,10 +149,13 @@ server {
                 # 
                 proxy_pass https://backend_crm;
 
-                proxy_set_header Host $host;
-                proxy_set_header X-Real-IP $remote_addr;
-                proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-                proxy_set_header X-Forwarded-Proto $scheme;
+                # recommended Nginx header forwarding settings
+                include proxy_params;
+
+                # proxy_set_header Host $host;
+                # proxy_set_header X-Real-IP $remote_addr;
+                # proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+                # proxy_set_header X-Forwarded-Proto $scheme;
 
         }
 }
