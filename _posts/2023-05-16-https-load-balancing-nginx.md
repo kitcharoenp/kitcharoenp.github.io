@@ -146,16 +146,13 @@ server {
                 # as directory, then fall back to displaying a 404.
                 # try_files $uri $uri/ =404;
 
-                # 
-                proxy_pass https://backend_crm;
-
-                # recommended Nginx header forwarding settings
+                #recommended Nginx header forwarding settings
                 include proxy_params;
+                
+                #
+                proxy_set_header Host $host;
 
-                # proxy_set_header Host $host;
-                # proxy_set_header X-Real-IP $remote_addr;
-                # proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-                # proxy_set_header X-Forwarded-Proto $scheme;
+                proxy_pass https://backend_crm;
 
         }
 }
@@ -179,3 +176,4 @@ server {
 ### Reference
 * [Self-Signed SSL Certificate for Nginx](https://www.digitalocean.com/community/tutorials/how-to-create-a-self-signed-ssl-certificate-for-nginx-in-ubuntu-22-04)
 * [Configure Nginx as a Load Balancer](https://cloud.google.com/community/tutorials/https-load-balancing-nginx)
+* [Nginx caching proxy](https://www.sheshbabu.com/posts/nginx-caching-proxy/)
