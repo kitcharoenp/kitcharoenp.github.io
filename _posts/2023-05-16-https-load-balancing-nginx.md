@@ -96,10 +96,15 @@ $ sudo openssl dhparam -out /etc/nginx/dhparam.pem 4096
 ```shell
    $ sudo nano /etc/nginx/sites-available/default
 ```
-
+[Configuring HTTP/2 Support ](https://docs.nginx.com/nginx/deployment-guides/load-balance-third-party/apache-tomcat/)
 Within this file will look like the following:
 
 ```
+map $http_upgrade $connection_upgrade {
+    default upgrade;
+    ''      close;
+}
+
 # Create a new top-level upstream directive and add your backend server instances to it
 
 upstream backend_crm {
@@ -147,12 +152,13 @@ server {
                 # try_files $uri $uri/ =404;
 
                 #recommended Nginx header forwarding settings
-                include proxy_params;
                 
-                #
-                proxy_set_header Host $host;
-
                 proxy_pass https://backend_crm;
+                include proxy_params;
+
+                proxy_http_version 1.1;
+                proxy_set_header Upgrade $http_upgrade;
+                proxy_set_header Connection $connection_upgrade;
 
         }
 }
