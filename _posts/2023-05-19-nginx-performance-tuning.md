@@ -55,3 +55,4 @@ uncomment and modify the gzip
 * https://www.makeuseof.com/ways-improve-nginx-performance-linux/
 * https://www.nginx.com/blog/avoiding-top-10-nginx-configuration-mistakes/#upstream-groups
 * https://www.makeuseof.com/ways-improve-nginx-performance-linux/
+* https://docs.mattermost.com/install/config-ssl-http2-nginx.html

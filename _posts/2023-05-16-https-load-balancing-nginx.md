@@ -82,11 +82,21 @@ $ sudo openssl dhparam -out /etc/nginx/dhparam.pem 4096
    ssl_session_tickets off;
    ssl_stapling on;
    ssl_stapling_verify on;
+
+   # Enable TLSv1.3's 0-RTT. Use $ssl_early_data when reverse proxying to
+   # prevent replay attacks.
+   #
+   # @see: https://nginx.org/en/docs/http/ngx_http_ssl_module.html#ssl_early_data
+   ssl_early_data on;
+
+
    resolver 8.8.8.8 8.8.4.4 valid=300s;
    resolver_timeout 5s;
+
    # Disable strict transport security for now. You can uncomment the following
    # line if you understand the implications.
    #add_header Strict-Transport-Security "max-age=63072000; includeSubDomains; preload";
+
    add_header X-Frame-Options DENY;
    add_header X-Content-Type-Options nosniff;
    add_header X-XSS-Protection "1; mode=block";
@@ -111,6 +121,10 @@ upstream backend_crm {
   server IP_ADDRESS_1:443;
   server IP_ADDRESS_2:443;
   server IP_ADDRESS_3:443;
+
+  # Limiting the number of idle keepalive connections 
+  # stored in each worker process cache
+  keepalive 32;
 }
 
 # Default server configuration
@@ -155,10 +169,14 @@ server {
                 
                 proxy_pass https://backend_crm;
                 include proxy_params;
+                
+                # Intercept Link header and initiate requested Pushes
+                http2_push_preload on;
 
-                proxy_http_version 1.1;
                 proxy_set_header Upgrade $http_upgrade;
                 proxy_set_header Connection $connection_upgrade;
+
+                
 
         }
 }
@@ -183,3 +201,5 @@ server {
 * [Self-Signed SSL Certificate for Nginx](https://www.digitalocean.com/community/tutorials/how-to-create-a-self-signed-ssl-certificate-for-nginx-in-ubuntu-22-04)
 * [Configure Nginx as a Load Balancer](https://cloud.google.com/community/tutorials/https-load-balancing-nginx)
 * [Nginx caching proxy](https://www.sheshbabu.com/posts/nginx-caching-proxy/)
+* [Keepalive connections in upstream servers](https://linuxhint.com/what-is-keepalive-in-nginx/)
+* [HTTP/2 Server Push](https://www.nginx.com/blog/nginx-1-13-9-http2-server-push/)
