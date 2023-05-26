@@ -77,7 +77,7 @@ $ sudo openssl dhparam -out /etc/nginx/dhparam.pem 4096
    ssl_dhparam /etc/nginx/dhparam.pem; 
    ssl_ciphers EECDH+CHACHA20:EECDH+AES128:RSA+AES128:EECDH+AES256:RSA+AES256:EECDH+3DES:RSA+3DES:!MD5;
    ssl_ecdh_curve secp384r1;
-   ssl_session_timeout  10m;
+   ssl_session_timeout  1d;
    ssl_session_cache shared:SSL:10m;
    ssl_session_tickets off;
    ssl_stapling on;
@@ -166,9 +166,11 @@ server {
                 # try_files $uri $uri/ =404;
 
                 #recommended Nginx header forwarding settings
-                
-                proxy_pass https://backend_crm;
                 include proxy_params;
+
+                #
+                proxy_pass https://backend_crm;
+                
                 
                 # Intercept Link header and initiate requested Pushes
                 http2_push_preload on;
