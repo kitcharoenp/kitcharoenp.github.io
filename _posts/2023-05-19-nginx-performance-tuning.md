@@ -2,7 +2,7 @@
 layout : post
 title : "Nginx Performance Tuning"
 categories : [nginx]
-published : false
+published : true
 ---
 
 ## Adjusting the Nginx Configuration to Use SSL
