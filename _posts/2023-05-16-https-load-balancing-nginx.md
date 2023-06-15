@@ -42,7 +42,6 @@ nginx version: nginx/1.18.0 (Ubuntu)
 
 $ openssl version
 OpenSSL 3.0.2 15 Mar 2022 (Library: OpenSSL 3.0.2 15 Mar 2022)
-
 ```
 
 ###  [Create a Self-Signed SSL Certificate](https://www.digitalocean.com/community/tutorials/how-to-create-a-self-signed-ssl-certificate-for-nginx-in-ubuntu-22-04)
@@ -54,7 +53,7 @@ $ sudo openssl dhparam -out /etc/nginx/dhparam.pem 4096
 ```
 
 ### Configuring Nginx to Use SSL
-* **Creating a Configuration Snippet Pointing to the SSL Key and Certificate**
+1. Creating a Configuration Snippet Pointing to the SSL Key and Certificate
    ```shell
    $ sudo nano /etc/nginx/snippets/self-signed.conf
    ```
@@ -64,7 +63,7 @@ $ sudo openssl dhparam -out /etc/nginx/dhparam.pem 4096
    ssl_certificate_key /etc/ssl/private/nginx-selfsigned.key;
    ```
 
-* **Creating a Configuration Snippet with Strong Encryption Settings**
+2. Creating a Configuration Snippet with Strong Encryption Settings
 
    ```shell
    $ sudo nano /etc/nginx/snippets/ssl-params.conf
