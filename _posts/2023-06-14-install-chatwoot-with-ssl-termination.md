@@ -21,12 +21,13 @@ published : true
 
 2. Execute the install script. 
 
-   ```
+   ```shell
    $ sudo ./install.sh --install
 
-   ***************************************************************************
+   ...
                Chatwoot Installation (v2.17.1)
-   ***************************************************************************
+
+   ...
 
    For more verbose logs, open up a second terminal and follow along using,
    'tail -f /var/log/chatwoot-setup.log'.
@@ -41,6 +42,7 @@ published : true
    ➥ 4/9 Setting up Ruby
    ➥ 5/9 Setting up the database.
    ➥ 6/9 Installing Chatwoot. This takes a long while.
+   
    ```
 
    3. Open a new terminal for see log install with command `tail -f /var/log/chatwoot-setup.log`
