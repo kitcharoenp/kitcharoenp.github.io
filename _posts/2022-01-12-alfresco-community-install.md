@@ -2,7 +2,7 @@
 layout : post
 title : "Install Alfresco Community Edition using Docker Compose"
 categories : [docker]
-published : true
+published : false
 ---
 Note from :   [Install using Docker Compose](https://docs.alfresco.com/content-services/community/install/containers/docker-compose/)
 
