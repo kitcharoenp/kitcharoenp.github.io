@@ -37,7 +37,11 @@ To prevent this warning from appearing, you can configure a filter in the `/etc/
 # This filter accepts the third partition on the first hard drive, while rejecting everything else. 
 filter = [ "a|/dev/sda3$|", "r|.*|" ]
 ```
+After updating `/etc/lvm.conf`, it’s necessary to update the initrd so that this file will be copied there, where the filter matters the most – during boot.
 
+```shell
+sudo update-initramfs -u -k all
+```
 
  After update `filter` in `/etc/lvm/lvm.conf`
 

@@ -68,6 +68,71 @@ $ sudo apt install php-fpm
 Fixed disable ~E_Waring & & ~E_NOTICE
 
 
+### Switch User
+error messages
+```
+[error] [exception.CException] CException: CSecurityManager requires PHP mcrypt extension to be loaded
+```
+**Fixed:**
+install `php-mcrypt.so`
+
+#### [Install PHP 7.2-mcrypt Module on Ubuntu 18.04 LTS](https://geekrewind.com/install-php-7-2-mcrypt-module-on-ubuntu-18-04-lts/)
+
+```
+# Install Required PHP Dependencies to Install Mcrypt
+$ sudo apt install php-dev libmcrypt-dev php-pear
+
+# install PHP mcrypt module on Ubuntu using pecl channel
+$ sudo pecl channel-update pecl.php.net
+$ sudo pecl install mcrypt-1.0.6
+```
+
+output:
+```
+Build complete.
+Don't forget to run 'make test'.
+
+running: make INSTALL_ROOT="/tmp/pear/temp/pear-build-rootRX5fCO/install-mcrypt-1.0.6" install
+Installing shared extensions:     /tmp/pear/temp/pear-build-rootRX5fCO/install-mcrypt-1.0.6/usr/lib/php/20190902/
+running: find "/tmp/pear/temp/pear-build-rootRX5fCO/install-mcrypt-1.0.6" | xargs ls -dils
+182809 1 drwxr-xr-x 3 root root      3 Jul 13 10:55 /tmp/pear/temp/pear-build-rootRX5fCO/install-mcrypt-1.0.6
+183352 1 drwxr-xr-x 3 root root      3 Jul 13 10:55 /tmp/pear/temp/pear-build-rootRX5fCO/install-mcrypt-1.0.6/usr
+183963 1 drwxr-xr-x 3 root root      3 Jul 13 10:55 /tmp/pear/temp/pear-build-rootRX5fCO/install-mcrypt-1.0.6/usr/lib
+183839 1 drwxr-xr-x 3 root root      3 Jul 13 10:55 /tmp/pear/temp/pear-build-rootRX5fCO/install-mcrypt-1.0.6/usr/lib/php
+183353 1 drwxr-xr-x 2 root root      3 Jul 13 10:55 /tmp/pear/temp/pear-build-rootRX5fCO/install-mcrypt-1.0.6/usr/lib/php/20190902
+184084 1 -rwxr-xr-x 1 root root 219344 Jul 13 10:55 /tmp/pear/temp/pear-build-rootRX5fCO/install-mcrypt-1.0.6/usr/lib/php/20190902/mcrypt.so
+
+Build process completed successfully
+Installing '/usr/lib/php/20190902/mcrypt.so'
+install ok: channel://pecl.php.net/mcrypt-1.0.6
+configuration option "php_ini" is not set to php.ini location
+You should add "extension=mcrypt.so" to php.ini
+```
+
+add `extension=mcrypt.so` in `[mcrypt]` on `/etc/php/7.2/apache2/php.ini`
+```
+# include the mcrypt.so extension in the php.ini file
+[mcrypt]
+...
+extension=mcrypt.so
+
+```
+
+### [APC is not installed.](https://installati.one/install-php-apcu-ubuntu-22-04/)
+
+```shell
+$ sudo apt-get -y install php-apcu
+```
+
+### [Memcache extension is not installed](https://linux.how2shout.com/how-to-install-memcached-on-ubuntu-22-04-lts-server/)
+
+```shell
+$ sudo apt install memcached libmemcached-tools
+$ sudo apt install php-memcached
+$ sudo apt install php-memcache
+```
+
+
 ### 7.2
 * [error] [exception.ParseError] ParseError: syntax error, unexpected 'const' (T_CONST), expecting variable (T_VARIABLE) in /var/www/zurmo/yii/framework/web/helpers/CJSON.php:66
 

@@ -127,6 +127,13 @@ $ sudo lvdisplay
   Block device           253:1
 ```
 
+### Remove logical volume
+```shell
+$ sudo lvremove /dev/ubuntu-vg/lxd-lv
+Do you really want to remove and DISCARD active logical volume ubuntu-vg/lxd-lv? [y/n]: y
+  Logical volume "lxd-lv" successfully removed
+
+```
 
 ### [Creating Filesystems](https://linuxhint.com/lvm-how-to-create-logical-volumes-and-filesystems/)
 
