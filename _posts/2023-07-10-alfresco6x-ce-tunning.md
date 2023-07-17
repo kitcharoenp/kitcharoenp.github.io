@@ -75,6 +75,15 @@ activities.feed.cleaner.enabled=false
 activities.post.cleaner.enabled=false
 ```
 
+### [Cleaning up binary files](https://docs.alfresco.com/content-services/7.0/admin/content-stores/)
+
+```
+system.content.orphanProtectDays=7
+```
+
+
+## Solr Tunning
+
 ### [Disable Solr 4 Tracking](https://hub.alfresco.com/t5/alfresco-content-services-blog/using-ssl-with-alfresco-search-services-and-solr-6/ba-p/292687)
 
 Go to each Solr 4 core and edit `<core>/conf/solrcore.properties` to set:
@@ -82,8 +91,6 @@ Go to each Solr 4 core and edit `<core>/conf/solrcore.properties` to set:
 enable.alfresco.tracking=false
 ```
 
-
-## Solr Tunning
 SOLR application has two cores preconfigured, one for the workspace and other one for the archive (which is not needed usually). The configuration can be found in solrcore.properties files:
 
  ```

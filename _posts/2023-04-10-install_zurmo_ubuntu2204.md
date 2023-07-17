@@ -132,6 +132,18 @@ $ sudo apt install php-memcached
 $ sudo apt install php-memcache
 ```
 
+### [AH00558](https://www.digitalocean.com/community/tutorials/apache-configuration-error-ah00558-could-not-reliably-determine-the-server-s-fully-qualified-domain-name)
+
+**messages:**
+```
+AH00558: apache2: Could not reliably determine the server's fully qualified domain name, using 10.10.10.123. Set the 'ServerName' directive globally to suppress this message
+```
+
+**solution:**
+append `etc/apache2/apache2.conf` with
+```
+ServerName 127.0.0.1
+```
 
 ### 7.2
 * [error] [exception.ParseError] ParseError: syntax error, unexpected 'const' (T_CONST), expecting variable (T_VARIABLE) in /var/www/zurmo/yii/framework/web/helpers/CJSON.php:66

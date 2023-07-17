@@ -2,7 +2,7 @@
 layout : post
 title : "Install Alfresco 6.x Community Edition"
 categories : [alfresco]
-published : true
+published : false
 ---
 
 ### [Download Linux Installer](https://hub.alfresco.com/t5/alfresco-content-services-hub/alfresco-community-edition-201802-ea-file-list/ba-p/291521)
