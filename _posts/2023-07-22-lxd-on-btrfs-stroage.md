@@ -2,7 +2,7 @@
 layout : post
 title : "Create LXD clustering on btrfs"
 categories : [lxd]
-published : false
+published : true
 ---
 
 ### List information about block devices.
