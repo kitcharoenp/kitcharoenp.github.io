@@ -2,7 +2,7 @@
 layout : post
 title : "Exchanging hard disks in a Software-RAID"
 categories : [raid]
-published : false
+published : true
 ---
 
 ### List information about block devices
