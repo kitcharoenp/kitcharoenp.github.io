@@ -139,7 +139,7 @@ sdb             8:16   0 931.5G  0 disk
 │   └─md123p1 259:2    0 249.9G  0 part  /poo1
 └─sdb6          8:22   0 425.5G  0 part  
   └─md124       9:124  0 425.3G  0 raid1 
-    └─md124p1 259:4    0 425.3G  0 part  /pool
+    └─md124p1 259:4    0 425.3G  0 part  /pool2
 ```
 
 
