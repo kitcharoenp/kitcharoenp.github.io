@@ -12,7 +12,13 @@ ESP - Efi System Partition
 
 ### Partitioning Scheme:
 
-In the 22.04 server installer, if you mark additional disks as `extra boot drives`, it will create an ESP partition on them and add them to this list of configured **ESPs**.
+![ubuntu_storage_configuration](/assets/img/blog/ubuntu_storage_configuration.png)
+
+see : *primary ESP, to be formatted as fat32* and *backup ESP, to be formatted as fat32*
+
+
+
+In [the 22.04 server installer](https://knowledgebase.45drives.com/kb/kb450289-ubuntu-20-04-redundant-os-installation/), if you mark additional disks as `extra boot drives`, it will create an ESP partition on them and add them to this list of configured **ESPs**.
 
 UEFI and RAID with GPT disks.
 
