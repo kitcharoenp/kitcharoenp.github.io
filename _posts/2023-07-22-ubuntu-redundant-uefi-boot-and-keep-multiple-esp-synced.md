@@ -23,7 +23,7 @@ In [the 22.04 server installer](https://knowledgebase.45drives.com/kb/kb450289-u
 UEFI and RAID with GPT disks.
 
 ```shell
-$ sudo parted -l /dev/sda
+$ sudo parted -l
 
 Model: ATA MB1000GDUNU (scsi)
 Disk /dev/sda: 1000GB
@@ -157,7 +157,7 @@ $ sudo grep efi /etc/fstab
 /dev/disk/by-uuid/1F01-E5A8 /boot/efi vfat defaults 0 1
 ```
 
-Does Ubuntu takes care of ESP sync? Given the case that I lost currently mounted /boot/efi, are backup ESP up to date? Otherwise, do I have to manually mount and sync them all?
+**Does Ubuntu takes care of ESP sync? Given the case that I lost currently mounted /boot/efi, are backup ESP up to date? Otherwise, do I have to manually mount and sync them all?**
 
 > Yes, if `grub-efi-amd64` is configured to use those as the ESP:s then Ubuntu will automatically sync them all. And they don't need to be mounted to be synced, myself I don't have `/boot/efi` mounted in `fstab` at all. [Reference : Ubuntu installation keep multiple ESP synced](https://unix.stackexchange.com/questions/719194/does-ubuntu-installation-keep-multiple-esp-synced-how-to-setup-etc-fstab-to-fa)
 

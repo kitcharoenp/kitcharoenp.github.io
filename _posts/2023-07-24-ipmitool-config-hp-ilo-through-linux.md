@@ -41,7 +41,7 @@ Channel 0x2 info:
 $ sudo ipmitool lan set 2 ipsrc static
 
 # IP Address
-$ sudo ipmitool lan set 2 ipaddr 10.10.10.110
+$ sudo ipmitool lan set 2 ipaddr 10.10.10.111
 
 # Subnet Mask
 $ sudo ipmitool lan set 2 netmask 255.255.255.0
@@ -63,7 +63,7 @@ Auth Type Enable        : Callback :
                         : Admin    : 
                         : OEM      : 
 IP Address Source       : Static Address
-IP Address              : 10.10.10.110
+IP Address              : 10.10.10.111
 Subnet Mask             : 255.255.255.0
 MAC Address             : 14:02:ec:62:32:3d
 SNMP Community String   : 
@@ -144,7 +144,7 @@ Access iLO via `https://ilo_ip_address` such as https://10.10.10.110
 
 ![hp_ilo_4](/assets/img/blog/hp_ilo_4.png)
 
-if `10.10.10.110` is local ip address and you can access it.
+if `10.10.10.111` is local ip address and you can access it.
 
 ### Reference
 * [IPMItool considerations](https://www.ibm.com/docs/en/power8/8348-21C?topic=overview-ipmitool-considerations)
