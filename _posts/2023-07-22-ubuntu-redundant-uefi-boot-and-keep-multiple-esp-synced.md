@@ -236,6 +236,7 @@ $ sudo debconf-show grub-efi-amd64
 
 * [Ubuntu 22.04 with multiple disks and (U)EFI booting](https://utcc.utoronto.ca/~cks/space/blog/linux/Ubuntu2204MultiDiskUEFI?showcomments)
 
+* [Ubuntu 20.04 Redundant OS Installation](https://knowledgebase.45drives.com/kb/kb450289-ubuntu-20-04-redundant-os-installation/)
 
 
 
