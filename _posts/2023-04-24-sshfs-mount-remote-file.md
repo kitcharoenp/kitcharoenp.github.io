@@ -1,7 +1,7 @@
 ---
 layout : post
 title : "Use SSHFS Mounting a Remote Filesystem"
-categories : []
+categories : [fileserver]
 published : true
 ---
 ### Create a container
