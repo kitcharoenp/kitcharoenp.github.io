@@ -1,73 +1,79 @@
 ---
 layout : post
-title : "Checkmk on Ubuntu 22.04"
-categories : [ubuntu, monitor, checkmk]
-published : false
+title : "Checkmk Install on Ubuntu 22.04"
+categories : [monitor, checkmk]
+published : true
 ---
 
 
-### 
+### [Downloading Checkmk for Ubuntu](https://checkmk.com/download?method=cmk&edition=cre&version=2.2.0p7&platform=ubuntu&os=jammy&type=cmk&google_analytics_user_id=)
 
-```
-No user sessions are running outdated binaries.
-
-No VM guests are running outdated hypervisor (qemu) binaries on this host.
-N: Download is performed unsandboxed as root as file '/home/ubuntu/check-mk-free-2.1.0p2_0.jammy_amd64.deb' couldn't be accessed by user '_apt'. - pkgAcquire::Run (13: Permission denied)
+Pull in the package using wget
+```bash
+$ wget https://download.checkmk.com/checkmk/2.2.0p7/check-mk-raw-2.2.0p7_0.jammy_amd64.deb
 ```
 
-### Create a monitoring instance
+### Install
 
-```shell
-ubuntu@checkmk-server0x:~$ sudo omd create Server0xMonitor
+```bash
+sudo apt install ./check-mk-raw-2.2.0p7_0.jammy_amd64.deb
+```
+
+### Show Version
+```
+$ omd versions
+```
+```
+2.2.0p7.cre (default)
+```
+
+
+### Create a `Server0xMonitor` monitoring instance
+
+```bash
+$ sudo omd create Server0xMonitor
+```
+
+
+```console
 Creating temporary filesystem /omd/sites/Server0xMonitor/tmp...mount: /opt/omd/sites/Server0xMonitor/tmp: can't find in /etc/fstab.
 WARNING: You may continue without tmpfs, but the performance of Check_MK may be degraded.
 Updating core configuration...
-Generating configuration for core (type cmc)...
-Starting full compilation for all hosts Creating global helper config...OK
- Creating cmc protobuf configuration...OK
+Generating configuration for core (type nagios)...
+Precompiling host checks...OK
 Executing post-create script "01_create-sample-config.py"...OK
 Restarting Apache...OK
-Created new site Server0xMonitor with version 2.1.0p2.cfe.
+Created new site Server0xMonitor with version 2.2.0p7.cre.
 
   The site can be started with omd start Server0xMonitor.
   The default web UI is available at http://checkmk-server0x/Server0xMonitor/
 
-  The admin user for the web applications is cmkadmin with password: kIVsAcy0
+  The admin user for the web applications is cmkadmin with password: FvMkTriL
   For command line administration of the site, log in with 'omd su Server0xMonitor'.
-  After logging in, you can change the password for cmkadmin with 'htpasswd etc/htpasswd cmkadmin'.
+  After logging in, you can change the password for cmkadmin with 'cmk-passwd cmkadmin'.
 ```
 
-### Install Agent
+### Start site
+The site can be started with `omd start Server0xMonitor`.
 
-```shell
-ubuntu@server01:~$ sudo dpkg -i check-mk-agent_2.1.0p2-567398bf0c1b95ff_all.deb 
-Selecting previously unselected package check-mk-agent.
-(Reading database ... 74525 files and directories currently installed.)
-Preparing to unpack check-mk-agent_2.1.0p2-567398bf0c1b95ff_all.deb ...
-Unpacking check-mk-agent (2.1.0p2-1.567398bf0c1b95ff) ...
-Setting up check-mk-agent (2.1.0p2-1.567398bf0c1b95ff) ...
-
-Deploying systemd units: check-mk-agent-async.service check-mk-agent.socket check-mk-agent@.service cmk-agent-ctl-daemon.service
-Deployed systemd
-Creating/updating cmk-agent user account ...
-
-WARNING: The agent controller is operating in an insecure mode! To secure the connection run `cmk-agent-ctl register`.
-
-Activating systemd unit 'check-mk-agent-async.service'...
-Created symlink /etc/systemd/system/multi-user.target.wants/check-mk-agent-async.service → /lib/systemd/system/check-mk-agent-async.service.
-Activating systemd unit 'check-mk-agent.socket'...
-Created symlink /etc/systemd/system/sockets.target.wants/check-mk-agent.socket → /lib/systemd/system/check-mk-agent.socket.
-Activating systemd unit 'cmk-agent-ctl-daemon.service'...
-Created symlink /etc/systemd/system/multi-user.target.wants/cmk-agent-ctl-daemon.service → /lib/systemd/system/cmk-agent-ctl-daemon.service.
-ubuntu@server01:~$
+```bash
+$ sudo omd start Server0xMonitor
 ```
 
-### [Notifications](https://docs.checkmk.com/latest/en/notifications.html)
 
+```bash
+$ sudo omd start Server0xMonitor
+Creating temporary filesystem /omd/sites/Server0xMonitor/tmp...mount: /opt/omd/sites/Server0xMonitor/tmp: can't find in /etc/fstab.
+WARNING: You may continue without tmpfs, but the performance of Check_MK may be degraded.
+Starting agent-receiver...OK
+Starting mkeventd...OK
+Starting rrdcached...OK
+Starting npcd...OK
+Starting nagios...OK
+Starting apache...OK
+Starting redis...OK
+Initializing Crontab...O
 
-
-```
-Unhandled exception: Failed to send the mail: /usr/sbin/sendmail is missing
 ```
 
 ### Reference
