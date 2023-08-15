@@ -1,7 +1,7 @@
 ---
 layout : post
 title : "Checkmk Upgrade to 2.2 on Ubuntu 22.04"
-categories : [ubuntu, monitor, checkmk]
+categories : [monitor, checkmk]
 published : true
 ---
 
