@@ -86,6 +86,78 @@ _.._.__._........_.._.W......_....._............................
 "<b><code>K</code></b>" Keepalive (read)
 ```
 
+### Donwload Plugin to Agent
+**Setup > Linux > Plugins**
+
+Copy `apache_status.py` and `apache_status_2.py` plugins url 
+
+![checkmk-activate-apache-status-plugin-02](/assets/img/2023-08/checkmk-activate-apache-status-plugin-02.png)
+
+
+**On Agent:**
+
+Replace `http://CmkServer/CmkSiteName/` with your config
+
+```bash
+$ cd /usr/lib/check_mk_agent/plugins/
+$ sudo wget http://CmkServer/CmkSiteName/check_mk/agents/plugins/apache_status.py
+$ sudo wget http://CmkServer/CmkSiteName/check_mk/agents/plugins/apache_status_2.py
+```
+
+```bash
+$ ls -l
+total 24
+-rw-r--r-- 1 root root 10811 Jul 25 14:21 apache_status.py
+-rw-r--r-- 1 root root 10950 Jul 25 13:43 apache_status_2.py
+```
+
+### Change mode to Execute
+```bash
+$ sudo chmod +x apache_status.py apache_status_2.py 
+$ ls -l
+total 24
+-rwxr-xr-x 1 root root 10811 Jul 25 14:21 apache_status.py
+-rwxr-xr-x 1 root root 10950 Jul 25 13:43 apache_status_2.py
+```
+
+### Add Service monitoring rules
+**Setup > Service monitoring rules** Filter `Apache Status` 
+
+![checkmk-activate-apache-status-plugin-08](/assets/img/2023-08/checkmk-activate-apache-status-plugin-08.png)
+
+* Fill **Description** : `Custom: Apache Status` 
+* **Save**
+* **Activate pending changes**
+
+
+### Run Sevice discovery
+
+Select **Host > Run Sevice discovery**
+
+![checkmk-activate-apache-status-plugin-03](/assets/img/2023-08/checkmk-activate-apache-status-plugin-03.png)
+
+
+See section : **Undecided services - currently not monitored (2)**
+
+![checkmk-activate-apache-status-plugin-04](/assets/img/2023-08/checkmk-activate-apache-status-plugin-04.png)
+
+
+
+Mark checkbox `Apache [::` then click `Monitor undecided services` 
+
+![checkmk-activate-apache-status-plugin-05](/assets/img/2023-08/checkmk-activate-apache-status-plugin-05.png)
+
+
+![checkmk-activate-apache-status-plugin-06](/assets/img/2023-08/checkmk-activate-apache-status-plugin-06.png)
+
+
+### Activate pending changes
+
+![checkmk-activate-apache-status-plugin-07](/assets/img/2023-08/checkmk-activate-apache-status-plugin-07.png)
+
+
+### View Apache status service
+![checkmk-activate-apache-status-plugin-09](/assets/img/2023-08/checkmk-activate-apache-status-plugin-09.png)
 
 ### Reference
 
