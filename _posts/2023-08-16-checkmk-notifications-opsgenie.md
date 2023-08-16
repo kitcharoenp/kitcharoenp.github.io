@@ -5,7 +5,7 @@ categories : [monitor, checkmk]
 published : true
 ---
 
-## Configuring `Opsgenie`
+## Configuring Opsgenie
 
 ### Add team
 Create a team
@@ -19,7 +19,7 @@ Select a team > Choose the entry Checkmk under **Integrations/Add Integration.**
 
 ![checkmk-notifications-opsgenie-02](/assets/img/2023-08/checkmk-notifications-opsgenie-02.png)
 
-## Configuring `Checkmk`
+## Configuring Checkmk
 
 ### Add User
 * In Checkmk **Setup > User**, Click on `Add User`
@@ -65,7 +65,7 @@ After saving, click on Main Menu on the left under WATO Configuration box.  You 
    * click on **Activate on selected sites**
 
 
- ## Test `Notifications`
+## Test Notifications
 
 **Monitor > All hosts** : select checkboxs on a Host.
 
