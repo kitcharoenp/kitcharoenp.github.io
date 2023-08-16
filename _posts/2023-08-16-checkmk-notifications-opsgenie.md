@@ -67,23 +67,30 @@ After saving, click on Main Menu on the left under WATO Configuration box.  You 
 
  ## Test `Notifications`
 
-**Monitor > All hosts** : mark `x` checkboxs on a Host. 
+**Monitor > All hosts** : select checkboxs on a Host.
 
 ![checkmk-notifications-opsgenie-09](/assets/img/2023-08/checkmk-notifications-opsgenie-09.png)
 
-   * In this case is the **(server03)**
+In this case is the **server03**
+
+### Fake check results
    * Select **Commands > Fake check results**
    * Select **Down** button
+   
 ![checkmk-notifications-opsgenie-10](/assets/img/2023-08/checkmk-notifications-opsgenie-10.png)
 
+### Confirm
+Manually set check results to Down
 
-   * **Confirm** : manually set check results to Down
 ![checkmk-notifications-opsgenie-11](/assets/img/2023-08/checkmk-notifications-opsgenie-11.png)
 
 
-   * Check notifications in **Opsgenie** 
+### Check  **Opsgenie** 
 
 ![checkmk-notifications-opsgenie-12](/assets/img/2023-08/checkmk-notifications-opsgenie-12.png)
+
+
+![checkmk-notifications-opsgenie-13](/assets/img/2023-08/checkmk-notifications-opsgenie-13.png)
 
 ### Reference
 * [Notifications via Opsgenie](https://docs.checkmk.com/latest/en/notifications_opsgenie.html)
