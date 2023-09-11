@@ -6,6 +6,19 @@ published : false
 ---
 
 
+# Install php8.1  packages 
+```shell
+$ sudo apt install php8.1 php8.1-cgi php8.1-curl php8.1-dev php8.1-fpm php8.1-gd
+$ sudo apt install php8.1-imap php8.1-json php8.1-mbstring php8.1-mysql php8.1-soap
+$ sudo apt install php8.1-xml php8.1-xmlrpc
+# Fixed execute .php 
+$ sudo apt install libapache2-mod-php8.1
+
+# 
+$ sudo apt install php8.1-memcache php8.1-memcached php8.1-opcache
+```
+
+
 # Testing Database Connections
 
 ```shell
@@ -40,21 +53,21 @@ $ sudo chmod o+w app/protected/runtime
 $ touch app/protected/config/perInstanceConfig.php
 ```
 
-# Install php packages 7.2 up
-```shell
-$ sudo apt install php-apcu php-apcu-bc php-curl php-gd php-imap php-ldap php-mcrypt php-mbstring 
-$ sudo apt install php-memcache php-memcached php-mysql php-soap
+
+## ERROR
+
+###  Array and string offset access syntax with curly braces is no longer supported 
+
+Error messages:
+```
+PHP Fatal error:  Array and string offset access syntax with curly braces is no longer supported 
 ```
 
-# Install php
-```shell
-$ sudo apt install php-fpm 
-```
+**Solution**
 
 
 
-### ERROR
-* PHP Fatal error:  Array and string offset access syntax with curly braces is no longer supported in /var/www/zurmo/yii/framework/utils/CFormatter.php on line 207
+
 
 * [php] Trying to access array offset on value of type null
 
