@@ -5,20 +5,6 @@ categories : [zurmo]
 published : false
 ---
 
-
-# Install php8.1  packages 
-```shell
-$ sudo apt install php8.1 php8.1-cgi php8.1-curl php8.1-dev php8.1-fpm php8.1-gd
-$ sudo apt install php8.1-imap php8.1-json php8.1-mbstring php8.1-mysql php8.1-soap
-$ sudo apt install php8.1-xml php8.1-xmlrpc
-# Fixed execute .php 
-$ sudo apt install libapache2-mod-php8.1
-
-# 
-$ sudo apt install php8.1-memcache php8.1-memcached php8.1-opcache
-```
-
-
 # Testing Database Connections
 
 ```shell
@@ -38,6 +24,43 @@ If bind-address is bound to `127.0.0.1` (localhost), one can't connect to the Ma
     ...
 ```
 
+
+# Install php8.1  packages 
+```shell
+$ sudo apt install php8.1 php8.1-cgi php8.1-curl php8.1-dev php8.1-fpm php8.1-gd
+$ sudo apt install php8.1-imap php8.1-json php8.1-mbstring php8.1-mysql php8.1-soap
+$ sudo apt install php8.1-xml php8.1-xmlrpc
+# Fixed execute .php 
+$ sudo apt install libapache2-mod-php8.1
+
+# 
+$ sudo apt install php8.1-memcache php8.1-memcached php8.1-opcache
+```
+
+### Disable the mod_php module
+
+```bash
+$ sudo apt-get install php8.1-fpm
+$ sudo a2dismod php8.1
+$ sudo a2enconf php8.1-fpm
+$ sudo a2enmod proxy_fcgi
+```
+
+### Enable an Apache MPM
+
+```bash
+# disable mpm_prefork module
+$ sudo a2dismod mpm_prefork
+
+# enable the mpm_event module
+$ sudo a2enmod mpm_event
+
+# restart service
+$ sudo service  php8.1-fpm restart
+$ sudo service apache2 restart
+```
+
+
 # Initial Setup
 
 * Create `assets` and `runtime` folder and `chmod`
@@ -46,15 +69,61 @@ If bind-address is bound to `127.0.0.1` (localhost), one can't connect to the Ma
 $ sudo chmod o+w app/assets
 $ sudo chmod o+w app/protected/runtime
 ```
-**Fixed** : PHP Fatal error: Class `SecurableModule` not found
-
-* Copy `perInstanceConfig.php` 
-```shell
-$ touch app/protected/config/perInstanceConfig.php
-```
 
 
 ## ERROR
+
+
+### Install PHP mcrypt extension
+**Error Messages:**
+
+```
+[error] [exception.CException] CException: CSecurityManager requires PHP mcrypt extension to be loaded
+```
+**Fixed:** : Install `php-mcrypt.so`
+
+#### [Install PHP Mcrypt Extension On Ubuntu 22.04](https://itsubuntu.com/install-php-mcrypt-extension-on-ubuntu-22-04/)
+
+```bash
+# Install Required PHP Dependencies to Install Mcrypt
+$ sudo apt install gcc make autoconf libc-dev pkg-config libmcrypt-dev php-pear php-dev
+
+# install PHP mcrypt module on Ubuntu using pecl channel
+$ sudo pecl channel-update pecl.php.net
+$ sudo pecl update-channels
+$ sudo pecl install mcrypt-1.0.6
+```
+
+**Output:**
+```console
+downloading mcrypt-1.0.6.tgz ...
+Starting to download mcrypt-1.0.6.tgz (27,062 bytes)
+.........done: 27,062 bytes
+6 source files, building
+
+....
+
+Build process completed successfully
+Installing '/usr/lib/php/20210902/mcrypt.so'
+install ok: channel://pecl.php.net/mcrypt-1.0.6
+configuration option "php_ini" is not set to php.ini location
+You should add "extension=mcrypt.so" to php.ini
+```
+
+#### activate the extension in  `/etc/php/8.1/fpm/php.ini` 
+
+```
+[mcrypt]
+extension=mcrypt.so
+```
+
+#### Restart service
+```bash
+$ sudo service php8.1-fpm restart
+$ sudo service apache2 restart
+```
+
+
 
 ###  Array and string offset access syntax with curly braces is no longer supported 
 
@@ -64,72 +133,8 @@ PHP Fatal error:  Array and string offset access syntax with curly braces is no 
 ```
 
 **Solution**
+replace `{}` with `[]` on code
 
-
-
-
-
-* [php] Trying to access array offset on value of type null
-
-* [Troubleshooting](https://gitlab.com/kitcharoenp/zurmo/-/wikis/Zurmo-:-Troubleshooting-&-Tunning)
-
-* https://freek.dev/1518-automatically-convert-your-code-to-php-74-syntax-using-rector
-
-* Unknown named parameter `$offset`
-
-* [error] [exception.TypeError] TypeError: count(): Argument #1 ($value) must be of type Countable|array, DropDownDependencyDerivedAttributeMetadata given
-Fixed disable ~E_Waring & & ~E_NOTICE
-
-
-### Switch User
-error messages
-```
-[error] [exception.CException] CException: CSecurityManager requires PHP mcrypt extension to be loaded
-```
-**Fixed:**
-install `php-mcrypt.so`
-
-#### [Install PHP 7.2-mcrypt Module on Ubuntu 18.04 LTS](https://geekrewind.com/install-php-7-2-mcrypt-module-on-ubuntu-18-04-lts/)
-
-```
-# Install Required PHP Dependencies to Install Mcrypt
-$ sudo apt install php-dev libmcrypt-dev php-pear
-
-# install PHP mcrypt module on Ubuntu using pecl channel
-$ sudo pecl channel-update pecl.php.net
-$ sudo pecl install mcrypt-1.0.6
-```
-
-output:
-```
-Build complete.
-Don't forget to run 'make test'.
-
-running: make INSTALL_ROOT="/tmp/pear/temp/pear-build-rootRX5fCO/install-mcrypt-1.0.6" install
-Installing shared extensions:     /tmp/pear/temp/pear-build-rootRX5fCO/install-mcrypt-1.0.6/usr/lib/php/20190902/
-running: find "/tmp/pear/temp/pear-build-rootRX5fCO/install-mcrypt-1.0.6" | xargs ls -dils
-182809 1 drwxr-xr-x 3 root root      3 Jul 13 10:55 /tmp/pear/temp/pear-build-rootRX5fCO/install-mcrypt-1.0.6
-183352 1 drwxr-xr-x 3 root root      3 Jul 13 10:55 /tmp/pear/temp/pear-build-rootRX5fCO/install-mcrypt-1.0.6/usr
-183963 1 drwxr-xr-x 3 root root      3 Jul 13 10:55 /tmp/pear/temp/pear-build-rootRX5fCO/install-mcrypt-1.0.6/usr/lib
-183839 1 drwxr-xr-x 3 root root      3 Jul 13 10:55 /tmp/pear/temp/pear-build-rootRX5fCO/install-mcrypt-1.0.6/usr/lib/php
-183353 1 drwxr-xr-x 2 root root      3 Jul 13 10:55 /tmp/pear/temp/pear-build-rootRX5fCO/install-mcrypt-1.0.6/usr/lib/php/20190902
-184084 1 -rwxr-xr-x 1 root root 219344 Jul 13 10:55 /tmp/pear/temp/pear-build-rootRX5fCO/install-mcrypt-1.0.6/usr/lib/php/20190902/mcrypt.so
-
-Build process completed successfully
-Installing '/usr/lib/php/20190902/mcrypt.so'
-install ok: channel://pecl.php.net/mcrypt-1.0.6
-configuration option "php_ini" is not set to php.ini location
-You should add "extension=mcrypt.so" to php.ini
-```
-
-add `extension=mcrypt.so` in `[mcrypt]` on `/etc/php/7.2/apache2/php.ini`
-```
-# include the mcrypt.so extension in the php.ini file
-[mcrypt]
-...
-extension=mcrypt.so
-
-```
 
 ### [APC is not installed.](https://installati.one/install-php-apcu-ubuntu-22-04/)
 
@@ -162,3 +167,16 @@ ServerName 127.0.0.1
 * [error] [exception.ParseError] ParseError: syntax error, unexpected 'const' (T_CONST), expecting variable (T_VARIABLE) in /var/www/zurmo/yii/framework/web/helpers/CJSON.php:66
 
 *  Function get_magic_quotes_gpc() is deprecated 
+
+
+
+* [php] Trying to access array offset on value of type null
+
+* [Troubleshooting](https://gitlab.com/kitcharoenp/zurmo/-/wikis/Zurmo-:-Troubleshooting-&-Tunning)
+
+* https://freek.dev/1518-automatically-convert-your-code-to-php-74-syntax-using-rector
+
+* Unknown named parameter `$offset`
+
+* [error] [exception.TypeError] TypeError: count(): Argument #1 ($value) must be of type Countable|array, DropDownDependencyDerivedAttributeMetadata given
+Fixed disable ~E_Waring & & ~E_NOTICE
