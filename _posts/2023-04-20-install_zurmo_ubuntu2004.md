@@ -66,6 +66,18 @@ If bind-address is bound to `127.0.0.1` (localhost), one can't connect to the Ma
 $ sudo chmod o+w app/assets
 $ sudo chmod o+w app/protected/runtime
 ```
+
+### Change owner `/var/www/zurmo` as `www-data`
+
+**Fixed:** permission write on `/var/www/zurmo/app/runtimes`
+```bash
+$  sudo chown -R www-data:www-data /var/www/zurmo
+
+# add `ubuntu` to `www-data` for rw `/var/www/zurmo`
+$ sudo usermod -a -G www-data ubuntu
+```
+
+
 **Fixed** : PHP Fatal error: Class `SecurableModule` not found
 
 * Copy `perInstanceConfig.php` 
@@ -83,6 +95,8 @@ $ sudo apt install php-fpm
 
 
 ### ERROR
+* Javascript is not load
+
 * `PHP Fatal error:  Uncaught Error: Class 'SecurableModule' not found in ...`
 
     **solution:**

@@ -4,6 +4,7 @@ title : "PHP-FPM Tuning"
 categories : [php]
 published : false
 ---
+
 PHP-FPM is a FastCGI Process Manager an alternative for PHP.
 
 ### Calculate Values for PHP-FPM Children
@@ -11,7 +12,7 @@ PHP-FPM is a FastCGI Process Manager an alternative for PHP.
 Determine the memory used by each (PHP-FPM) child process:
 ```shell
 
-$ ps -ylC php-fpm7.4 --sort:rss
+$ ps -ylC php-fpm8.1 --sort:rss
 S   UID     PID    PPID  C PRI  NI   RSS    SZ WCHAN  TTY          TIME CMD
 S     0     193       1  0  80   0 18168 55600 -      ?        00:00:05 php-fpm7.4
 S    33    1511     193  0  80   0 43256 75854 -      ?        00:00:09 php-fpm7.4
@@ -35,7 +36,7 @@ By default the `pm` value will be set to `dynamic` . We will change the pm value
 
 > `Ondemand` – No children are created at startup. Children will be forked when new requests will connect. This will cause some delay on site first load
 
-edit `/etc/php/7.4/fpm/pool.d/www.conf`
+edit `/etc/php/8.1/fpm/pool.d/www.conf`
 ```
 pm = ondemand
 pm.max_children = 250
@@ -44,9 +45,9 @@ pm.max_requests = 250
 
 Test the validity of your php-fpm configuration syntax
 ```shell
-$ sudo php-fpm7.4 -t
+$ sudo php-fpm8.1 -t
 [23-May-2023 17:02:38] NOTICE: configuration file /etc/php/7.4/fpm/php-fpm.conf test is successful
-$ sudo service php7.4-fpm restart 
+$ sudo service php8.1-fpm restart 
 ```
 
 
