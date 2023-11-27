@@ -22,7 +22,6 @@ To change your Default Taxes, go to Invoicing ‣ **Configuration ‣ Settings �
 
 
 
-
 ### Reference
 * [Odoo document : Taxes](https://www.odoo.com/documentation/17.0/applications/finance/accounting/taxes.html#configuration)
 
