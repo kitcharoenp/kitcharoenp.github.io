@@ -61,67 +61,109 @@ $ sudo groups solr
 ```
 
 ### [Create Directory Structure](https://javaworld-abhinav.blogspot.com/2021/06/setup-acs70-ass201-and-transformation-service.html#setup-directory) Alfresco Community 23.x
-* Create directory structure for Alfresco Content Services
 
-   * Create a directory named `alfresco-community23x` under `/usr/local/` directory.
+#### Create directory structure for `Alfresco Content Services`
+
+* Create a directory named `alfresco-community23x` under `/usr/local/` directory.
+
+   ```shell
+   $ sudo mkdir /usr/local/alfresco-community23x
+   ```
+* Create sub-directories under `/usr/local/alfresco-community23x`
    
-      ```shell
-      $ sudo mkdir /usr/local/alfresco-community23x
-      ```
-   * Create sub-directories under `/usr/local/alfresco-community23x`
-      
-      ```shell
-      $ cd /usr/local/alfresco-community23x
-      $ sudo mkdir -p activemq alf_data/keystore amps amps_share bin lincenses modules/platform modules/share
-      
-      # Local transformation services
-      $ sudo mkdir -p alfresco-pdf-renderer imagemagick libreoffice tomcat/shared/classes tomcat/shared/lib
-      ```
-
-   * Set initial permissions to structure
+   ```shell
+   $ cd /usr/local/alfresco-community23x
+   $ sudo mkdir -p activemq alf_data/keystore amps amps_share bin lincenses modules/platform modules/share
    
-      ```shell
-      $ sudo chgrp -R Alfresco /usr/local/alfresco-community23x
+   # Local transformation services
+   $ sudo mkdir -p alfresco-pdf-renderer imagemagick libreoffice tomcat/shared/classes tomcat/shared/lib
+   ```
 
-      $ sudo chmod 775 /usr/local/alfresco-community23x
+* Set initial permissions to structure
 
-      $ sudo chmod -R 775 /usr/local/alfresco-community23x/alf_data
-      ```
+   ```shell
+   $ sudo chgrp -R Alfresco /usr/local/alfresco-community23x
 
-   * Add `ALF_HOME` to permanent environment variable, Edit (ubuntu)`~/.profile` file: 
+   $ sudo chmod 775 /usr/local/alfresco-community23x
 
-      ```shell
-      # Ubuntu
-      $ sudo vim ~/.profile
+   $ sudo chmod -R 775 /usr/local/alfresco-community23x/alf_data
+   ```
 
-      # Red Hat
-      $ sudo vim ~/.bash_profile
-      ```
+* Add `ALF_HOME` to permanent environment variable, Edit (ubuntu)`~/.profile` file: 
 
-      ```shell
-      # .profile
+   ```shell
+   # Ubuntu
+   $ sudo vim ~/.profile
 
-      # Get the aliases and functions
-      if [ -f ~/.bashrc ]; then
-         . ~/.bashrc
-      fi
+   # Red Hat
+   $ sudo vim ~/.bash_profile
+   ```
+   **~/.profile:**
+   ```shell
+   # .profile
 
-      # User specific environment and startup programs
+   # Get the aliases and functions
+   if [ -f ~/.bashrc ]; then
+      . ~/.bashrc
+   fi
 
-      export ALF_HOME=/usr/local/alfresco-community23x
+   # User specific environment and startup programs
 
-      PATH=$PATH:$HOME/.local/bin:$HOME/bin:$ALF_HOME
+   export ALF_HOME=/usr/local/alfresco-community23x
 
-      export PATH
-      
-      ```
+   PATH=$PATH:$HOME/.local/bin:$HOME/bin:$ALF_HOME
 
-* Create directory structure for Alfresco Search Services
+   export PATH
+   ```
 
+#### Create directory structure for `Alfresco Search Services`
 
+* Create a directory named `alfresco-search-services` under `/usr/local/` directory. 
+
+```shell
+$ sudo mkdir /usr/local/alfresco-search-services
+```
+
+* Set initial permissions to structure created folder 
+
+```shell
+$ sudo chgrp -R Solr /usr/local/alfresco-search-services
+
+$ sudo chmod 775 /usr/local/alfresco-search-services 
+```
+
+* Add `SOLR_HOME` to permanent environment variable
+
+ ```shell
+   # Ubuntu
+   $ sudo vim ~/.profile
+
+   # Red Hat
+   $ sudo vim ~/.bash_profile
+```
+
+Example `~/.profile` after add `ALF_HOME` and `SOLR_HOME` to permanent environment variable
+
+```shell
+# .profile
+
+# Get the aliases and functions
+if [ -f ~/.bashrc ]; then
+. ~/.bashrc
+fi
+
+# User specific environment and startup programs
+
+export ALF_HOME=/usr/local/alfresco-community23x
+export SOLR_HOME=/usr/local/alfresco-search-services
+
+PATH=$PATH:$HOME/.local/bin:$HOME/bin:$ALF_HOME:$SOLR_HOME
+
+export PATH
+```
 
 ### Installing Prerequisites
-1. Installing Java 11.0.11
+1. Installing Java 11.0.11 (OpenJDK 17.x.x)
 
 2. Installing PostgreSQL 13
 
