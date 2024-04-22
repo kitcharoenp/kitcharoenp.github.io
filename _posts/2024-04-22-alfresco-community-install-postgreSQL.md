@@ -48,5 +48,37 @@ systemctl status postgresql
         CPU: 2ms
 ```
 
+### [Prepare Database for ACS](https://javaworld-abhinav.blogspot.com/2021/06/setup-acs70-ass201-and-transformation-service.html#setup-acs-db)
+
+Prepare `alfresco` database, user and assign privileges
+
+```shell
+ubuntu@alfresco23x:~$ sudo su - postgres
+postgres@alfresco23x:~$ psql
+```
+
+1. Create a database named `alfresco`. Set default encoding which is `utf8`.
+
+```sql
+postgres=# create database alfresco encoding 'utf8';
+CREATE DATABASE
+```
+
+2. Create a user named `alfresco` with password `alfresco`
+
+```sql
+postgres=# create role alfresco LOGIN password 'alfresco';
+CREATE ROLE
+```
+
+3. Grant all permissions for user `alfresco` on database `alfresco`.
+
+```sql
+postgres=# grant all on database alfresco to alfresco;
+GRANT
+```
+
 ### Reference
 * [How to Install PostgreSQL 15 on Ubuntu 24.04, 22.04 or 20.04](https://www.linuxcapable.com/install-postgresql-15-on-ubuntu/)
+
+*  [Prepare Database for ACS](https://javaworld-abhinav.blogspot.com/2021/06/setup-acs70-ass201-and-transformation-service.html#setup-acs-db)
