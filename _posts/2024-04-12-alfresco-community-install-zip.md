@@ -162,14 +162,14 @@ PATH=$PATH:$HOME/.local/bin:$HOME/bin:$ALF_HOME:$SOLR_HOME
 export PATH
 ```
 
-### Installing Prerequisites
-1. Installing Java 11.0.11 (OpenJDK 17.x.x)
+### Installing Prerequisites for Alfresco 23.2
+1. Installing Java OpenJDK 17.x.x
 
-2. Installing PostgreSQL 13
+2. Installing PostgreSQL 15.x
 
-3. Install ActiveMQ 5.16 (Mandatory to use Transformation service)
+3. Install ActiveMQ v5.18 (Mandatory to use Transformation service)
 
-4. Install Tomcat
+4. Install Tomcat 10.1.x
 
 ### Setting up ACS (alfresco content services) 
 

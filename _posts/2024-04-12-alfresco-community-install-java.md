@@ -4,7 +4,7 @@ title : "Alfresco Community 23.x Install Java (OpenJDK 17.x.x)"
 categories : [alfreco]
 published : true
 ---
-### Supported platforms
+### Alfresco Supported platforms
 [Here](https://docs.alfresco.com/content-services/latest/support/) is a list of the individual components that have been through the complete Alfresco Quality Assurance and Certification activities for Alfresco Content Services 23.x. 
 
 ### Step 1: Update Ubuntu before OpenJDK 17 Installation
