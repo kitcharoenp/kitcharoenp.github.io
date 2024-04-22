@@ -2,7 +2,7 @@
 layout : post
 title : "Alfresco Community 23.x Install Zip"
 categories : [alfreco]
-published : true
+published : false
 ---
 ### Supported platforms
 [Here](https://docs.alfresco.com/content-services/latest/support/) is a list of the individual components that have been through the complete Alfresco Quality Assurance and Certification activities for Alfresco Content Services 23.x. 
@@ -10,9 +10,9 @@ published : true
 ### Prerequisites
 
 * Java: OpenJDK 17.x.x is required
-* Application server: Apache Tomcat (Tomcat 10.1.x)
 * Database: PostgreSQL 15.x
 * Message broker: ActiveMQ v5.18
+* Application server: Apache Tomcat (Tomcat 10.1.x)
 * LibreOffice v7.2.5
 * ImageMagick v7.1.0-16
 
@@ -207,17 +207,17 @@ export PATH
 
 * Starting and stopping alfresco search service
 
-   #### Optionals
-   * enabling the multi language search support
-   * enabling search suggestions 
-   * setup search services on a different or remote machine
-   * edit `solr.in.sh` 
+#### Optionals
+* enabling the multi language search support
+* enabling search suggestions 
+* setup search services on a different or remote machine
+* edit `solr.in.sh` 
 
-   #### Full setup and config file:
-   * `alfresco-global.properties`
-   * `custom-log4j.properties`
-   * `shared.properties`
-   * `solr.in.sh` 
+#### Full setup and config file:
+* `alfresco-global.properties`
+* `custom-log4j.properties`
+* `shared.properties`
+* `solr.in.sh` 
 
 ### Start and Test
 1. Start AMQ
