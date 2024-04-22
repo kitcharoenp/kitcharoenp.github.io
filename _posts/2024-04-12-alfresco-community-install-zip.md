@@ -2,7 +2,7 @@
 layout : post
 title : "Alfresco Community 23.x Install Zip"
 categories : [alfreco]
-published : false
+published : true
 ---
 ### Supported platforms
 [Here](https://docs.alfresco.com/content-services/latest/support/) is a list of the individual components that have been through the complete Alfresco Quality Assurance and Certification activities for Alfresco Content Services 23.x. 
