@@ -5,7 +5,7 @@ categories : [alfreco]
 published : true
 ---
 ### Alfresco Supported platforms
-[Here](https://docs.alfresco.com/content-services/latest/support/) is a list of the individual components that have been through the complete Alfresco Quality Assurance and Certification activities for Alfresco Content Services 23.x. 
+> [Here](https://docs.alfresco.com/content-services/latest/support/) is a list of the individual components that have been through the complete Alfresco Quality Assurance and Certification activities for Alfresco Content Services 23.x. 
 
 ### Downloaded the distribution packages
 Navigate to the Apache [Tomcat official download page](http://tomcat.apache.org/download-10.cgi), and grab the latest version of the binary distribution in tar.gz format.
@@ -17,7 +17,35 @@ $ wget https://downloads.apache.org/tomcat/tomcat-10/v10.1.20/bin/apache-tomcat-
 
 ### Extract the package 
 
+```shell
+# extract
+$ sudo tar -xvf /home/ubuntu/apache-tomcat-10.1.20-bin.tar.gz
+
+# copy
+$ sudo cp -R /home/ubuntu/apache-tomcat-10.1.20/* /usr/local/alfresco-community23x/tomcat/
+```
+
 ### Update directory permissions
+
+```shell
+    $ sudo chgrp -R Alfresco /usr/local/alfresco-community23x
+         
+    $ sudo chmod -R 755 /usr/local/alfresco-community23x/tomcat/bin
+         
+    $ sudo chmod -R 755 /usr/local/alfresco-community23x/tomcat/conf
+      
+    $ sudo chmod -R 755 /usr/local/alfresco-community23x/tomcat/shared
+
+    $ sudo chmod -R 755 /usr/local/alfresco-community23x/tomcat/lib
+
+    $ sudo chmod -R 775 /usr/local/alfresco-community23x/tomcat/temp
+         
+    $ sudo chmod -R 775 /usr/local/alfresco-community23x/tomcat/logs
+
+    $ sudo chmod -R 775 /usr/local/alfresco-community23x/tomcat/work
+         
+    $ sudo chmod -R 775 /usr/local/alfresco-community23x/tomcat/webapps
+   ```
 
 ### Create a system service
 
@@ -69,6 +97,17 @@ $ wget https://downloads.apache.org/tomcat/tomcat-10/v10.1.20/bin/apache-tomcat-
 
    # check status
    $ sudo systemctl status tomcat
+
+   # output
+   ● tomcat.service - Apache Tomcat Web Application Container
+     Loaded: loaded (/etc/systemd/system/tomcat.service; enabled; vendor preset: enabled)
+     Active: active (running) since Tue 2024-04-23 09:30:51 UTC; 17s ago
+   Main PID: 3999 (java)
+      Tasks: 31 (limit: 37387)
+     Memory: 151.4M
+        CPU: 5.799s
+     CGroup: /system.slice/tomcat.service
+
    ```
 
 ### Reference
