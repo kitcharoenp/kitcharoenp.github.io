@@ -5,7 +5,7 @@ categories : [alfreco]
 published : true
 ---
 ### Alfresco Supported platforms
-[Here](https://docs.alfresco.com/content-services/latest/support/) is a list of the individual components that have been through the complete Alfresco Quality Assurance and Certification activities for Alfresco Content Services 23.x. 
+> [Here](https://docs.alfresco.com/content-services/latest/support/) is a list of the individual components that have been through the complete Alfresco Quality Assurance and Certification activities for Alfresco Content Services 23.x. 
 
 ### Download
 Download the **ActiveMQ** `v5.18` from its [official download page](https://activemq.apache.org/components/classic/download/)
@@ -125,7 +125,9 @@ $ sudo cp -R /home/ubuntu/apache-activemq-5.18.4/* /usr/local/alfresco-community
 
    ![Manage ActiveMQ broker](/assets/img/2024/Screenshot%20from%202024-04-23%2015-28-15.png)
 
-* **Error** temp dir not configured correctly: writeable=false
+### Error
+
+* temp dir not configured correctly: writeable=false
 
    ```log
    java.lang.IllegalStateException: Parent for temp dir not configured correctly: writeable=false
