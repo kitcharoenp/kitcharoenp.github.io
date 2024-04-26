@@ -1,0 +1,57 @@
+---
+layout : post
+title : "Alfresco Community 23.x Install ImageMagick v7.1.0-16"
+categories : [alfreco]
+published : true
+---
+
+[`ImageMagick v7.1.0-16`](https://docs.alfresco.com/content-services/latest/support/)  have been through the complete Alfresco Quality Assurance and Certification activities for Alfresco Content Services 23.x.
+
+
+### Installing build-essential on Ubuntu
+
+```shell
+sudo apt update 
+sudo apt install build-essential
+```
+
+### Download ImageMagick Source Files
+
+```
+# download
+wget https://imagemagick.org/archive/ImageMagick.tar.gz
+
+# extract
+tar xvzf ImageMagick.tar.gz
+
+cd ImageMagick-7.1.1-31/
+```
+
+### ImageMagick Compilation and Installation
+
+```
+# perform a compilation configuration
+./configure
+
+# perform the compilation
+make
+
+# install and configure the dynamic linker run-time bindings
+sudo make install 
+sudo ldconfig /usr/local/lib
+
+```
+
+### Verify the Installation
+The `identify` program is used as it belongs to the toolset of ImageMagick
+
+```shell
+$ identify --version
+Version: ImageMagick 6.9.11-60 Q16 x86_64 2021-01-25 https://imagemagick.org
+Copyright: (C) 1999-2021 ImageMagick Studio LLC
+```
+
+### Reference
+* [Install Imagemagick](https://javaworld-abhinav.blogspot.com/2021/06/setup-acs70-ass201-and-transformation-service.html#install-magick)
+
+* [How to Install ImageMagick 7 on Debian and Ubuntu](https://www.tecmint.com/install-imagemagick-on-debian-ubuntu/)
