@@ -182,7 +182,7 @@ $ sudo chmod -R 775 /usr/local/alfresco-community23x/tomcat/work/Catalina/localh
    xpoweredBy="false" 
    server="AlfrescoECM"/>
 ```
-* `URIEncoding`: Tomcat uses ISO-8859-1 character encoding when decoding URLs that are received from a browser. This can cause problems when creating, uploading, and renaming files with international characters.
+* `URIEncoding`: Tomcat uses **ISO-8859-1** character encoding when decoding URLs that are received from a browser. *This can cause problems when creating, uploading, and renaming files with international characters.*
 
 * `maxHttpHeaderSize`: Tomcat uses an 8 KB header buffer size, which might not be large enough for the Kerberos authentication protocol. We need to increase this buffer size.
 
@@ -191,8 +191,100 @@ $ sudo chmod -R 775 /usr/local/alfresco-community23x/tomcat/work/Catalina/localh
 ### Edit `catalina.properties`
 **/usr/local/alfresco-community23x/tomcat/conf/catalina.properties**
 
-### edit `alfresco-global.properties` file
+Update the value of the `shared.loader=`
 
+```
+shared.loader=${catalina.base}/shared/classes,${catalina.base}/shared/lib/*.jar
+```
+
+### Edit `catalina.sh`
+
+ Add `JAVA_TOOL_OPTIONS` java environment variable for metadata encryption. *Add the variable after `JAVA_OPTS` in catalina.sh file*. If you add this variable at the end of the file, it is not getting recognized for some reason.
+
+ **/usr/local/alfresco-community23x/tomcat/bin/catalina.sh**
+
+ ```
+ ...
+
+if [ -z "$JSSE_OPTS" ] ; then
+  JSSE_OPTS="-Djdk.tls.ephemeralDHKeySize=2048"
+fi
+JAVA_OPTS="$JAVA_OPTS $JSSE_OPTS"
+
+# Register custom URL handlers
+# Do this here so custom URL handles (specifically 'war:...') can be used in the security policy
+JAVA_OPTS="$JAVA_OPTS -Djava.protocol.handler.pkgs=org.apache.catalina.webresources"
+
+# Customize add for :  Metadata Encryption
+#
+# ACS23x Custom changes [Start] ##############
+
+export JAVA_TOOL_OPTIONS="-Dencryption.keystore.type=JCEKS -Dencryption.cipherAlgorithm=DESede/CBC/PKCS5Padding -Dencryption.keyAlgorithm=DESede -Dencryption.keystore.location=/usr/local/alfresco-community23x/tomcat/shared/classes/alfresco/extension/keystore/metadata-keystore/keystore -Dmetadata-keystore.password=mp6yc0UD9e -Dmetadata-keystore.aliases=metadata -Dmetadata-keystore.metadata.password=oKIWzVdEdA -Dmetadata-keystore.metadata.algorithm=DESede"
+
+# ACS23x Custom changes [End] ##############
+
+```
+
+
+### Edit `alfresco-global.properties`
+
+**/usr/local/alfresco-community23x/tomcat/shared/classes/classes/alfresco-global.properties**
+
+```shell
+# Check
+$ ls /usr/local/alfresco-community23x/tomcat/shared/classes/classes/
+alfresco  alfresco-global.properties.sample
+
+
+# copy
+$ sudo cp /usr/local/alfresco-community23x/tomcat/shared/classes/classes/alfresco-global.properties.sample /usr/local/alfresco-community23x/tomcat/shared/classes/classes/alfresco-global.properties
+
+# Update the file permissions
+
+$ sudo chgrp Alfresco /usr/local/alfresco-community23x/tomcat/shared/classes/classes/alfresco-global.properties
+$ sudo chmod 775 /usr/local/alfresco-community23x/tomcat/shared/classes/classes/alfresco-global.properties
+
+```
+
+* Add the “dir.root” property 
+   ```
+   dir.root=/usr/local/alfresco-community70/alf_data
+   dir.keystore=/usr/local/alfresco-community70/tomcat/shared/classes/alfresco/extension/keystore
+   ```
+
+* Add alfresco and share host, port, context and protocol specific properties
+   ```
+   alfresco.context=alfresco
+   alfresco.host=${localname}
+   alfresco.port=8080
+   alfresco.protocol=http
+   share.context=share
+   share.host=${localname}
+   share.port=8080
+   share.protocol=http
+   ```
+* Add the database connection properties
+   ```
+   db.driver=org.postgresql.Driver
+   db.username=alfresco
+   db.password=alfresco
+   db.name=alfresco
+   db.url=jdbc:postgresql://localhost:5432/${db.name}
+   db.pool.max=275
+   db.pool.validate.query=SELECT 1
+   ```
+
+* Add the server mode property, leave it default to ‘UNKNOWN’.
+   ```
+   system.serverMode=UNKNOWN
+   ```
+
+* Add the alfresco rmi services port and host properties.
+   ```
+   alfresco.rmi.services.port=50500
+
+   alfresco.rmi.services.host=0.0.0.0
+   ```
 
 
 ### Reference
