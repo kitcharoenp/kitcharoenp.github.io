@@ -286,6 +286,125 @@ $ sudo chmod 775 /usr/local/alfresco-community23x/tomcat/shared/classes/classes/
    alfresco.rmi.services.host=0.0.0.0
    ```
 
+### Apply amps to `alfresco.war` and `share.war`
+* The `alfresco-share-services.amp`  is mandatory for `alfresco.war`. 
+* Execute `apply_amps.sh` script to apply amps, it will install amps copied under `/usr/local/alfresco-community23x/amps` and `/usr/local/alfresco-community23x/amps_share` directories to `alfresco.war` and `share.war`:
+
+   ```shell
+   $ sudo $ALF_HOME/bin/apply_amps.sh
+
+   # OR 
+   $ sudo /usr/local/alfresco-community23x/bin/apply_amps.sh
+   ```
+* output as result of executing `apply_amps.sh`
+   
+   ```shell
+   $ sudo /usr/local/alfresco-community23x/bin/apply_amps.sh 
+   /usr/bin/java
+
+   Found installed java executable on the system
+
+   This script will apply all the AMPs in amps and amps_share to the alfresco.war and share.war files in /usr/local/alfresco-community23x/tomcat/webapps
+   Press control-c to stop this script . . .
+   Press any other key to continue . . .
+
+   Module 'alfresco-share-services' installed in '/usr/local/alfresco-community23x/tomcat/webapps/alfresco.war'
+      -    Title:        Alfresco Share Services AMP
+      -    Version:      23.2.0.60
+      -    Install Date: Tue Apr 30 08:37:14 UTC 2024
+      -    Description:   Module to be applied to alfresco.war, containing APIs for Alfresco Share
+   No modules are installed in this WAR file
+   About to clean out /usr/local/alfresco-community23x/tomcat/webapps/alfresco and share directories and temporary files...
+   Press control-c to stop this script . . .
+   Press any other key to continue . . .
+
+   Cleaning temporary Alfresco files from Tomcat...
+   $ 
+
+   ```
+* After amps are install, you can choose to remove the backup files created by apply_amps.sh tool.
+
+* When amps will be install, it may end up creating files with `root` user (as we would be using sudo) so make sure permissions are fixed back, Or install the amps using the 'alfresco' user mode (sudo -u alfresco).
+
+   ```shell
+   # Check permissions
+   $ ls -lt /usr/local/alfresco-community23x/tomcat/webapps/
+   total 489070
+   drwxr-x--- 10 alfresco Alfresco        13 Apr 30 08:37 alfresco
+   drwxr-x--- 14 alfresco Alfresco        18 Apr 30 08:37 share
+   -rw-r--r--  1 root     root     150253279 Apr 30 08:37 alfresco.war
+   drwxr-x---  4 alfresco Alfresco         5 Apr 24 09:06 _vti_bin
+   drwxr-x---  6 alfresco Alfresco         9 Apr 24 09:06 ROOT
+   -rwxrwxr-x  1 root     Alfresco 108411684 Apr 24 09:06 share.war
+   -rw-r--r--  1 root     root     108411684 Apr 24 09:06 share.war-1714466235516.bak
+   -rw-r--r--  1 root     root     134742228 Apr 24 09:06 alfresco.war-1714466233891.bak
+   -rwxrwxr-x  1 root     Alfresco   2357157 Apr 24 09:06 _vti_bin.war
+   -rwxrwxr-x  1 root     Alfresco    274777 Apr 24 09:06 ROOT.war
+
+   # Change permissions
+   $ sudo chgrp -R Alfresco /usr/local/alfresco-community23x/tomcat/webapps/*.war
+   $ sudo chmod -R 775 /usr/local/alfresco-community23x/tomcat/webapps/*.war
+
+   # Check permissions
+   $ ls -lt /usr/local/alfresco-community23x/tomcat/webapps/*.war
+   -rwxrwxr-x 1 root Alfresco 150253279 Apr 30 08:37 /usr/local/alfresco-community23x/tomcat/webapps/alfresco.war
+   -rwxrwxr-x 1 root Alfresco 108411684 Apr 24 09:06 /usr/local/alfresco-community23x/tomcat/webapps/share.war
+   -rwxrwxr-x 1 root Alfresco   2357157 Apr 24 09:06 /usr/local/alfresco-community23x/tomcat/webapps/_vti_bin.war
+   -rwxrwxr-x 1 root Alfresco    274777 Apr 24 09:06 /usr/local/alfresco-community23x/tomcat/webapps/ROOT.war
+   ```
+   ### Share Config Custom Changes
+   ```shell
+   # Change directory to `TOMCAT` home
+   $ sudo cd /usr/local/alfresco-community23x/tomcat
+
+   # Check and Update
+   $ sudo vim shared/classes/classes/alfresco/web-extension/share-config-custom.xml
+   ```
+   
+   ```
+   <config evaluator="string-compare" condition="Remote">
+      <remote>
+         <endpoint>
+            <id>alfresco-noauth</id>
+            <name>Alfresco - unauthenticated access</name>
+            <description>Access to Alfresco Repository WebScripts that do not require authentication</description>
+            <connector-id>alfresco</connector-id>
+            <endpoint-url>http://localhost:8080/alfresco/s</endpoint-url>
+            <identity>none</identity>
+         </endpoint>
+
+         <endpoint>
+            <id>alfresco</id>
+            <name>Alfresco - user access</name>
+            <description>Access to Alfresco Repository WebScripts that require user authentication</description>
+            <connector-id>alfresco</connector-id>
+            <endpoint-url>http://localhost:8080/alfresco/s</endpoint-url>
+            <identity>user</identity>
+         </endpoint>
+
+         <endpoint>
+            <id>alfresco-feed</id>
+            <name>Alfresco Feed</name>
+            <description>Alfresco Feed - supports basic HTTP authentication via the EndPointProxyServlet</description>
+            <connector-id>http</connector-id>
+            <endpoint-url>http://localhost:8080/alfresco/s</endpoint-url>
+            <basic-auth>true</basic-auth>
+            <identity>user</identity>
+         </endpoint>
+
+         <endpoint>
+            <id>alfresco-api</id>
+            <parent-id>alfresco</parent-id>
+            <name>Alfresco Public API - user access</name>
+            <description>Access to Alfresco Repository Public API that require user authentication.
+                         This makes use of the authentication that is provided by parent 'alfresco' endpoint.</description>
+            <connector-id>alfresco</connector-id>
+            <endpoint-url>http://localhost:8080/alfresco/api</endpoint-url>
+            <identity>user</identity>
+         </endpoint>
+      </remote>
+   </config>
+```
 
 ### Reference
 * [Configure Tomcat for ACS](https://javaworld-abhinav.blogspot.com/2021/06/setup-acs70-ass201-and-transformation-service.html#configure-tomcat-acs-repo)
