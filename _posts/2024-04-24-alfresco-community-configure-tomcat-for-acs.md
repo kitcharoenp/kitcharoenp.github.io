@@ -361,7 +361,7 @@ $ sudo chmod 775 /usr/local/alfresco-community23x/tomcat/shared/classes/classes/
    $ sudo vim shared/classes/classes/alfresco/web-extension/share-config-custom.xml
    ```
    
-   ```
+   ```xml
    <config evaluator="string-compare" condition="Remote">
       <remote>
          <endpoint>
@@ -404,7 +404,25 @@ $ sudo chmod 775 /usr/local/alfresco-community23x/tomcat/shared/classes/classes/
          </endpoint>
       </remote>
    </config>
-```
+   ```
+
+   * Find the `<show-authorization-status>true</show-authorization-status>` tag and change the value to *false*
+
+   * If the config not present and you can't find the `<show-authorization-status>` element then add the following config 
+
+   ```xml
+   <config evaluator="string-compare" condition="Users" replace="true">
+      <users>
+         <!-- minimum length for username and password -->
+         <username-min-length>2</username-min-length>
+         <password-min-length>3</password-min-length>
+         <!-- Default value is 'true', setting it to 'false' to fix the user search issue. -->
+         <show-authorization-status>false</show-authorization-status>
+      </users>
+      <!-- This enables/disables the Add External Users Panel on the Add Users page. -->
+      <enable-external-users-panel>false</enable-external-users-panel>
+   </config>
+   ```
 
 ### Reference
 * [Configure Tomcat for ACS](https://javaworld-abhinav.blogspot.com/2021/06/setup-acs70-ass201-and-transformation-service.html#configure-tomcat-acs-repo)
