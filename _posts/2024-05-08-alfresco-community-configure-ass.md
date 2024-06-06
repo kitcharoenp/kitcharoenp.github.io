@@ -77,7 +77,9 @@ solr.base.url=/solr
 index.subsystem.name=solr6
 ```
 
-### [Installation options](https://docs.alfresco.com/search-services/latest/install/options/#install-without-mutual-tls-http-with-secret-word-in-request-header) on `solr.in.sh`
+
+
+### [Install without mutual TLS](https://docs.alfresco.com/search-services/latest/install/options/#install-without-mutual-tls-http-with-secret-word-in-request-header) on `solr.in.sh`
 
 ```shell
 $ sudo vim /usr/local/alfresco-search-services/solr.in.sh
@@ -95,15 +97,29 @@ SOLR_ALFRESCO_BASEURL=/alfresco
 # Default is https. For ACS7.2 onwards
 # ACS72 Shared secret 
 # [Start] ##############
-#export JAVA_TOOL_OPTIONS="-Dalfresco.secureComms.secret=secret"
+export JAVA_TOOL_OPTIONS="-Dalfresco.secureComms.secret=secret"
 ############ OR Instead of JAVA_TOOL_OPTIONS, you can also export SOLR_OPTS , 
 #example below. Make sure you dont export both###
 
-export SOLR_OPTS="-Dalfresco.secureComms.secret=secret"
+#export SOLR_OPTS="-Dalfresco.secureComms.secret=secret"
 
 # ACS72 Shared secret [End] ##############
 SOLR_ALFRESCO_SECURECOMMS=secret
 ```
+
+* [Trouble with Solr does not communicate with Alfresco secureComms=secret](https://hub.alfresco.com/t5/alfresco-content-services-forum/trouble-with-solr-does-not-communicate-with-alfresco-securecomms/td-p/313577)
+
+> "Missing value for alfresco.secureComms.secret configuration property. Make sure to pass this property as a JVM Argument (eg. -Dalfresco.secureComms.secret=my-secret-value)."
+
+
+### Set `alfresco.secureComms`
+Set `alfresco.secureComms=secret`
+```shell
+$ sudo vim /usr/local/alfresco-search-services/solrhome/templates/rerank/conf/solrcore.properties
+$ sudo vim /usr/local/alfresco-search-services/solrhome/alfresco/conf/solrcore.properties
+$ sudo vim /usr/local/alfresco-search-services/solrhome/archive/conf/solrcore.properties
+```
+
 
 ### Starting alfresco search service 
 
@@ -119,6 +135,9 @@ Waiting up to 180 seconds to see Solr running on port 8983 [|]
 Started Solr server on port 8983 (pid=1773). Happy searching!
 
 ```
+Note that, `-Dcreate.alfresco.defaults=alfresco,archive` command automatically creates the alfresco and archive cores. So you need to pass this param **only on first/initial startup of solr** in order to allow cores being created and configured.
+
+
 ### Stopping alfresco search service
 ```shell
 # stop service
@@ -177,10 +196,13 @@ WantedBy=multi-user.target
 # Reload demons
 $ sudo systemctl daemon-reload
 
-# Start and enable solr to automatically start at boot time
+# Start 
 $ sudo systemctl start solr
 
+# Enable solr to automatically start at boot time
 $ sudo systemctl enable solr
+# Output
+Created symlink /etc/systemd/system/multi-user.target.wants/solr.service → /etc/systemd/system/solr.service.
 
 # Check status 
 $ sudo systemctl status solr
@@ -208,7 +230,68 @@ lines 1-18/18 (END)
 ```
 
 
+### [Schema auto-update failed](https://hub.alfresco.com/t5/alfresco-content-services-forum/schema-auto-update-failed/td-p/219277)
+
+
+### [Disable Transform Service](https://docs.alfresco.com/transform-service/latest/config/)
+
+**alfresco-global.properties:**
+```
+transform.service.enabled=true
+local.transform.service.enabled=true
+```
+
+
+* 2024-05-10 14:22:46,774 ERROR [org.springframework.web.context.ContextLoader] [main] Context initialization failed
+org.alfresco.error.AlfrescoRuntimeException: 04100039 Keystores are invalid
+
+
+
+### See Log Error
+**/usr/local/alfresco-search-services/logs/solr.log**
+```shell
+$ sudo cat /usr/local/alfresco-search-services/logs/solr.log | grep ERROR
+2024-05-09 08:08:38.420 ERROR (searcherExecutor-8-thread-1-processing-x:alfresco) [   x:alfresco] o.a.s.c.SolrCore null:java.lang.IllegalArgumentException: Invalid communications type
+2024-05-09 08:08:38.420 ERROR (searcherExecutor-7-thread-1-processing-x:archive) [   x:archive] o.a.s.c.SolrCore null:java.lang.IllegalArgumentException: Invalid communications type
+
+```
+
+> To finish, i had alfresco.log and share.log error on catalina.out
+i had to change those files
+
+```
+cd /usr/local/alfresco-community70/
+grep -R 'log4j.appender.File.File=' ./
+./tomcat/webapps/share/WEB-INF/classes/log4j.properties:log4j.appender.File.File=share.log
+./tomcat/webapps/alfresco/WEB-INF/classes/log4j.properties:log4j.appender.File.File=alfresco.log
+and i changed the log4j.appender.File.File on both file to these
+./tomcat/webapps/share/WEB-INF/classes/log4j.properties:log4j.appender.File.File=logs/share.log
+./tomcat/webapps/alfresco/WEB-INF/classes/log4j.properties:log4j.appender.File.File=logs/alfresco.log
+```
+
+```
+./share/WEB-INF/classes/log4j2.properties:### ERROR Unable to create file share.log java.io.IOException: Permission denied
+./share/WEB-INF/classes/log4j2.properties:appender.rolling.fileName=logs/share.log # default: share.log 
+```
+
+
+```
+./alfresco/WEB-INF/classes/log4j2.properties:appender.rolling.fileName=alfresco.log
+```
+
+
+
+```
+dir.keystore=${dir.root}/keystore
+```
+
+org.postgresql.util.PSQLException: ERROR: relation "alf_prop_class" does not exist
+
 ### Reference
 * [Setup and Configure ASS](https://javaworld-abhinav.blogspot.com/2021/06/setup-acs70-ass201-and-transformation-service.html#setup-and-configure-ass)
 
 * [Alfresco Search Services 2.0 Installation options](https://docs.alfresco.com/search-services/latest/install/options/#install-without-mutual-tls-http-with-secret-word-in-request-header)
+
+* [Alfresco Community Edition "Cannot find Alfresco Repository on this server"](https://stackoverflow.com/questions/56712582/alfresco-community-edition-cannot-find-alfresco-repository-on-this-server)
+
+* https://javaworld-abhinav.blogspot.com/2021/06/setup-acs70-ass201-and-transformation-service.html?showComment=1630537894717#c909321641820170862
