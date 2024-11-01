@@ -2,7 +2,7 @@
 layout : post
 title : "PostgreSQL 10 Master-Slave Replication"
 categories : [postgresql]
-published : false
+published : true
 ---
 
 ## Master : Configuring
@@ -123,5 +123,14 @@ pg_basebackup -h master_ip_address -U replica -p 5432 -D /var/lib/postgresql/10/
 
 It will prompt for a password for the **replica** PostgreSQL user, which is in our case `replica@S3cr3t3`.
 
+### Set `read_only` mode for PostgreSQL
+
+```sql
+ALTER SYSTEM SET default_transaction_read_only TO on;
+SELECT pg_reload_conf();
+SHOW default_transaction_read_only;
+```
+
 ### Reference
 * [PostgreSQL Master-Slave Database Replication](https://blog.devgenius.io/postgresql-master-slave-database-replication-a845777901ab)
+* [PostgreSQL master-slave database replication](https://medium.com/@i.am.ashraful/django-multiple-database-system-using-postgresql-master-slave-database-architecture-f71d4e9e53ba)
