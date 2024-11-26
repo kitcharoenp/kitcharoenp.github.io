@@ -92,7 +92,15 @@ $ touch app/protected/config/perInstanceConfig.php
 $ sudo apt install php-fpm 
 ```
 
+### Page Blank
 
+**solution:** Edit `php.ini` of fpm
+```shell
+; edit /etc/php/7.4/fpm/php.ini
+;
+error_reporting = E_ALL & ~E_DEPRECATED & ~E_STRICT & ~E_NOTICE & ~E_WARNING
+
+```
 
 ### ERROR
 * Javascript is not load
