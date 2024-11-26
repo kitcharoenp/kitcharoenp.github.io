@@ -1,6 +1,6 @@
 ---
 layout : post
-title : "Install Zurmo on Ubuntu 20.04"
+title : "Install Zurmo on Ubuntu 20.04 with Php7.2 or Php7.4"
 categories : [zurmo]
 published : false
 ---
