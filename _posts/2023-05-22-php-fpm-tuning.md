@@ -51,9 +51,8 @@ $ sudo service php8.1-fpm restart
 ```
 
 
-
-
 ### Reference
+* [An Introduction to PHP-FPM Tuning](https://tideways.com/profiler/blog/an-introduction-to-php-fpm-tuning)
 * [PHP-FPM Configuration](https://www.cloudbooklet.com/best-php-fpm-configuration-easy-and-simple-calculation/)
 * [Maximizing The Potential Of PHP-FPM](https://marketsplash.com/tutorials/php/php-fpm/)
 

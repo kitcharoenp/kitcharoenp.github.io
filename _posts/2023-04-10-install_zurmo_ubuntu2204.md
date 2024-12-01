@@ -161,6 +161,21 @@ $ sudo service apache2 restart
 
 ### [`php.ini` Tunning](https://haydenjames.io/php-8-compatibility-check-and-performance-tips/)
 
+
+
+This directive controls whether or not and where PHP will output errors,
+notices and warnings too. `Production Value: Off`
+
+```shell
+; Default Value: On
+; Development Value: On
+; Production Value: Off
+; https://php.net/display-errors
+display_errors = On
+```
+
+
+
 ```
 error_reporting = E_ALL & ~E_DEPRECATED & ~E_STRICT & ~E_NOTICE & ~E_WARNING
 
@@ -228,6 +243,13 @@ opcache.revalidate_freq=60
     # for enable http2
     sudo service php8.1-fpm restart
     ```
+
+
+#### SapGoodsMovementUpdateUtil
+`SapGoodsMovementUpdateUtil` use  `cache_file`
+```
+$ touch assets/cache_file
+```
 
 
 ####  Array and string offset access syntax with curly braces is no longer supported 
