@@ -46,8 +46,23 @@ $ sshfs -o allow_other,default_permissions ubuntu@remote_server:/opt/remote_loca
 ### [Permanently Mounting the Remote Filesystem](https://adamtheautomator.com/sshfs-mount/)
 
 edit **/etc/fstab:**
+
 ```
-ubuntu@remote_server:/opt/remote_localfiles  /var/www/../runtime/uploads/localfiles fuse.sshfs identityfile=/home/ubuntu/.ssh/id_rsa,allow_other,_netdev 0 0
+# Ubuntu < 22.04
+# SSHFS version 2.8
+# FUSE library version: 2.9.7
+#fusermount version: 2.9.7
+#using FUSE kernel interface version 7.19
+
+ubuntu@remote_server:/pool2/remote_localfiles  /var/www/../uploads/localfiles fuse.sshfs identityfile=/home/ubuntu/.ssh/id_rsa,allow_other,nonempty,default_permissions,_netdev,umask=000,uid=1000,gid=1000 0 0
+
+# Ubuntu 22.04
+# SSHFS version 3.7.1
+# FUSE library version 3.10.5
+# using FUSE kernel interface version 7.31
+# fusermount3 version: 3.10.5
+
+ubuntu@remote_server:/pool2/remote_localfiles  /var/www/../uploads/localfiles fuse.sshfs identityfile=/home/ubuntu/.ssh/id_rsa,allow_other,default_permissions,_netdev,umask=000,uid=1000,gid=1000 0 0
 ```
 
 **Validate fstab without rebooting**
@@ -55,6 +70,7 @@ ubuntu@remote_server:/opt/remote_localfiles  /var/www/../runtime/uploads/localfi
 # -a Mount all filesystems (of the given types) mentioned in fstab.
 $ mount -a
 ```
+
 
 **Show result**
 ```shell
@@ -71,6 +87,14 @@ tmpfs                                    6.3G     0  6.3G   0% /run/user/1000
 ```
 
 ### Error
+
+
+#### unknown option `-o nonempty`
+```shell
+$ sudo mount -a
+fuse: unknown option(s): `-o nonempty'
+```
+remove option `nonempty` in `/etc/fstab`
 
 * **option allow_other**
  ```

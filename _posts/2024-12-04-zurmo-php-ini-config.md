@@ -1,9 +1,15 @@
 ---
 layout : post
-title : "Zurmo On PHP 7.4"
+title : "PHP.ini configuration for zurmo"
 categories : [zurmo]
 published : false
 ---
+
+### Display `php.ini` config
+```shell
+$ grep '^[[:blank:]]*[^[:blank:]#;]' /etc/php/7.2/fpm/php.ini
+```
+
 
 ### php.ini
 ```
