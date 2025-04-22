@@ -21,6 +21,9 @@ max_input_vars = 3000
 
 ; Fixed : Fatal error: Allowed memory size of 134217728 bytes exhausted (tried to allocate 20480 bytes)
 memory_limit = -1
+
+max_execution_time = 300
+default_socket_timeout = 300
 ```
 
 ### Class

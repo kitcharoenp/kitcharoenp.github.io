@@ -81,6 +81,8 @@ If bind-address is bound to `127.0.0.1` (localhost), one can't connect to the Ma
 ```shell
 $ sudo chmod -R 777 app/assets
 $ sudo chmod -R 777 app/protected/runtime
+$ sudo usermod -a -G www-data ubuntu
+$ sudo chmod -R g+w /var/www/zurmo
 ```
 Fixed `zurmo_rest_api` connection 
 
