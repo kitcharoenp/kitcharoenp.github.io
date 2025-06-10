@@ -2,7 +2,7 @@
 layout : post
 title : "Alfresco Installation in Ubuntu Using ZIP"
 categories : [alfresco]
-published : true
+published : false
 ---
 
 ### [Alfresco installation in Ubuntu using ZIP Distribution Files](https://github.com/aborroy/alfresco-ubuntu-installer/tree/main)
