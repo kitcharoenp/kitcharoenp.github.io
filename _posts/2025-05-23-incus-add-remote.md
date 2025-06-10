@@ -2,7 +2,7 @@
 layout : post
 title : "Adding a LXC remote server to Incus Server"
 categories : [incus, lxc]
-published : false
+published : true
 ---
 
 ### Ccpy `client.crt` to LXC 
